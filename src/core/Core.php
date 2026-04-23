@@ -24,8 +24,8 @@ class Core
         }
 
         // Cargar controller
-        $controllerClass = "App\\Controllers\\" . $this->controller;
-        $this->controller = new $controllerClass();
+        $controllerClass = "Mikelnavarro\\Eurofilm\\Controllers\\" . $this->controller;
+        $this->controller = new Controller();
 
         // 2. Método
         if (isset($url[1])) {
