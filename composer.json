@@ -1,0 +1,11 @@
+{
+    "name": "mikelnavarro/eurofilm",
+    "description": "Proyecto Pelis Eurofilm",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mikelnavarro\\Eurofilm\\": "src/"
+        }
+    },
+    "require": {}
+}

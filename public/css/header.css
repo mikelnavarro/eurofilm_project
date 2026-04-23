@@ -1,0 +1,43 @@
+
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.1); /* Transparente */
+    backdrop-filter: blur(10px); /* Desenfoque */
+    z-index: 1000;
+}
+
+/* Buscador */
+#busqueda-titulo {
+    padding: 12px 20px;
+    width: 60%;
+    border-radius: 4px;
+    border: none;
+    background: #333;
+    color: white;
+    font-size: 1rem;
+}
+
+#btn-buscar {
+    padding: 12px 25px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#btn-buscar:hover {
+    background-color: #b20710;
+}
+/* Cabecera */
+h1 {
+    text-align: left;
+}
+img .logo {
+    width: 40%;
+    max-height: 30%;
+    border-radius: 30%;
+}

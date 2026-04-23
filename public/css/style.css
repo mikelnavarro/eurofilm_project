@@ -1,97 +1,58 @@
-/* General */
-body {
-    margin: 0;
-    padding: 20px;
-    background-color: #e0e0e0;
-    background-size: 20px 20px;
-    font-family: 'Arial', sans-serif;
-}
 
-/* ESTRUCTURA PRINCIPAL CON GRID */
-#movie-details {
+
+
+/* Contenedor de Películas (Grid) */
+#peliculas {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
-    gap: 15px;
-    max-width: 1100px;
-    margin: 0;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    padding-top: 40px;
 }
 
-#movie-title,
-#movie-info,
-#movie-rating,
-#movie-poster {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#movie-title {
-    grid-column: 1 / span 2;
-    font-size: 1.8rem;
-    font-weight: bold;
-    padding: 30px;
-}
-
-/* CONTENIDO INTERNO CON FLEX (Prioridad según pides) */
-#movie-info {
-    grid-column: 1 / 3;
-    grid-row: 3;
-    text-align: left;
-    padding: 20px;
-}
-
-#movie-release-date {
-    grid-column: 1;
-    grid-row: 2;
-    display: flex;
-    align-items: center;
-}
-
-/* Poster */
-#movie-poster {
-    grid-column: 3;
-    grid-row: 3;
-    padding: 0;
+/* Tarjeta de Película */
+.pelicula-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
     overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
     display: flex;
+    flex-direction: column;
 }
 
-#movie-poster img {
+.pelicula-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.pelicula-card img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: auto;
+    display: block;
 }
 
-#movie-overview {
-    grid-column: 1 / span 2;
-    grid-row: 3;
-    text-align: left;
-    min-height: 150px;
+/* Contenido de la Tarjeta */
+.pelicula-card h3 {
+    font-size: 0.9rem;
+    margin: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+.pelicula-card p {
+    font-size: 0.8rem;
+    color: var(--gray-text);
+    margin: 0 10px 10px 10px;
+}
 
-/* Rating */
-#movie-rating {
-    grid-column: 3 / span 2;
-    grid-row: 4;
+/* El ID de la API lo ocultamos o lo ponemos pequeño (puedes borrarlo si no lo quieres ver) */
+.pelicula-card span {
+    display: none; 
+}
+
+/* Rating (Estilo burbuja) */
+.pelicula-card p:nth-of-type(1) {
+    color: #11a736; /* Verde para la nota */
     font-weight: bold;
-    display: flex;
-    justify-content: center;
-}
-
-/* Botón de favoritos (Estilo TFG) */
-#btn-favorito {
-    grid-column: 3 / 3;
-    grid-row: 6;
-    cursor: pointer;
-    background-color: #ef4a4a;
-    transition: transform 0.2s;
-    font-size: 1.0rem;
-    padding: 15px;
-}
-
-#btn-favorito:hover {
-    background-color: #ef4a4a;
-    transform: scale(1.02);
 }
