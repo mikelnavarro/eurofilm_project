@@ -1,51 +1,68 @@
 <?php
 
-namespace Mikelnavarro\Eurofilm\core;
+namespace Mikelnavarro\Eurofilm\Core;
+
+use Mikelnavarro\Eurofilm\Controllers;
 
 class Core
 {
-    private string $controller = 'MovieController';
-    private string $method = 'index';
-    private array $params = [];
+    protected $controladorActual = 'Movie';
+    protected $metodoActual = 'index';
+    protected array $parametros = [];
 
     public function __construct()
     {
-        $url = $this->getUrl();
+        $url = $this->getUrl() ?? [];
 
-        // 1. Controller
-        if (isset($url[0])) {
-            $controllerName = ucfirst($url[0]) . 'Controller';
-            $controllerPath = __DIR__ . '/../Controllers/' . $controllerName . '.php';
 
-            if (file_exists($controllerPath)) {
-                $this->controller = $controllerName;
+        // 1) Controlador desde URL
+        $controlador = $url[0] ?? '';
+        $controlador = strtok($controlador, '?');
+        $controlador = trim($controlador);
+
+
+        if ($controlador !== '') {
+            $controladorClase = ucfirst(strtolower($controlador));
+
+            // IMPORTANTE: Apuntamos directamente al namespace de los controladores
+            $fqcn = "Mikelnavarro\\Eurofilm\\Controllers\\" . $controladorClase . "Controller";
+
+            // class_exists() disparará el autoload de Composer
+            if (class_exists($fqcn)) {
+                $this->controladorActual = $controladorClase;
                 unset($url[0]);
             }
         }
 
-        // Cargar controller
-        $controllerClass = "Mikelnavarro\\Eurofilm\\Controllers\\" . $this->controller;
-        $this->controller = new Controller();
 
-        // 2. Método
-        if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
-                unset($url[1]);
-            }
+        // 2) Instanciar controlador (añadimos "Controller" al nombre y el namespace)
+        $fqcnControlador = "Mikelnavarro\\Eurofilm\\Controllers\\" . $this->controladorActual . "Controller";
+
+
+        if (class_exists($fqcnControlador)) {
+            $this->controladorActual = new $fqcnControlador();
+        } else {
+            die("El controlador {$fqcnControlador} no existe.");
         }
 
-        // 3. Parámetros
-        $this->params = $url ? array_values($url) : [];
+        // 3) Método
+        $metodo = $url[1] ?? $this->metodoActual;
+        if (method_exists($this->controladorActual, $metodo)) {
+            $this->metodoActual = $metodo;
+            unset($url[1]);
+        }
+
+        // Parámetros
+        $this->parametros = $url ? array_values($url) : [];
 
         // Ejecutar
-        call_user_func_array([$this->controller, $this->method], $this->params);
+        call_user_func_array([$this->controladorActual, $this->metodoActual], $this->parametros);
     }
 
     /**
      * Obtener URL limpia
      */
-    private function getUrl(): array
+    private function getUrl(): ?array
     {
         if (isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');

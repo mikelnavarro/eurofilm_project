@@ -1,6 +1,5 @@
 // Referencias
 const API_URL = "movies.php"; // Puente de PHP
-const movieContainer = document.getElementById("peliculas");
 
 // Función genérica para peticiones al puente PHP
 async function request(params) {

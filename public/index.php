@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <title>Eurofilm</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/global.css">
-    <script src="script.js" type="module"></script>
-</head>
-
-<body>
-    <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
-    <button id="btn-buscar">
-        <i class="fas fa-search"></i>Buscar</button>
-    <select id="select-pais">
-        <option value="">Cualquier país</option>
-        <option value="ES">España</option>
-        <option value="US">EE.UU.</option>
-    </select>
-    <select id="select-plataforma">
-        <option value="">Todas las plataformas</option>
-        <option value="8">Netflix</option>
-        <option value="337">Disney+</option>
-        <option value="350">Apple TV</option>
-    </select>
-    <div id="peliculas"></div>
-</body>
-
-</html>
+// Cargar el autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
+// La sesión debe iniciarse antes de cargar las vistas
+session_start();
+// 3. Arrancar el Core
+// Como usas namespaces, instancia el Core desde su ubicación
+$app = new \Mikelnavarro\Eurofilm\Core\Core();
