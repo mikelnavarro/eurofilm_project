@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Eurofilm</title>
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <script src="js/main.js" type="module"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <script defer src="../js/main.js" type="module"></script>
 </head>
 
 <body>
+<?php include '../inc/header.php'; ?>
 <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
 <button id="btn-buscar">
     <i class="fas fa-search"></i>Buscar</button>

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mikelnavarro\Eurofilm\Core;
+namespace Mikelnavarro\Eurofilm\core;
 
-use Mikelnavarro\Eurofilm\Controllers;
+use Mikelnavarro\Eurofilm\controllers;
 
 class Core
 {

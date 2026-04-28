@@ -1,49 +1,43 @@
-
 // Referencias
 let paginaActual = 1;
 const movieContainer = document.getElementById("peliculas");
 
-
-
-// Función genérica para peticiones al puente PHP
-async function request(params) {
-    try {
-        const queryParams = new URLSearchParams(params).toString();
-        const res = await fetch(`movie/index?${queryParams}`);
-        const data = await response.json();
-        return data.results; // TMDB devuelve los resultados en .results
-        paginaActual++;
-
-    } catch (error) {
-        console.error("Error en la petición:", error);
-        return null;
-    }
-}
 async function fetchMovies(pagina) {
     try {
-        const res = await fetch(`movie/index?page=${pagina}`);
-        if (!res.ok) throw new Error("Error en la red");
+        const res = await fetch(`../movie/getAll?page=${pagina}`);
+
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status}`);
+        }
 
         const data = await res.json();
-        return data.results; // Solo devolvemos los datos puros
+        console.log("Datos recibidos:", data);
+        return data.results;
     } catch (error) {
-        console.error("Error en la petición:", error);
+        console.error("Error en fetchMovies:", error);
         return null;
     }
 }
+
 function renderList(movies) {
-    if (!movies) return;
-    // Limpiamos el contenedor de forma eficiente
+    if (!movies || movies.length === 0) {
+        movieContainer.innerHTML = "<h3>No se encuentran películas</h3>";
+        return;
+    }
+
     movieContainer.innerHTML = "";
     movieContainer.style.display = "grid";
+    movieContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(150px, 1fr))";
+    movieContainer.style.gap = "15px";
 
-    movies.forEach((movie) => {
-        // Creamos la estructura de la Card
+    movies.forEach(movie => {
         const card = createMovieCard(movie);
         movieContainer.appendChild(card);
     });
+    
+    console.log("Películas renderizadas:", movies.length);
 }
-// función de carga de detalles de Movies
+
 function createMovieCard(movie) {
     const card = document.createElement("div");
     card.className = "pelicula-card";
@@ -65,7 +59,7 @@ function createMovieCard(movie) {
     const title = document.createElement("h3");
     title.textContent = movie.title;
 
-    // ID de la película (como pedías en tu código anterior)
+    // ID de la película
     const id = document.createElement("span");
     id.textContent = movie.id;
 
@@ -73,16 +67,21 @@ function createMovieCard(movie) {
     const releaseYear = document.createElement("p");
     releaseYear.textContent = movie.release_date ? movie.release_date.slice(0, 4) : "—";
 
-    // Añadimos todo a la tarjeta
+    // Construir tarjeta
     card.append(img, title, id, releaseYear);
 
     return card;
 }
-/**
- * 4. FUNCIÓN DE INICIO (Orquestadora)
- */
+
 async function init() {
+    console.log("Iniciando carga de películas...");
     const movies = await fetchMovies(paginaActual);
-    renderList(movies);
+    if (movies) {
+        renderList(movies);
+    } else {
+        movieContainer.innerHTML = "<p>No se pudieron cargar las películas.</p>";
+    }
 }
 
+// Llamar directamente (no necesita DOMContentLoaded gracias a defer)
+init();

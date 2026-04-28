@@ -1,6 +1,6 @@
 <?php
 
-namespace Mikelnavarro\Eurofilm\Services;
+namespace Mikelnavarro\Eurofilm\services;
 
 class TmdbService {
 
@@ -47,7 +47,8 @@ class TmdbService {
             echo 'Error de cURL: ' . curl_error($ch);
         }
         curl_close($ch);
-        return json_encode(json_decode($resultado)); // Nos aseguramos que sea JSON válido
+        // Decodificamos a array asociativo (NO volveemos a encodificar)
+        return json_decode($resultado, true);
     }
 }
 
