@@ -1,12 +1,9 @@
 <?php
 
 namespace Mikelnavarro\Eurofilm\core;
-
-use Mikelnavarro\Eurofilm\controllers;
-
 class Core
 {
-    protected $controladorActual = 'Movie';
+    protected $controladorActual = 'ApiMovie';
     protected $metodoActual = 'index';
     protected array $parametros = [];
 
@@ -25,7 +22,7 @@ class Core
             $controladorClase = ucfirst(strtolower($controlador));
 
             // IMPORTANTE: Apuntamos directamente al namespace de los controladores
-            $fqcn = "Mikelnavarro\\Eurofilm\\Controllers\\" . $controladorClase . "Controller";
+            $fqcn = "Mikelnavarro\\Eurofilm\\controllers\\" . $controladorClase . "Controller";
 
             // class_exists() disparará el autoload de Composer
             if (class_exists($fqcn)) {

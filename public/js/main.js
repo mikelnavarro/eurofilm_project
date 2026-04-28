@@ -1,87 +1,68 @@
 // Referencias
+
+const BASE_URL = "/Eurofilm/api/movies";
 let paginaActual = 1;
-const movieContainer = document.getElementById("peliculas");
+  const movieContainer = document.getElementById("peliculas");
 
 async function fetchMovies(pagina) {
-    try {
-        const res = await fetch(`../movie/getAll?page=${pagina}`);
+  try {
+    const res = await fetch(`${BASE_URL}?page=${pagina}`);
 
-        if (!res.ok) {
-            throw new Error(`Error HTTP: ${res.status}`);
-        }
-
-        const data = await res.json();
-        console.log("Datos recibidos:", data);
-        return data.results;
-    } catch (error) {
-        console.error("Error en fetchMovies:", error);
-        return null;
+    if (!res.ok) {
+      throw new Error(`Error HTTP: ${res.status}`);
     }
+
+    const data = await res.json();
+    console.log("Datos recibidos:", data);
+    return data.results;
+
+  } catch (error) {
+    console.error("Error en fetchMovies:", error);
+    return null;
+  }
 }
 
+// función de carga de detalles de Movies
 function renderList(movies) {
-    if (!movies || movies.length === 0) {
-        movieContainer.innerHTML = "<h3>No se encuentran películas</h3>";
-        return;
-    }
 
-    movieContainer.innerHTML = "";
-    movieContainer.style.display = "grid";
-    movieContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(150px, 1fr))";
-    movieContainer.style.gap = "15px";
-
-    movies.forEach(movie => {
-        const card = createMovieCard(movie);
-        movieContainer.appendChild(card);
-    });
-    
-    console.log("Películas renderizadas:", movies.length);
-}
-
-function createMovieCard(movie) {
+  if (!movieContainer) {
+    console.error("La referencia del contenedor de 'peliculas' no encontrado.");
+    return;
+  }
+  movieContainer.style.display = "grid";
+  movies.forEach((movie) => {
+    // Creamos los elementos uno a uno
     const card = document.createElement("div");
     card.className = "pelicula-card";
     card.style.cursor = "pointer";
-
-    // Navegación al detalle
+    // Si el usuario pulsa click, se abrirá la ventana de Card
     card.addEventListener("click", () => {
-        window.location.href = `card.php?id=${movie.id}`;
+      window.location.href = `card.php?id=${movie.id}`;
     });
-
-    // Imagen del póster
+    // Cargar elemento uno a uno
     const img = document.createElement("img");
     img.src = movie.poster_path
-        ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-        : "placeholder.png";
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : "placeholder.png";
     img.alt = movie.title;
-
-    // Título de la película
     const title = document.createElement("h3");
     title.textContent = movie.title;
-
-    // ID de la película
     const id = document.createElement("span");
     id.textContent = movie.id;
-
-    // Año de lanzamiento
     const releaseYear = document.createElement("p");
-    releaseYear.textContent = movie.release_date ? movie.release_date.slice(0, 4) : "—";
+    releaseYear.textContent = movie.release_date?.slice(0, 4) ?? "—";
 
-    // Construir tarjeta
-    card.append(img, title, id, releaseYear);
-
-    return card;
+    card.append(img, title, releaseYear);
+    // añadir la tarjeta al contenedor principal
+    movieContainer.append(card);
+  });
 }
+// eventos (Controladores de usuario)
+// Al cargar el documento, mostramos algo por defecto
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("Iniciando carga de películas...");
+  const movies = await fetchMovies(paginaActual);
+  renderList(movies);
+});
 
-async function init() {
-    console.log("Iniciando carga de películas...");
-    const movies = await fetchMovies(paginaActual);
-    if (movies) {
-        renderList(movies);
-    } else {
-        movieContainer.innerHTML = "<p>No se pudieron cargar las películas.</p>";
-    }
-}
-
-// Llamar directamente (no necesita DOMContentLoaded gracias a defer)
-init();
+// Función para cambiar de página

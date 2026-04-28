@@ -24,17 +24,12 @@ class Controller
 
         return $data;
     }
-    public function json($data, int $status = 200)
+    public function jsonResponse($data, int $status = 200): void
     {
-        ob_clean();
-        header('Content-Type: application/json; charset=utf-8');
-
-        // 3. Código de estado (200 OK, 201 Created, 404 Not Found, etc.)
         http_response_code($status);
-
-        // 4. Convertimos el array de PHP a String JSON y lo enviamos
-        echo json_encode($data);
-        exit; // Importante para que no se ejecute nada más después
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
 
@@ -46,7 +41,21 @@ class Controller
         $fqcn = "Mikelnavarro\\Eurofilm\\services\\" . ucfirst($serviceName);
 
         if (!class_exists($fqcn)) {
-            $this->json(['error' => "Servicio '$serviceName' no encontrado."], 500);
+            $this->jsonResponse(['error' => "Servicio '$serviceName' no encontrado."], 500);
+        }
+
+        return new $fqcn();
+    }
+
+    public function modelo(string $modeloName)
+    {
+        // Normaliza: "articulo" -> "Articulo"
+        $modeloClase = ucfirst(strtolower(trim($modeloName)));
+        $fqcn = "Mikelnavarro\\Eurofilm\\models\\" . ucfirst($modeloName);
+
+        // autoload
+        if (!class_exists($fqcn)) {
+            throw new \RuntimeException("Modelo no encontrado: $fqcn");
         }
 
         return new $fqcn();
@@ -58,6 +67,4 @@ class Controller
         }
         return isset($_SESSION['user_id']);
     }
-
-
 }

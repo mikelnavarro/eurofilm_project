@@ -11,8 +11,8 @@
     <p><strong>Explorando el reino animal especie por especie</strong></p>
     <nav>
         <ul>
-            <li><a href="<?php echo RUTA_URL; ?>/AnimalController/index">Inicio</a></li>
-            <li><a href="<?php echo RUTA_URL; ?>/AnimalController/list">Animales</a></li>
+            <li><a href="/Eurofilm/public/movies/movies.php">Inicio</a></li>
+            <li><a href="<?php echo RUTA_URL; ?>/AnimalController/list">Películas Populares</a></li>
             <?php if(isset($_SESSION['nombre'])) : ?>
                 <li><a href="<?= RUTA_URL ?>/UsuarioController/detalle">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
                 <li><a href="<?php echo RUTA_URL; ?>/UsuarioController/logout">Cerrar Sesión</a></li>
