@@ -1,15 +1,17 @@
-
-
-
-/* Contenedor de Películas (Grid) */
 #peliculas {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
-    padding-top: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
 }
 
 /* Tarjeta de Película */
+.pelicula-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+}
 .pelicula-card {
     background-color: var(--card-bg);
     border-radius: 8px;
@@ -45,8 +47,6 @@
     color: var(--gray-text);
     margin: 0 10px 10px 10px;
 }
-
-/* El ID de la API lo ocultamos o lo ponemos pequeño (puedes borrarlo si no lo quieres ver) */
 .pelicula-card span {
     display: none; 
 }

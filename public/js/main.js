@@ -4,6 +4,14 @@ const BASE_URL = "/Eurofilm/api/movies";
 let paginaActual = 1;
   const movieContainer = document.getElementById("peliculas");
 
+
+  // Para las paginas botones
+  const prevBtn = document.getElementById("prev-page");
+const nextBtn = document.getElementById("next-page");
+const pageDisplay = document.getElementById("current-page-display");
+
+
+
 async function fetchMovies(pagina) {
   try {
     const res = await fetch(`${BASE_URL}?page=${pagina}`);
@@ -29,7 +37,6 @@ function renderList(movies) {
     console.error("La referencia del contenedor de 'peliculas' no encontrado.");
     return;
   }
-  movieContainer.style.display = "grid";
   movies.forEach((movie) => {
     // Creamos los elementos uno a uno
     const card = document.createElement("div");
@@ -57,12 +64,30 @@ function renderList(movies) {
     movieContainer.append(card);
   });
 }
+loadMovies();
+
+
 // eventos (Controladores de usuario)
-// Al cargar el documento, mostramos algo por defecto
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("Iniciando carga de películas...");
-  const movies = await fetchMovies(paginaActual);
-  renderList(movies);
+prevBtn.addEventListener("click", async () => {
+    if (paginaActual > 1) {
+        paginaActual--;
+        await loadMovies();
+    }
 });
+nextBtn.addEventListener("click", async () => {
+    paginaActual++;
+    await loadMovies();
+});
+// Al cargar el documento, mostramos algo por defecto
+async function loadMovies() {
+    console.log("Iniciando carga de películas...");
+    const movies = await fetchMovies(paginaActual);
+    renderList(movies);
+    updatePageUI();
+}
+
 
 // Función para cambiar de página
+function updatePageUI() {
+    pageDisplay.textContent = `Página ${paginaActual}`;
+}
