@@ -1,18 +1,18 @@
 <?php
-
 require_once '../variables_config.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo NOMBRESITIO; ?></title>
-    <link rel="stylesheet" href="<?php echo RUTA_URL; ?>public/css/header.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../image/favicon.ico" type="image/x-icon">
+    <title><?= NOMBRESITIO ?? 'Eurofilm' ?></title>
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
+    <a href="<?php RUTA_URL; ?>"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
     <h1>eurofilm</h1>
     <p><strong>Explorando el reino cinematográfico de TMDB</strong></p>
     <nav>
@@ -30,24 +30,16 @@ require_once '../variables_config.php';
                 <li><a href="<?php echo RUTA_URL; ?>/UsuarioController/login">Login</a></li>
                 <li><a href="<?php echo RUTA_URL; ?>/UsuarioController/registrarse">Sign up</a></li>
             <?php endif; ?>
-            <li><a href="<?php echo RUTA_URL; ?>/AnimalController/ejemplo2">ejemplo 2</a></li>
-            <li><a href="#">Categorías</a>
-                <ul class="submenu">
-                    <li><a href="#tecnologia">Tecnología</a></li>
-                    <li><a href="#moda">Moda</a></li>
-                    <li><a href="#hogar">Hogar</a></li>
-                </ul>
-            </li>
-            <li><a href="#ofertas">Ofertas</a>
-                <ul class="submenu">
-                    <li><a>Ropa</a></li>
-                    <li><a>Maquillaje</a></li>
-                </ul>
-            </li>
             <li><a href="#">Contacto</a>
                 <ul class="submenu">
+                    <li><a href="#">Quiénes somos</a></li>
                     <li><a href="#">Email</a></li>
                 </ul>
+            </li>
+            <li>
+                <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
+                <button id="btn-buscar">
+                    <i class="fas fa-search"></i>Buscar</button>
             </li>
         </ul>
     </nav>

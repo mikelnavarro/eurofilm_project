@@ -8,8 +8,8 @@ require_once '../variables_config.php';
 <head>
     <meta charset="UTF-8">
     <title>Eurofilm</title>
-    <link rel="stylesheet" href="<?php RUTA_URL; ?>public/css/style.css">
-    <link rel="stylesheet" href="<?php RUTA_URL; ?>public/css/global.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/global.css">
     <script defer src="../js/main.js" type="module"></script>
 </head>
 

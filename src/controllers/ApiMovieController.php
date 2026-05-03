@@ -44,6 +44,36 @@ class ApiMovieController extends Controller
     }
 
 
+    public function movie($param = null)
+    {
+        var_dump($_GET);
+        var_dump($param ?? null);
+        exit;
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->jsonResponse(['error' => 'Método no permitido'], 405);
+        }
+
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'ID requerido']);
+        exit;
+    }
+        if (!$id) {
+            $this->jsonResponse(['error' => 'ID requerido'], 400);
+        }
+
+        $tmdb = $this->service('TmdbService');
+        $data = $tmdb->consultar("/movie/$id");
+
+        header('Content-Type: application/json');
+        echo $data;
+        exit;
+    }
+
+    // Para añadir a favoritos (listas)
     public function addFavorito(): void
     {
 

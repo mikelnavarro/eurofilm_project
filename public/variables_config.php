@@ -1,5 +1,5 @@
 <?php
-define('RUTA_URL', 'http://localhost/eurofilm/');
+define('RUTA_URL', 'http://localhost/Eurofilm/');
 define('NOMBRESITIO', 'Eurofilm');
 
 

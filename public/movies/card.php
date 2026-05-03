@@ -9,13 +9,19 @@ require_once '../variables_config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?php RUTA_URL; ?>public/css/tarjeta-peli.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/tarjeta-peli.css">
     <script src="../js/detalles.js"></script>
 
 </head>
 
 <body>
+    <?php include '../inc/header.php'; ?>
     <main>
+        <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
+        <button id="btn-buscar">
+            <i class="fas fa-search"></i>Buscar</button>
+        <!-- Detalles de la Película - Busqueda -->
         <div id="movie-details">
             <img id="movie-poster" src="" alt="Poster de la película">
             <p id="movie-rating"></p>

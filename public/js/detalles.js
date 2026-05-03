@@ -1,24 +1,29 @@
 // Referencias
-const API_URL = "/Eurofilm/api/movies"; // Puente de PHP
+
+const API_URL = "/Eurofilm/api/movie"; // Puente de PHP
 const detailsView = document.getElementById("movie-details");
+
 
 // detalles
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1. Extraer el ID de la URL (ej: card.html?id=123)
   const params = new URLSearchParams(window.location.search);
   const movieId = params.get("id");
   if (!movieId) {
     console.error("No se encontró el ID de la película");
-    // Opcional: redirigir al index si no hay ID
     window.location.href = "index.php";
     return;
   }
   showDetails(movieId);
 });
 
+function getMovieId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
+}
+// Pide detalles de Peli a la API DE TMDB
 async function fetchDetails(id) {
   try {
-    const response = await fetch(`${API_URL}?id=${id}`);
+    const response = await fetch(`${API_URL}?id=${params.get("id")}`);
     return await response.json();
   } catch (error) {
     console.error("Error al cargar detalles:", error);
