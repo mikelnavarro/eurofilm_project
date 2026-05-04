@@ -6,3 +6,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Captura la URI y la pasa como parámetro ?url=
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Alias simple: /trending
+RewriteRule ^trending/?$ public/movies/movies.php [L,QSA]
+
+# (Opcional) si tu movies.php usa section:
+# RewriteRule ^trending/?$ public/movies/movies.php?section=trending [L,QSA]

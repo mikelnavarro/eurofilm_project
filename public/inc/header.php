@@ -20,8 +20,7 @@ require_once '../variables_config.php';
             <li><a href="/Eurofilm/public/movies/movies.php">Inicio</a></li>
             <li><a href="#">Películas</a>
                 <ul class="submenu">
-                    <li><a href="#">Populares</a></li>
-                    <li><a href="#">Top Rated</a></li>
+                    <li><a href="/Eurofilm/public/movies/movies.php">Populares</a></li>
                 </ul>
             </li> <?php if (isset($_SESSION['nombre'])) : ?>
                 <li><a href="<?= RUTA_URL ?>/UsuarioController/detalle">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
@@ -35,11 +34,6 @@ require_once '../variables_config.php';
                     <li><a href="#">Quiénes somos</a></li>
                     <li><a href="#">Email</a></li>
                 </ul>
-            </li>
-            <li>
-                <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
-                <button id="btn-buscar">
-                    <i class="fas fa-search"></i>Buscar</button>
             </li>
         </ul>
     </nav>

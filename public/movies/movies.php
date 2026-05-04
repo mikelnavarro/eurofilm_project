@@ -10,14 +10,13 @@ require_once '../variables_config.php';
     <title>Eurofilm</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/global.css">
+    <script defer src="../js/busqueda.js" type="module"></script>
     <script defer src="../js/main.js" type="module"></script>
 </head>
 
 <body>
     <?php include '../inc/header.php'; ?>
-    <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
-    <button id="btn-buscar">
-        <i class="fas fa-search"></i>Buscar</button>
+    <?php include '../busqueda.php'; ?>
     <select id="select-pais">
         <option value="">Cualquier país</option>
         <option value="ES">España</option>

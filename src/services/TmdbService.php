@@ -2,22 +2,25 @@
 
 namespace Mikelnavarro\Eurofilm\services;
 
-class TmdbService {
+class TmdbService
+{
 
-// Atributos
+    // Atributos
     private $token;
     private $baseUrl;
     private $config;
 
     // Constructores
-    public function __construct() {
+    public function __construct()
+    {
         $config = require __DIR__ . '/../config/config.php';
         $this->token  = $config['tmdb']['token'];
         $this->baseUrl = $config['tmdb']['base_url'];
     }
 
 
-    public function consultar($endpoint, $params = []) {
+    public function consultar($endpoint, $params = [])
+    {
         $params['language'] = 'es-ES';
 
         // Construimos la URL: base + endpoint + ?query_string
@@ -50,5 +53,11 @@ class TmdbService {
         // Decodificamos a array asociativo (NO volveemos a encodificar)
         return json_decode($resultado, true);
     }
+    public function getCredits($id)
+    {
+        return json_decode(
+            $this->consultar("/movie/$id/credits"),
+            true
+        );
+    }
 }
-

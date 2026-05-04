@@ -1,35 +1,26 @@
+import { BASE_URL } from "./configuracion.js";
 // Referencias
-
-const API_URL = "/Eurofilm/api/movie"; // Puente de PHP
 const detailsView = document.getElementById("movie-details");
 
-
-// detalles
-document.addEventListener("DOMContentLoaded", async () => {
-  const params = new URLSearchParams(window.location.search);
-  const movieId = params.get("id");
-  if (!movieId) {
-    console.error("No se encontró el ID de la película");
-    window.location.href = "index.php";
-    return;
-  }
-  showDetails(movieId);
-});
-
+// Obtener el ID de la API
 function getMovieId() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("id");
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
 }
 // Pide detalles de Peli a la API DE TMDB
-async function fetchDetails(id) {
+async function fetchMovie(id) {
   try {
-    const response = await fetch(`${API_URL}?id=${params.get("id")}`);
+    const response = await fetch(`${BASE_URL}/movie?id=${id}`);
+
+    if (!response.ok) {
+      throw new Error("Error en API");
+    }
+
     return await response.json();
   } catch (error) {
     console.error("Error al cargar detalles:", error);
   }
 }
-
 // Obtiene detalles de una pelicula
 function renderMovieDetails(movie) {
   // Llenamos tus campos mediante IDs
@@ -40,8 +31,8 @@ function renderMovieDetails(movie) {
   document.getElementById("movie-title").textContent = movie.title;
   document.getElementById("movie-release-date").textContent =
     `Fecha de lanzamiento: ${movie.release_date}`;
-  document.getElementById("movie-overview").textContent = movie.overview;
-  // Localiza donde pones los géneros y cámbialo por esto:
+  document.getElementById("movie-overview").textContent =
+    `Sinopsis: ${movie.overview}`;
   const genresElement = document.getElementById("movie-genres");
   if (movie.genres && Array.isArray(movie.genres)) {
     const nombresGeneros = movie.genres.map((g) => g.name).join(", ");
@@ -50,10 +41,33 @@ function renderMovieDetails(movie) {
     // Si no hay (o es una búsqueda general que no trae los nombres)
     genresElement.textContent = "Géneros: No disponibles";
   }
-}
 
-async function showDetails(id) {
-  const detalles = await fetchDetails(id);
+  document.getElementById("countries").textContent = movie.production_countries
+    .map((c) => c.name)
+    .join(", ");
+
+  document.getElementById("companies").textContent = movie.production_companies
+    .map((p) => p.name)
+    .join(", ");
+
+  // Trailer
+  if (movie.trailer) {
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${movie.trailer}`;
+    document.getElementById("movie-info").appendChild(iframe);
+  }
+  // Casting
+  const castList = document.getElementById("cast");
+  movie.cast.slice(0, 5).forEach((actor) => {
+    const li = document.createElement("li");
+    li.textContent = actor.name;
+    castList.appendChild(li);
+  });
+}
+showDetails();
+async function showDetails() {
+  const id = getMovieId();
+  const detalles = await fetchMovie(id);
   if (detalles) {
     renderMovieDetails(detalles);
   }

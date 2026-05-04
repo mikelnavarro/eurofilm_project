@@ -3,44 +3,42 @@ body {
     margin: 0;
     padding: 20px;
     background-color: #e0e0e0;
-    background-size: 20px 20px;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
 }
-
-/* ESTRUCTURA PRINCIPAL CON GRID */
-#movie-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
+/* PANEL DERECHO */
+#right-panel {
+    display: flex;
+    flex-direction: column;
     gap: 15px;
-    max-width: 1100px;
-    margin: 0;
 }
-
-#movie-title,
-#movie-info,
-#movie-rating,
-#movie-poster {
-    background: #ffffff;
+/* PANEL IZQUIERDO */
+#left-panel {
+    background: #fff;
     border-radius: 20px;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 15px;
 }
-
+/* Title */
 #movie-title {
     grid-column: 1 / span 2;
     font-size: 1.8rem;
     font-weight: bold;
     padding: 30px;
 }
-
-/* CONTENIDO INTERNO CON FLEX (Prioridad según pides) */
+#movie-details {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+/* INFO */
 #movie-info {
-    grid-column: 1 / 3;
-    grid-row: 3;
-    text-align: left;
+    grid-column: 2;
+    grid-row: 1;
+    background: #fff;
+    border-radius: 20px;
     padding: 20px;
 }
-
 #movie-release-date {
     grid-column: 1;
     grid-row: 2;
@@ -50,17 +48,21 @@ body {
 
 /* Poster */
 #movie-poster {
-    grid-column: 3;
-    grid-row: 3;
-    padding: 0;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    background: #fff;
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
+
 
 #movie-poster img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: auto;
 }
 
 #movie-overview {
@@ -80,15 +82,41 @@ body {
     justify-content: center;
 }
 
+/* CAST */
+#movie-cast {
+    grid-column: 2;
+    grid-row: 2;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#cast {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+/* Elemento Lista */
+#cast li {
+    background: #222;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
 /* Botón de favoritos (Estilo TFG) */
 #btn-favorito {
-    grid-column: 3 / 3;
-    grid-row: 6;
-    cursor: pointer;
+    grid-column: 2;
+    grid-row: 3;
     background-color: #ef4a4a;
-    transition: transform 0.2s;
-    font-size: 1.0rem;
+    border: none;
+    color: white;
     padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 #btn-favorito:hover {

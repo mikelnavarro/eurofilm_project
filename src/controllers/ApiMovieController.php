@@ -36,6 +36,7 @@ class ApiMovieController extends Controller
 
         $pagina = $_GET['page'] ?? 1;
 
+
         $data = $this->tmdb->consultar('/movie/popular', [
             'page' => $pagina
         ]);
@@ -46,30 +47,78 @@ class ApiMovieController extends Controller
 
     public function movie($param = null)
     {
-        var_dump($_GET);
-        var_dump($param ?? null);
-        exit;
 
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $this->jsonResponse(['error' => 'Método no permitido'], 405);
         }
 
-        $id = $_GET['id'] ?? null;
 
+        $id = $_GET['id'] ?? null;
         if (!$id) {
-        header('Content-Type: application/json');
-        echo json_encode(['error' => 'ID requerido']);
-        exit;
-    }
-        if (!$id) {
+            header('Content-Type: application/json');
             $this->jsonResponse(['error' => 'ID requerido'], 400);
+            exit;
         }
 
-        $tmdb = $this->service('TmdbService');
-        $data = $tmdb->consultar("/movie/$id");
+        // DETALLES PRINCIPALES
+        $data = $this->tmdb->consultar("/movie/$id");
+        // CRÉDITOS
+        $credits = $this->tmdb->consultar("/movie/$id/credits");
+        $data['cast'] = array_slice($credits['cast'], 0, 5);
+
+        // TRAILER
+        $videos =
+            $this->tmdb->consultar("/movie/$id/videos");
+
+        $trailer = null;
+        if (!empty($videos['results'])) {
+            foreach ($videos['results'] as $video) {
+                if ($video['site'] === 'YouTube' && $video['type'] === 'Trailer') {
+                    $trailer = $video['key'];
+                    break;
+                }
+            }
+        }
+
+        $data["trailer"] = $trailer;
+
+
 
         header('Content-Type: application/json');
-        echo $data;
+        $this->jsonResponse($data, 200);
+        exit;
+    }
+
+
+    // Buscar películas
+    public function search()
+    {
+        $query = $_GET['query'] ?? null;
+        $page = $_GET['page'] ?? 1;
+
+        if (!$query) {
+            $this->jsonResponse(['error' => 'Query requerida'], 400);
+        }
+
+        $data = $this->tmdb->consultar('/search/movie', [
+            'query' => $query,
+            'page' => $page
+        ]);
+
+        $this->jsonResponse($data, 200);
+        exit;
+    }
+    // Películas Españolas
+    public function spanishMovies()
+    {
+        $page = $_GET['page'] ?? 1;
+
+        $data = $this->tmdb->consultar('/discover/movie', [
+            'with_original_language' => 'es',
+            'page' => $page
+        ]);
+
+        $this->jsonResponse($data, 200);
         exit;
     }
 
