@@ -67,8 +67,7 @@ class ApiMovieController extends Controller
         $data['cast'] = array_slice($credits['cast'], 0, 5);
 
         // TRAILER
-        $videos =
-            $this->tmdb->consultar("/movie/$id/videos");
+        $videos = $this->tmdb->consultar("/movie/$id/videos");
 
         $trailer = null;
         if (!empty($videos['results'])) {

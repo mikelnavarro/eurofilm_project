@@ -29,8 +29,12 @@ function renderMovieDetails(movie) {
     : "placeholder.png";
   document.getElementById("movie-poster").alt = movie.title;
   document.getElementById("movie-title").textContent = movie.title;
+  // Flag
+  //renderFlag(movie);
+  // Lanzamiento
   document.getElementById("movie-release-date").textContent =
     `Fecha de lanzamiento: ${movie.release_date}`;
+  // Sinopsis - Overview
   document.getElementById("movie-overview").textContent =
     `Sinopsis: ${movie.overview}`;
   const genresElement = document.getElementById("movie-genres");
@@ -41,14 +45,10 @@ function renderMovieDetails(movie) {
     // Si no hay (o es una búsqueda general que no trae los nombres)
     genresElement.textContent = "Géneros: No disponibles";
   }
-
-  document.getElementById("countries").textContent = movie.production_countries
-    .map((c) => c.name)
-    .join(", ");
-
-  document.getElementById("companies").textContent = movie.production_companies
-    .map((p) => p.name)
-    .join(", ");
+  // Countries
+  renderCountries(movie);
+  // Productoras - Companies
+  renderCompanies(movie);
 
   // Trailer
   if (movie.trailer) {
@@ -57,12 +57,7 @@ function renderMovieDetails(movie) {
     document.getElementById("movie-info").appendChild(iframe);
   }
   // Casting
-  const castList = document.getElementById("cast");
-  movie.cast.slice(0, 5).forEach((actor) => {
-    const li = document.createElement("li");
-    li.textContent = actor.name;
-    castList.appendChild(li);
-  });
+  renderCast(movie);
 }
 showDetails();
 async function showDetails() {
@@ -71,4 +66,95 @@ async function showDetails() {
   if (detalles) {
     renderMovieDetails(detalles);
   }
+}
+
+/* Renderizado de carga de elenco de actores/actrices */
+function renderCast(movie) {
+  const container_cast = document.getElementById("cast");
+  container_cast.innerHTML = "";
+  if (!movie.cast || !Array.isArray(movie.cast)) {
+    return;
+  }
+  movie.cast.forEach((actor) => {
+    const li = document.createElement("li");
+
+    const img = document.createElement("img");
+
+    if (actor.profile_path) {
+      img.src = `https://image.tmdb.org/t/p/w200${actor.profile_path}`;
+      img.alt = actor.name;
+    }
+
+    const name = document.createElement("span");
+    name.textContent = actor.name;
+
+    const character = document.createElement("span");
+    character.className = "Character";
+    character.textContent = actor.character;
+
+    li.append(img, name, character);
+    container_cast.appendChild(li);
+  });
+}
+/* Cargar Banderitas */
+function renderCountries(movie) {
+  const container_bandera = document.getElementById("countries");
+  container_bandera.innerHTML = "";
+
+  if (!movie.production_countries) {
+    return;
+  }
+
+  movie.production_countries.forEach((country) => {
+    const name = document.createElement("p");
+    name.textContent = country.name;
+    const img = document.createElement("img");
+
+    img.src = `https://flagcdn.com/w40/${country.iso_3166_1.toLowerCase()}.png`;
+    img.alt = country.name;
+    img.title = country.name;
+
+
+    name.append(img);
+    container_bandera.appendChild(name,img);
+  });
+}
+function renderFlag(movie) {
+  const flag = document.getElementById("country-flag");
+  flag.innerHTML = "";
+  const img = document.createElement("img");
+  img.src = `https://flagcdn.com/w40/${movie.origin_country.toLowerCase()}.png`;
+  img.alt = movie.origin_country;
+  flag.appendChild(img);
+}
+/* Cargar imágenes de Productoras */
+function renderCompanies(movie) {
+  const container_companies = document.getElementById("companies");
+  container_companies.innerHTML = "";
+
+  if (
+    !movie.production_companies ||
+    !Array.isArray(movie.production_companies)
+  ) {
+    return;
+  }
+
+  movie.production_companies.forEach((company) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "company";
+    const img = document.createElement("img");
+
+    if (company.logo_path) {
+      img.src = `https://image.tmdb.org/t/p/w200${company.logo_path}`;
+      img.alt = company.name;
+    } else {
+      img.style.display = "none";
+    }
+
+    const name = document.createElement("span");
+    name.textContent = company.name;
+
+    wrapper.append(img, name);
+    container_companies.appendChild(wrapper);
+  });
 }

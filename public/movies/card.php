@@ -21,33 +21,33 @@ require_once '../variables_config.php';
         <div id="movie-details">
 
             <!-- IZQUIERDA: INFO -->
-            <div id="left-panel">
+            <div class="left-panel">
+                <div id="movie-info">
+                    <p id="movie-genres"></p>
+                    <h1 id="movie-title"></h1>
+                    <p id="movie-release-date"></p>
+                    <p id="movie-overview"></p>
+                </div>
                 <!-- ACTRICES -->
                 <div id="movie-cast">
                     <h3>Elenco</h3>
                     <ul id="cast"></ul>
                 </div>
-                <div id="movie-info">
-                    <h1 id="movie-title"></h1>
-                    <p id="movie-release-date"></p>
-                    <p id="movie-overview"></p>
-                    <p id="movie-genres"></p>
-                </div>
             </div>
-                <!-- DERECHA: POSTER -->
-                <div id="right-panel">
-                    <img id="movie-poster" src="" alt="Poster">
-                    <p id="movie-genres"></p>
-                    <p id="movie-language"></p>
-                    <p id="movie-status"></p>
-                    <p id="countries"></p>
-                    <p id="companies"></p>
-                    <div id="trailer-container">
-                        <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <button id="btn-favorito">Añadir a Favoritos</button>
+            <!-- DERECHA: POSTER -->
+            <div class="right-panel">
+                <img id="movie-poster" src="" alt="Poster">
+                <p id="country-flag"></p>
+                <p id="movie-language"></p>
+                <p id="movie-status"></p>
+                <p id="countries"></p>
+                <p id="companies"></p>
+                <div id="trailer-container">
+                    <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
+                <button id="btn-favorito">Añadir a Favoritos</button>
             </div>
+        </div>
         </div>
 
     </main>
