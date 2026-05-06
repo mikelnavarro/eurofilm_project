@@ -1,4 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
+
+import { initFiltros } from "./filtros.js";
+
 // Referencias
 let paginaActual = 1;
 const movieContainer = document.getElementById("peliculas");
@@ -78,6 +81,7 @@ async function loadMovies() {
   const movies = await fetchMovies(paginaActual);
   renderList(movies);
   updatePageUI();
+  initFiltros(movies);
 }
 
 // Función para cambiar de página

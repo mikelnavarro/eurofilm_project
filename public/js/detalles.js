@@ -34,6 +34,15 @@ function renderMovieDetails(movie) {
   // Lanzamiento
   document.getElementById("movie-release-date").textContent =
     `Fecha de lanzamiento: ${movie.release_date}`;
+  const fecha = new Date(movie.release_date);
+
+  document.getElementById("movie-release-date").textContent =
+  `Fecha de lanzamiento: ${fecha.toLocaleDateString('es-ES', { 
+    day: '2-digit', 
+    month: 'long', 
+    year: 'numeric' 
+  })}`;
+
   // Sinopsis - Overview
   document.getElementById("movie-overview").textContent =
     `Sinopsis: ${movie.overview}`;
@@ -53,6 +62,7 @@ function renderMovieDetails(movie) {
   // Trailer
   if (movie.trailer) {
     const iframe = document.createElement("iframe");
+    iframe.id = "movie-trailer";
     iframe.src = `https://www.youtube.com/embed/${movie.trailer}`;
     document.getElementById("movie-info").appendChild(iframe);
   }

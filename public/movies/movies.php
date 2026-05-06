@@ -22,6 +22,7 @@ require_once '../variables_config.php';
         <option value="ES">España</option>
         <option value="US">EE.UU.</option>
     </select>
+    <!-- Selección Por Proveedor -->
     <select id="select-plataforma">
         <option value="">Todas las plataformas</option>
         <option value="8">Netflix</option>
@@ -36,7 +37,7 @@ require_once '../variables_config.php';
     </main>
     <div class="pagination-controls">
         <button id="prev-page">Anterior</button>
-        <span id="current-page-display">Página 1</span>
+        <span id="current-page-display">Cargar Mas</span>
         <button id="next-page">Siguiente</button>
     </div>
     <?php include '../inc/footer.php'; ?>

@@ -11,6 +11,7 @@ require_once '../variables_config.php';
     <title>Document</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/tarjeta-peli.css">
+    <link rel="stylesheet" href="../css/rating.css">
     <script defer src="../js/detalles.js" type="module"></script>
 
 </head>
@@ -40,14 +41,21 @@ require_once '../variables_config.php';
                 <p id="country-flag"></p>
                 <p id="movie-language"></p>
                 <p id="movie-status"></p>
-                <p id="countries"></p>
-                <p id="companies"></p>
-                <div id="trailer-container">
-                    <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
+                <div class="meta-block">
+                    <span class="label">Paises: </span>
+                    <p id="countries"></p>
                 </div>
-                <button id="btn-favorito">Añadir a Favoritos</button>
+                <div class="meta-block">
+                    <span class="label">Productoras: </span>
+                    <p id="companies"></p>
+                </div>
+                <?php include_once "rating.php"; ?>
+                    <div id="trailer-container">
+                        <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <button id="btn-favorito">Añadir a Favoritos</button>
+                </div>
             </div>
-        </div>
         </div>
 
     </main>

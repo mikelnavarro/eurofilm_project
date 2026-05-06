@@ -1,0 +1,22 @@
+
+public function rateMovie()
+{
+    if (!isset($_SESSION['usuario'])) {
+        $this->jsonResponse(['error' => 'No autenticado'], 401);
+        return;
+    }
+
+    $movieId = $_POST['movie_id'] ?? null;
+    $rating = $_POST['rating'] ?? null;
+
+    if (!$movieId || !$rating) {
+        $this->jsonResponse(['error' => 'Datos inválidos'], 400);
+        return;
+    }
+
+    $email = $_SESSION['usuario']['email'];
+
+    $this->ratingModelo->guardar($email, $movieId, $rating);
+
+    $this->jsonResponse(['ok' => true]);
+}

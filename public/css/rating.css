@@ -1,0 +1,58 @@
+#rating-box {
+    background: rgba(255,255,255,0.04);
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+#rating-box .label {
+    font-size: 12px;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+/* estrellas */
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    font-size: 26px;
+    color: #444;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* hover */
+.stars label:hover,
+.stars label:hover ~ label {
+    color: #e50914;
+}
+
+/* seleccionadas */
+.stars input:checked ~ label {
+    color: #e50914;
+}
+
+#btn-rate {
+    background: #e50914;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+#rating-msg {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #bbb;
+}
