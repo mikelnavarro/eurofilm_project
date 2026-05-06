@@ -20,8 +20,15 @@ class ApiMovieController extends Controller
 
     public function index()
     {
-        header('Content-Type: text/html; charset=utf-8');
+        header('Content-Type: text/json; charset=utf-8');
         echo "<h1>Bienvenido a Eurofilm</h1>";
+                $pagina = $_GET['page'] ?? 1;
+
+        $data = $this->tmdb->consultar('/movie/popular', [
+            'page' => $pagina
+        ]);
+
+        $this->jsonResponse($data, 200);
         echo "El sistema de rutas está funcionando correctamente.";
         exit();
     }

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Eurofilm</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script defer src="../js/login.js" type="module"></script>
 </head>
 <body>
 
@@ -11,7 +13,6 @@
 <main class="login-container">
     <form id="loginForm">
         <h2>Iniciar Sesión</h2>
-
         <div class="form-group">
             <label for="username">Nombre de usuario</label>
             <input type="text" id="username" name="username" required>

@@ -1,6 +1,14 @@
 import { BASE_URL } from "./configuracion.js";
 // Referencias
+const formLogin = document.getElementById("form-login");
+const loginMsg = document.getElementById("login-msg");
 
+function getFormData() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    return { email, password };
+}
 // metodos
 async function login() {
   try {
@@ -32,7 +40,7 @@ async function login() {
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
 
-  form.addEventListener("submit", async (e) => {
+formLogin.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = getFormData();
@@ -41,15 +49,26 @@ document.addEventListener("DOMContentLoaded", () => {
       showMessage("Rellena todos los campos", true);
       return;
     }
-    const response = await loginUser(data);
+    const response = await login(data);
     if (response && response.success) {
       showMessage("Login correcto");
       // Ejemplo: redirección
     } else {
       showMessage("Credenciales incorrectas", true);
     }
+
+  if (!res.ok) {
+    loginMsg.textContent = data.error || "Error al iniciar sesión";
+    return;
+  }
+
+  loginMsg.textContent = "Login correcto ✔";
+
+  // redirigir o actualizar UI
+  window.location.href = "/Eurofilm/public/movies/movies.php";
   });
 });
+
 // funcion mostrar mensaje
 function showMessage(text, isError = false) {
   const msg = document.getElementById("mensaje");

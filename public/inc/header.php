@@ -23,15 +23,15 @@ require_once '../variables_config.php';
                     <li><a href="/Eurofilm/public/movies/movies.php">Populares</a></li>
                 </ul>
             </li> <?php if (isset($_SESSION['nombre'])) : ?>
-                <li><a href="<?= RUTA_URL ?>/UsuarioController/detalle">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
-                <li><a href="<?php echo RUTA_URL; ?>/UsuarioController/logout">Cerrar Sesión</a></li>
+                <li><a href="<?php RUTA_URL; ?>AuthController/logout">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
+                <li><a href="<?php RUTA_URL; ?>AuthController/logout">Cerrar Sesión</a></li>
             <?php else : ?>
-                <li><a href="<?php echo RUTA_URL; ?>/AuthController/login">Login</a></li>
-                <li><a href="<?php echo RUTA_URL; ?>/AuthController/registrarse">Sign up</a></li>
+                <li><a href="/Eurofilm/public/pantalla/login.php">Login</a></li>
+                <li><a href="/Eurofilm/public/pantalla/registrarse.php">Sign up</a></li>
             <?php endif; ?>
             <li><a href="#">Contacto</a>
                 <ul class="submenu">
-                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="/Eurofilm/public/referencia/quienes-somos">Quiénes somos</a></li>
                     <li><a href="#">Email</a></li>
                 </ul>
             </li>
