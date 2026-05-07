@@ -1,18 +1,14 @@
 <?php
-
 namespace Mikelnavarro\Eurofilm\controllers;
-
 use Mikelnavarro\Eurofilm\core\Controller;
 
 class AuthController extends Controller
 {
     // Atributos
-    private $usuarioServicio;
     private $usuarioModelo;
     // Constructores
     public function __construct()
     {
-        $this->usuarioServicio = $this->service('UserService');
         $this->usuarioModelo = $this->modelo("Usuario");
     }
     // Registrase
@@ -24,16 +20,18 @@ class AuthController extends Controller
             return;
         }
 
-        // datos
-        $nombre = $_POST['nombre'];
-        $email = $_POST['email'];
-        $clave = $_POST['clave'];
+        // datos (FORMDATA)
+        $nombre = $_POST['nombre'] ?? null;
+        $email  = $_POST['email'] ?? null;
+        $clave  = $_POST['password'] ?? null;
         // datos incompletos
         if (!$nombre || !$email || !$clave) {
             $this->jsonResponse(['error' => 'Datos incompletos'], 400);
             return;
         }
 
+
+        // comprobar duplicado
         $usuarioIgual = $this->usuarioModelo->obtenerUsuarioPorEmail($email); // comprobamos que existe el email
 
         if ($usuarioIgual) {

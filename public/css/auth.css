@@ -4,20 +4,23 @@ body {
     min-height: 100vh;
 }
 
-a {
-    color: #4a90e2;
-    text-decoration: none;
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-a:hover {
-    color: #e25c4a;
-}
-/* error */
-.error {
-    color: #e25c4a;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+form {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 form {
@@ -27,18 +30,19 @@ form {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 360px;
 }
-/* Título del formulario */
-form h2 {
+/* Titulos del FORMULARIO */
+
+form h1 {
     text-align: center;
     margin-bottom: 1.5rem;
-    font-size: 1.4rem;
     color: #333;
+    margin: 0 0 10px 0;
 }
-
 /* LOGIN → franja azul arriba */
-form.login {
+form {
     border-top: 4px solid #4a90e2;
 }
+
 label {
     display: block;
     padding: 6px 0 4px;
@@ -60,7 +64,8 @@ input:focus {
     outline: none;
     border-color: #4a90e2;
 }
-#btnLogin {
+
+#btnRegistrar, #btnLogin {
     background-color: #4a90e2;
     color: white;
     padding: 10px;
@@ -72,6 +77,25 @@ input:focus {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-form.loginForm button:hover {
+
+form.button:hover {
     background-color: #357abd;
+}
+
+/* error */
+.error {
+    color: #e25c4a;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Enlace ^*/
+a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e25c4a;
 }

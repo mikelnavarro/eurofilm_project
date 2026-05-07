@@ -22,13 +22,6 @@ class ApiMovieController extends Controller
     {
         header('Content-Type: text/json; charset=utf-8');
         echo "<h1>Bienvenido a Eurofilm</h1>";
-                $pagina = $_GET['page'] ?? 1;
-
-        $data = $this->tmdb->consultar('/movie/popular', [
-            'page' => $pagina
-        ]);
-
-        $this->jsonResponse($data, 200);
         echo "El sistema de rutas está funcionando correctamente.";
         exit();
     }
@@ -41,11 +34,12 @@ class ApiMovieController extends Controller
             $this->jsonResponse(["error" => "Method Not Allowed"], 405);
         }
 
-        $pagina = $_GET['page'] ?? 1;
+        $page = $_GET['page'] ?? 1;
 
 
         $data = $this->tmdb->consultar('/movie/popular', [
-            'page' => $pagina
+            "sort_by" => "popularity.desc",
+            'page' => $page
         ]);
 
         $this->jsonResponse($data, 200);
@@ -110,7 +104,7 @@ class ApiMovieController extends Controller
             'query' => $query,
             'page' => $page
         ]);
-
+        header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }
@@ -121,9 +115,25 @@ class ApiMovieController extends Controller
 
         $data = $this->tmdb->consultar('/discover/movie', [
             'with_original_language' => 'es',
+            "sort_by" => "popularity.desc",
             'page' => $page
         ]);
 
+        
+        
+        header('Content-Type: application/json');
+        $this->jsonResponse($data, 200);
+        exit;
+    }
+    public function series() {
+        $page = $_GET['page'] ?? 1;
+
+
+        $data = $this->tmdb->consultar('/tv', [
+            'with_original_language' => 'es',
+            'page' => $page
+        ]);
+        header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }

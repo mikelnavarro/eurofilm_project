@@ -4,7 +4,7 @@ import { initFiltros } from "./filtros.js";
 import { updatePageUI } from "./helper.js";
 // Referencias
 let paginaActual = 1;
-const movieContainer = document.getElementById("peliculas");
+const movieContainer = document.getElementById("film");
 
 
 // Para las paginas botones
@@ -14,7 +14,7 @@ const pageDisplay = document.getElementById("current-page-display");
 
 async function fetchMovies(pagina) {
   try {
-    const res = await fetch(`${BASE_URL}/movies?page=${pagina}`);
+    const res = await fetch(`${BASE_URL}/series?page=${pagina}`);
 
     if (!res.ok) {
       throw new Error(`Error HTTP: ${res.status}`);
@@ -30,12 +30,12 @@ async function fetchMovies(pagina) {
 }
 
 // función de carga de detalles de Movies
-function renderList(movies) {
+function renderList(series) {
   if (!movieContainer) {
     console.error("La referencia del contenedor de 'peliculas' no encontrado.");
     return;
   }
-  movies.forEach((movie) => {
+  series.forEach((serie) => {
     // Creamos los elementos uno a uno
     const card = document.createElement("div");
     card.className = "pelicula-card";
@@ -46,16 +46,16 @@ function renderList(movies) {
     });
     // Cargar elemento uno a uno
     const img = document.createElement("img");
-    img.src = movie.poster_path
+    img.src = serie.poster_path
       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
       : "placeholder.png";
-    img.alt = movie.title;
+    img.alt = serie.alt;
     const title = document.createElement("h3");
-    title.textContent = movie.title;
+    title.textContent = serie.title;
     const id = document.createElement("span");
-    id.textContent = movie.id;
+    id.textContent = serie.id;
     const releaseYear = document.createElement("p");
-    releaseYear.textContent = movie.release_date?.slice(0, 4) ?? "—";
+    releaseYear.textContent = serie.release_date?.slice(0, 4) ?? "—";
 
     card.append(img, title, releaseYear);
     // añadir la tarjeta al contenedor principal

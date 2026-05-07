@@ -20,14 +20,19 @@ require_once '../variables_config.php';
             <li><a href="/Eurofilm/public/movies/movies.php">Inicio</a></li>
             <li><a href="#">Películas</a>
                 <ul class="submenu">
+                    <li><a href="/Eurofilm/public/movies/movies.php">Pelis de Acción</a></li>
                     <li><a href="/Eurofilm/public/movies/movies.php">Populares</a></li>
                 </ul>
-            </li> <?php if (isset($_SESSION['nombre'])) : ?>
+            </li>
+            <li><a href="/Eurofilm/public/movies/spanish.php">Spanish Movies</a></li>
+            <li><a href="/Eurofilm/public/movies/series.php">Series en España</a></li>
+
+            <?php if (isset($_SESSION['nombre'])) : ?>
                 <li><a href="<?php RUTA_URL; ?>AuthController/logout">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
                 <li><a href="<?php RUTA_URL; ?>AuthController/logout">Cerrar Sesión</a></li>
             <?php else : ?>
                 <li><a href="/Eurofilm/public/pantalla/login.php">Login</a></li>
-                <li><a href="/Eurofilm/public/pantalla/registrarse.php">Sign up</a></li>
+                <li><a href="/Eurofilm/public/pantalla/register.php">Sign up</a></li>
             <?php endif; ?>
             <li><a href="#">Contacto</a>
                 <ul class="submenu">

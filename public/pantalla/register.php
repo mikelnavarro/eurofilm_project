@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <script defer src="../js/register.js" type="module"></script>
+</head>
+
+<body>
+    <?php include '../inc/header.php'; ?>
+    <main class="auth-container">
+
+        <form id="form-register">
+
+            <h1>Crear cuenta</h1>
+
+            <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Nombre"
+                required>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Correo electrónico"
+                required>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Contraseña"
+                required>
+            <input
+                type="text"
+                id="country"
+                name="country"
+                placeholder="Estado"
+                required>
+
+
+            <button id="btnRegistrar" type="submit">
+                Registrarse
+            </button>
+
+            <div id="login-msg" style="color: red; display: none;"></div>
+
+            <a href="./login.php">
+                Ya tengo cuenta
+            </a>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>

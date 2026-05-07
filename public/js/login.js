@@ -1,26 +1,20 @@
 import { BASE_URL } from "./configuracion.js";
+
+// Función importada
+import { showMessage } from "./helper.js";
 // Referencias
-const formLogin = document.getElementById("form-login");
-const loginMsg = document.getElementById("login-msg");
+const loginForm = document.getElementById("loginForm");
 
-function getFormData() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
 
-    return { email, password };
-}
+const message = document.getElementById("login-msg");
+
 // metodos
 async function login() {
   try {
-    const res = await fetch(`Eurofilm/api/auth/login`, {
+    const res = await fetch(`${BASE_URL}auth/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+      body: getFormData,
+      credentials: "include",
     });
 
     if (!res.ok) {
@@ -35,12 +29,10 @@ async function login() {
   }
 }
 
-// login
-// ----------------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
 
-formLogin.addEventListener("submit", async (e) => {
+  formLogin.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = getFormData();
@@ -57,22 +49,20 @@ formLogin.addEventListener("submit", async (e) => {
       showMessage("Credenciales incorrectas", true);
     }
 
-  if (!res.ok) {
-    loginMsg.textContent = data.error || "Error al iniciar sesión";
-    return;
-  }
+    if (!res.ok) {
+      loginMsg.textContent = data.error || "Error al iniciar sesión";
+      return;
+    }
 
-  loginMsg.textContent = "Login correcto ✔";
+    loginMsg.textContent = "Login correcto ✔";
 
-  // redirigir o actualizar UI
-  window.location.href = "/Eurofilm/public/movies/movies.php";
+    // redirigir o actualizar UI
+    window.location.href = "/Eurofilm/public/movies/movies.php";
   });
 });
-
-// funcion mostrar mensaje
-function showMessage(text, isError = false) {
-  const msg = document.getElementById("mensaje");
-
-  msg.textContent = text;
-  msg.style.color = isError ? "red" : "green";
+// Función obtener datos de form
+function getFormData() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  return { email, password };
 }

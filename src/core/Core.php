@@ -33,7 +33,7 @@ class Core
 
 
         // 2) Instanciar controlador (añadimos "Controller" al nombre y el namespace)
-        $fqcnControlador = "Mikelnavarro\\Eurofilm\\Controllers\\" . $this->controladorActual . "Controller";
+        $fqcnControlador = "Mikelnavarro\\Eurofilm\\controllers\\" . $this->controladorActual . "Controller";
 
 
         if (class_exists($fqcnControlador)) {
