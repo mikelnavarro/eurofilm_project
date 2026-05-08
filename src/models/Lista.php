@@ -13,9 +13,9 @@ class Lista
     private $db;
 
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->db = new Db();
     }
 
     // 1. obtener o crear lista Favoritos

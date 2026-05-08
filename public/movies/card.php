@@ -45,19 +45,26 @@ require_once '../variables_config.php';
                     <span class="label">Paises: </span>
                     <p id="countries"></p>
                 </div>
+                <a id="link-provider">PROVIDER/S</a>
                 <div class="meta-block">
                     <span class="label">Productoras: </span>
                     <p id="companies"></p>
                 </div>
                 <?php include_once "rating.php"; ?>
-                    <div id="trailer-container">
-                        <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <button id="btn-favorito">Añadir a Favoritos</button>
+                <div id="trailer-container">
+                    <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
+                <button id="btn-favorito">Añadir a Favoritos</button>
             </div>
         </div>
-
+        </div>
+        <?php
+        $tmdb_id = $_GET['id'] ?? null;
+        if (!$tmdb_id) {
+            die("ID de película no válido");
+        }
+        ?>
+        <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
     </main>
 </body>
 

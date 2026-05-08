@@ -37,11 +37,11 @@ function renderMovieDetails(movie) {
   const fecha = new Date(movie.release_date);
 
   document.getElementById("movie-release-date").textContent =
-  `Fecha de lanzamiento: ${fecha.toLocaleDateString('es-ES', { 
-    day: '2-digit', 
-    month: 'long', 
-    year: 'numeric' 
-  })}`;
+    `Fecha de lanzamiento: ${fecha.toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    })}`;
 
   // Sinopsis - Overview
   document.getElementById("movie-overview").textContent =
@@ -68,6 +68,8 @@ function renderMovieDetails(movie) {
   }
   // Casting
   renderCast(movie);
+  // Link
+  document.getElementById("link-provider").href = movie.homepage;
 }
 showDetails();
 async function showDetails() {
@@ -124,9 +126,8 @@ function renderCountries(movie) {
     img.alt = country.name;
     img.title = country.name;
 
-
     name.append(img);
-    container_bandera.appendChild(name,img);
+    container_bandera.appendChild(name, img);
   });
 }
 function renderFlag(movie) {
@@ -163,8 +164,30 @@ function renderCompanies(movie) {
 
     const name = document.createElement("span");
     name.textContent = company.name;
-
     wrapper.append(img, name);
     container_companies.appendChild(wrapper);
   });
 }
+// buscamos añadir a favoritos
+const movieData = document.getElementById("movie-data");
+const tmdbId = movieData?.dataset.tmdbId;
+const favBtn = document.getElementById("btn-favorito");
+
+
+favBtn.addEventListener("click", async () => {
+  const formData = new FormData();
+  formData.append("tmdb_id", tmdbId);
+
+  const res = await fetch("/Eurofilm/movie/addFavorite", {
+    method: "POST",
+    body: formData,
+    credentials: "include",
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  if (data.ok) {
+    favBtn.textContent = "En favoritos";
+  }
+});

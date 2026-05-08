@@ -15,7 +15,7 @@ class MovieController extends Controller
     public function __construct()
     {
         $this->MovieModel = $this->modelo('Movie');
-        $this->ListModel = $this->modelo('List');
+        $this->ListModel = $this->modelo('Lista');
         $this->tmdb = $this->service('TmdbService');
     }
     public function addFavorite()
@@ -28,9 +28,6 @@ class MovieController extends Controller
         $userId = $_SESSION['usuario']['id'];
 
         $tmdbId = $_POST['tmdb_id'] ?? null;
-        $title = $_POST['title'] ?? null;
-        $poster = $_POST['poster'] ?? null;
-        $releaseDate = $_POST['release_date'] ?? null;
 
 
         if (!$tmdbId) {
@@ -43,11 +40,13 @@ class MovieController extends Controller
 
 
         if (!$movie) {
+            $tmdbData = $this->tmdb->getMovie($tmdbId);
+
             $movieId = $this->MovieModel->create(
                 $tmdbId,
-                $title,
-                $poster,
-                $releaseDate
+                $tmdbData->title,
+                $tmdbData->poster_path,
+                $tmdbData->release_date
             );
         } else {
             $movieId = $movie->id;

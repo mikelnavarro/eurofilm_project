@@ -53,6 +53,10 @@ class TmdbService
         // Decodificamos a array asociativo (NO volveemos a encodificar)
         return json_decode($resultado, true);
     }
+    public function getMovie($id)
+    {
+        return json_decode($this->consultar("/movie/$id"), true);
+    }
     public function getCredits($id)
     {
         return json_decode(
