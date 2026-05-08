@@ -4,8 +4,8 @@ return [
     'db' => [
         'host'     => 'localhost',
         'dbname'   => 'eurofilm_db',
-        'user'     => 'root',
-        'pass'     => '',
+        'user'     => 'dweb',
+        'pass'     => '12345',
         'charset'  => 'utf8mb4',
     ],
     // Configuración de TMDB

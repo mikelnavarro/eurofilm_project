@@ -26,6 +26,12 @@
                 required>
 
             <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nombre usuario"
+                required>
+            <input
                 type="email"
                 id="email"
                 name="email"
@@ -33,7 +39,7 @@
                 required>
 
             <input
-                type="password"
+                type="password" x
                 id="password"
                 name="password"
                 placeholder="Contraseña"
@@ -50,7 +56,7 @@
                 Registrarse
             </button>
 
-            <div id="login-msg" style="color: red; display: none;"></div>
+            <div id="mensaje" style="color: red; display: none;"></div>
 
             <a href="./login.php">
                 Ya tengo cuenta

@@ -1,4 +1,4 @@
-<?php
+<?php session_start(); 
 require_once '../variables_config.php';
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
-    <a href="<?php RUTA_URL; ?>"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
+    <a href="<?php echo RUTA_URL; ?>"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
     <h1>eurofilm</h1>
     <p><strong>Explorando el reino cinematográfico de TMDB</strong></p>
     <nav>
@@ -27,10 +27,16 @@ require_once '../variables_config.php';
             <li><a href="/Eurofilm/public/movies/spanish.php">Spanish Movies</a></li>
             <li><a href="/Eurofilm/public/movies/series.php">Series en España</a></li>
 
-            <?php if (isset($_SESSION['nombre'])) : ?>
-                <li><a href="<?php RUTA_URL; ?>AuthController/logout">Bienvenido, <strong><?php echo $_SESSION['nombre']; ?></strong></li>
-                <li><a href="<?php RUTA_URL; ?>AuthController/logout">Cerrar Sesión</a></li>
-            <?php else : ?>
+            <?php if (isset($_SESSION['usuario'])) : ?>
+                <li>
+                    <a href="/Eurofilm/public/pantalla/perfil.php">Bienvenido, <strong><?php echo $_SESSION['usuario']['username'] ?? 'Usuario'; ?>
+                        </strong>
+                    </a>
+                </li>
+                <li><a href="/Eurofilm/public/pantalla/perfil.php">Ver Perfil</a></li>
+                <li>
+                    <a href="/Eurofilm/auth/logout">Cerrar Sesión</a>
+                </li> <?php else : ?>
                 <li><a href="/Eurofilm/public/pantalla/login.php">Login</a></li>
                 <li><a href="/Eurofilm/public/pantalla/register.php">Sign up</a></li>
             <?php endif; ?>

@@ -10,20 +10,29 @@ class Usuario
     }
 
 
-    public function registrar($nombre, $email, $pass){
+    public function registrar($nombre, $username, $email, $pass){
         $passHash = password_hash($pass, PASSWORD_BCRYPT);
 
 
-        $sql = "INSERT INTO usuarios (nombre, email, password_hash) VALUES (:nombre, :email, :pass)";
+        $sql = "INSERT INTO users (name, username, email, passwordHash) VALUES (:name, :username, :email, :password)";
         $this->db->query($sql);
-        $this->db->bind(':nombre', $nombre);
+        $this->db->bind(':name', $nombre);
+        $this->db->bind(':username', $username);
         $this->db->bind(':email', $email);
-        $this->db->bind(':pass',   $passHash);
+        $this->db->bind(':password',   $passHash);
         return $this->db->execute();
     }
     // Funciones
+    public function obtenerUsuarioPorUserName($username){
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $this->db->query($sql);
+        $this->db->bind("username", $username);
+
+        // registro() devuelve el objeto con las propiedades
+        return $this->db->registro();
+    }
     public function obtenerUsuarioPorEmail($email){
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = "SELECT * FROM users WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind("email", $email);
 
@@ -31,7 +40,7 @@ class Usuario
         return $this->db->registro();
     }
     public function login($email, $clave){
-        $sql = "SELECT * FROM usuarios WHERE email = :email AND password_hash = :clave";
+        $sql = "SELECT * FROM users WHERE email = :email AND password_hash = :clave";
         $this->db->query($sql);
         $this->db->bind(':email', $email);
         $this->db->bind(':clave', $clave);
@@ -39,7 +48,7 @@ class Usuario
     }
     public function comprobar($email, $clave){
         // 1. Buscamos al usuario solo por email
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = "SELECT * FROM users WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind(':email', $email);
 
@@ -59,7 +68,7 @@ class Usuario
         }
     }
     public function eliminarUsuario($email){
-        $sql = "DELETE FROM usuarios WHERE email = :email";
+        $sql = "DELETE FROM users WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind(':email', $email);
         $this->db->execute();

@@ -4,54 +4,34 @@ const registerForm = document.getElementById("form-register");
 if (registerForm) {
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const formData = new FormData(registerForm);
+    try {
+      const res = await fetch(`/Eurofilm/auth/registrarse`, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      const data = await res.json();
+      const text = await res.text();
 
-    const response = await registrarse(registerForm);
+      console.log(text);
+      if (data.ok) {
+        showMessage("Usuario registrado correctamente");
 
-    if (response.success) {
-      showMessage("Usuario registrado correctamente");
-
-      setTimeout(() => {
-        window.location.href = "./login.php";
-      }, 600);
-    } else {
-      console.log(response.error);
+        setTimeout(() => {
+          window.location.href = "./movies.php";
+        }, 800);
+      } else {
+        showMessage(data.error, true);
+      }
+    } catch (error) {
+      console.error(error);
+      showMessage("Error de servidor", true);
     }
   });
 }
 // metodos
-async function registrarse(form) {
-  try {
-    const formData = new FormData(form);
 
-    const res = await fetch(`Eurofilm/index.php?url=auth/registrarse`, {
-      method: "POST",
-
-      body: formData,
-
-      credentials: "include",
-    });
-    const data = await res.json();
-
-    console.log(data);
-
-    if (!res.ok) {
-      return { success: false, error: data.error };
-    }
-
-    return { success: true, data };
-  } catch (error) {
-    console.error("Error register:", error);
-
-    return { success: false };
-  }
-}
-// Función obtener datos de form
-function getFormData() {
-  const nombre = document.getElementById("nombre").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  return { email, password };
-}
 
 // funcion mostrar mensaje
 function showMessage(text, isError = false) {

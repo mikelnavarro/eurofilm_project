@@ -20,11 +20,15 @@
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <div id="login-msg" style="color: red; display: none;"></div>
+            <div id="mensaje" style="color: red; display: none;"></div>
 
             <button type="submit" id="btnLogin">Entrar</button>
             <p>¿No tienes cuenta? <a href="./register.php">Crear cuenta</a>
