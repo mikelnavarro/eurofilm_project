@@ -1,13 +1,15 @@
 <?php
+
 namespace Mikelnavarro\Eurofilm\models;
 
 use Mikelnavarro\Eurofilm\core\Db;
 use PDO;
 use PDOException;
-class List 
+
+class Lista
 {
 
-// atributos
+    // atributos
     private $db;
 
 
@@ -41,22 +43,32 @@ class List
 
         return $this->db->lastInsertId();
     }
-        // 2. añadir película a lista
-    public function addMovieToList($listId, $tmdbId, $title, $poster, $date)
+    // 2. añadir película a lista
+    public function addMovie($listId, $movieId)
     {
-        $sql = "INSERT INTO list_movies 
-                (list_id, tmdb_id, title, poster_path, release_date)
-                VALUES (:list_id, :tmdb_id, :title, :poster, :date)";
+        $sql = "INSERT INTO list_movies (list_id, movie_id)
+            VALUES (:list_id, :movie_id)";
 
         return $this->db->execute($sql, [
             'list_id' => $listId,
-            'tmdb_id' => $tmdbId,
-            'title' => $title,
-            'poster' => $poster,
-            'date' => $date
+            'movie_id' => $movieId
         ]);
     }
+
+
+
+    // si existe
+    public function exists($listId, $movieId)
+    {
+        $sql = "SELECT id FROM list_movies 
+            WHERE list_id = :list_id AND movie_id = :movie_id
+            LIMIT 1";
+
+        $result = $this->db->query($sql, [
+            'list_id' => $listId,
+            'movie_id' => $movieId
+        ]);
+
+        return !empty($result);
+    }
 }
-
-
-

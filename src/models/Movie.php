@@ -27,47 +27,16 @@ class Movie
     // create
     public function create($tmdbId, $title, $poster, $releaseDate)
     {
-        $sql = "INSERT INTO movies (tmdb_id, title, poster_path, release_date)
-            VALUES (:tmdb_id, :title, :poster, :release_date)";
+        $sql = "INSERT INTO movies (tmdb_id, title, release_date, poster_path)
+            VALUES (:tmdb_id, :title, :release_date, :poster)";
 
         $this->db->execute($sql, [
             'tmdb_id' => $tmdbId,
             'title' => $title,
+            'release_date' => $releaseDate,
             'poster' => $poster,
-            'release_date' => $releaseDate
         ]);
 
         return $this->db->lastInsertId();
-    }
-    // añadir a favoritos
-    public function addToFavorites($userId, $tmdbId, $title, $poster, $date)
-    {
-        // Evitar duplicado
-        $check = "SELECT id FROM lists 
-              WHERE user_id = :user_id 
-              AND name = 'Favoritos'
-              AND tmdb_id = :tmdb_id";
-
-        $exists = $this->db->query($check, [
-            'user_id' => $userId,
-            'tmdb_id' => $tmdbId
-        ]);
-
-        if ($exists) {
-            return false;
-        }
-
-        // Insertar
-        $sql = "INSERT INTO lists 
-            (user_id, name, tmdb_id, title, poster_path, release_date)
-            VALUES (:user_id, 'Favoritos', :tmdb_id, :title, :poster, :date)";
-
-        return $this->db->execute($sql, [
-            'user_id' => $userId,
-            'tmdb_id' => $tmdbId,
-            'title' => $title,
-            'poster' => $poster,
-            'date' => $date
-        ]);
     }
 }

@@ -54,6 +54,7 @@ class AuthController extends Controller
 
         if ($usuario) {
             $_SESSION['usuario'] = [
+                'id' => $usuario->id,
                 'nombre' => $usuario->name,
                 'username' => $usuario->username,
                 'email' => $usuario->email,
@@ -90,6 +91,7 @@ class AuthController extends Controller
         // guardamos 
         // sesión
         $_SESSION['usuario'] = [
+            'id' => $usuario->id,
             'nombre' => $usuario->name,
             'username' => $usuario->username,
             'email' => $usuario->email,

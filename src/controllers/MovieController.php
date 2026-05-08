@@ -8,13 +8,14 @@ class MovieController extends Controller
 {
     // Atributos
     private $tmdb;
-    private $modelo;
+    private $ListModel;
+    private $MovieModel;
 
     // Constructor
     public function __construct()
     {
-        $this->modelo = $this->modelo('Movie');
-        $this->modelo = $this->modelo('List');
+        $this->MovieModel = $this->modelo('Movie');
+        $this->ListModel = $this->modelo('List');
         $this->tmdb = $this->service('TmdbService');
     }
     public function addFavorite()
@@ -29,14 +30,40 @@ class MovieController extends Controller
         $tmdbId = $_POST['tmdb_id'] ?? null;
         $title = $_POST['title'] ?? null;
         $poster = $_POST['poster'] ?? null;
-        $date = $_POST['release_date'] ?? null;
+        $releaseDate = $_POST['release_date'] ?? null;
+
 
         if (!$tmdbId) {
             $this->jsonResponse(['error' => 'Falta tmdb_id'], 400);
             return;
         }
 
-        $ok = $this->modelo->addToFavorites(
+        // Comprobamos
+        $movie = $this->MovieModel->getByTmdbId($tmdbId);
+
+
+        if (!$movie) {
+            $movieId = $this->MovieModel->create(
+                $tmdbId,
+                $title,
+                $poster,
+                $releaseDate
+            );
+        } else {
+            $movieId = $movie->id;
+        }
+
+
+        // Obtener Lista favoritos
+        $listId = $this->ListModel->getOrCreateFavorites($userId);
+        if ($this->ListModel->exists($listId, $movieId)) {
+            $this->jsonResponse(['ok' => true, 'message' => 'Ya estaba en favoritos']);
+            return;
+        }
+        $this->ListModel->addMovie($listId, $movieId);
+
+        // Ok
+        $ok = $this->ListModel->addToFavorites(
             $userId,
             $tmdbId
         );
