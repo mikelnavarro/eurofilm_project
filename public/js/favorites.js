@@ -15,10 +15,15 @@ async function loadFavorites() {
   }
   data.movies.forEach((movie) => {
     container.innerHTML += `
-            <a href="/Eurofilm/public/movies/card.php?id=${movie.tmdb_id}" alt="card"><div class="movie-card">
+            <a href="/Eurofilm/public/movies/card.php?id=${movie.tmdb_id}" alt="card">
+            <div class="movie-card">
                 <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}">
                 <h3>${movie.title}</h3>
+                </a>
                 <p>${movie.release_date}</p>
+                <button class="remove-fav" data-id="${movie.id}">
+          Quitar de Favoritos
+</button>
             </div>
         `;
   });
@@ -26,9 +31,9 @@ async function loadFavorites() {
 
 loadFavorites();
 // remover
-document.querySelectorAll(".remove-fav").forEach((btn) => {
-  btn.addEventListener("click", async () => {
-    const movieId = btn.dataset.id;
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("remove-fav")) {
+    const movieId = e.target.dataset.id;
 
     const formData = new FormData();
     formData.append("movie_id", movieId);
@@ -42,10 +47,11 @@ document.querySelectorAll(".remove-fav").forEach((btn) => {
     const data = await res.json();
 
     if (data.ok) {
-      // eliminar card del DOM
+      //eliminar Card
       btn.closest(".movie-card").remove();
     } else {
-      alert("Error al eliminar");
+      alert("Error al eliminar favorito");
     }
-  });
+    location.reload();
+  }
 });

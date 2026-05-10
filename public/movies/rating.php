@@ -1,3 +1,12 @@
+<div id="rating-summary">
+    <h3>Valoración media</h3>
+
+    <div class="rating-box">
+        <span id="average-rating">--</span> / 5
+    </div>
+
+    <small id="total-reviews"></small>
+</div>
 <div id="rating-box">
     <span class="label">Tu valoración</span>
     <form id="form-rating" method="POST">

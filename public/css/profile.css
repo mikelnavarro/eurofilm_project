@@ -1,0 +1,68 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --accent-glow: #6366f1;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --bg-main: #f8fafc;
+}
+
+body {
+    background-color: var(--bg-main);
+    background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%);
+    font-family: 'Arial';
+}
+/* Títulos de sección con subrayado dinámico */
+h1, h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-glow), #ec4899);
+    border-radius: 2px;
+}
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-glow), #ec4899);
+    border-radius: 2px;
+}
+.btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+/* BOTÓN ELIMINAR */
+.btn-delete-review {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-delete-review:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+.btn-delete-review:active {
+    transform: translateY(0px);
+}

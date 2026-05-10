@@ -58,7 +58,7 @@ require_once '../variables_config.php';
                     <p id="companies"></p>
                 </div>
                 <?php include_once "rating.php"; ?>
-                <div class="movie-rating"></div>
+                <div class="movie-rating-tmdb"></div>
             </div>
         </div>
         </div>
@@ -72,7 +72,6 @@ require_once '../variables_config.php';
 
 
         <div id="reviews-container"></div>
-
         <script>
             const TMDB_ID = <?= json_encode($_GET['id']) ?>;
             const CURRENT_USER_ID = <?= $_SESSION['usuario']['id'] ?? 'null' ?>;

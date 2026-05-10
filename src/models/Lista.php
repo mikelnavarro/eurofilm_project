@@ -108,4 +108,5 @@ class Lista
 
         return $this->db->registros();
     }
+    
 }

@@ -1,5 +1,5 @@
 const container = document.getElementById("reviews-container");
-
+// cargar reviews
 async function loadReviews() {
 
   const res = await fetch(
@@ -27,20 +27,27 @@ async function loadReviews() {
         <small>
           ${review.username} · ${review.rating}/5
         </small>
-
-        ${
-          canEdit
-          ? `
-            <button data-id="${review.id}">
-              Eliminar
-            </button>
-          `
-          : ''
-        }
-
       </div>
     `;
   });
 }
 
 loadReviews();
+async function loadAverage() {
+
+  const res = await fetch(
+    `/Eurofilm/movie/getMediaByMovie?tmdb_id=${TMDB_ID}`
+  );
+
+  const data = await res.json();
+
+  if (!data.ok) return;
+
+  document.getElementById("average-rating").textContent =
+    data.average ?? "0";
+
+  document.getElementById("total-reviews").textContent =
+    `${data.total ?? 0} reseñas`;
+}
+
+loadAverage();

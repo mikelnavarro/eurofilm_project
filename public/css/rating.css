@@ -1,3 +1,15 @@
+#rating-summary {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.rating-box {
+    font-size: 24px;
+    font-weight: bold;
+}
 #rating-box {
     background: rgba(255,255,255,0.04);
     padding: 15px;

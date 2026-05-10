@@ -1,5 +1,3 @@
-
-
 const formRating = document.getElementById("form-rating");
 const msg = document.getElementById("rating-msg");
 
@@ -16,7 +14,6 @@ formRating.addEventListener("submit", async (e) => {
 
   const formData = new FormData(formRating);
 
-
   const res = await fetch("/Eurofilm/movie/addReview", {
     method: "POST",
     body: formData,
@@ -29,11 +26,28 @@ formRating.addEventListener("submit", async (e) => {
     return;
   }
 
-
-  if (data.ok) {
-    alert("Reseña guardada");
+  if (!data.ok) {
+    msg.textContent = data.error || "Error";
+    return;
   }
-  console.log(data);
 
-  msg.textContent = data.ok ? "Valoracion guardada" : data.error || "Error";
+  if (data.updated) {
+    msg.textContent = "Reseña actualizada";
+  } else {
+    msg.textContent = "Reseña creada";
+  }
+
+  if (data.hasReviewed) {
+    document.getElementById("form-rating").style.display = "none";
+  }
+  if (data.review) {
+    form.rating.value = data.review.rating;
+    form["review-title"].value = data.review.title;
+    form.comment.value = data.review.comment;
+  }
+
+  
+  console.log(data);
+  msg.style.color = "green";
 });
+

@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <script defer src="../js/verPerfil.js" type="module"></script>
     <script defer src="../js/updatePerfil.js" type="module"></script>
 </head>
@@ -53,11 +54,11 @@
                 <button type="submit">Guardar</button><br><br>
             </form>
         </div>
+        <?php include 'reviews-user.php'; ?>
         <?php include 'favoritos.php'; ?>
 
     </main>
     <?php include_once '../inc/footer.php' ?>
 
 </body>
-
 </html>

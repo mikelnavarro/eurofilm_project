@@ -22,3 +22,24 @@ main {
     margin: 20px auto;
     padding: 20px;
 }
+
+/* Buttons */
+.btn-secondary {
+    background-color: #bdc3c7;
+    color: #2c3e50;
+}
+
+.btn-secondary:hover {
+    background-color: #95a5a6;
+}
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

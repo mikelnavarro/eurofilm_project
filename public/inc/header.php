@@ -12,7 +12,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
-    <a href="<?php echo RUTA_URL; ?>"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
+    <a href="<?php echo RUTA_URL; ?>/public/movies/movies.php"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
     <h1>eurofilm</h1>
     <p><strong>Explorando el reino cinematográfico de TMDB</strong></p>
     <nav>
