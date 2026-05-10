@@ -72,8 +72,23 @@ class MovieController extends Controller
             'created' => $ok
         ]);
     }
-    // borrar de Favoritos
+    // cambiar visibilidad de lista
+    public function changeFavoritesVisibility()
+    {
+        if (!isset($_SESSION['usuario'])) {
+            $this->jsonResponse(['error' => 'No autenticado'], 401);
+            return;
+        }
+        $userId = $_SESSION['usuario']['id'];
+        $visibility = $_POST['visibility'];
 
+        $listId = $this->ListModel->getOrCreateFavorites($userId);
+
+        $ok = $this->ListModel->updateVisibility($listId, $visibility);
+
+        $this->jsonResponse(['ok' => $ok]);
+    }
+    // borrar de Favoritos
     public function removeFavorite()
     {
         $userId = $_SESSION['usuario']['id'];
@@ -110,20 +125,45 @@ class MovieController extends Controller
             return;
         }
 
-        $tmdbId = $_POST['tmdb_id'] ?? null;
-        $rating = $_POST['rating'] ?? null;
-        $comment = $_POST['comment'] ?? null;
 
-        if (!$tmdbId || !$rating) {
+        $tmdbId = $_GET['id'];
+        $userId = $_SESSION['usuario']['id'];
+        $movieId = $_POST['movie_id'];
+        $rating  = $_POST['rating'];
+        $titulo = $_POST['review-title'] ?? '';
+        $comment = $_POST['comment'] ?? '';
+        $visibility = $_POST['visibility'] ?? "Privada";
+
+
+        // spoiler
+        $spoiler = $_POST["spoiler"] ?? '0';
+        if (!$movieId || !$rating) {
             $this->jsonResponse(['error' => 'Datos incompletos'], 400);
             return;
         }
 
-        $this->reviewModel->create(
-            $_SESSION['usuario']['id'],
+        // 1. obtener datos de la peli desde TMDB o frontend
+        $movieData = $this->tmdb->getMovie($tmdbId);
+
+
+        // 2. asegurar película en BD
+        $movieId = $this->MovieModel->create(
             $tmdbId,
+            $movieData['title'],
+            $movieData['poster_path'],
+            $movieData['release_date']
+        );
+        // insertamos en review
+
+        // porque tenemos
+        $this->reviewModel->saveReview(
+            $userId,
+            $movieId,
             $rating,
-            $comment
+            $titulo,
+            $comment,
+            $visibility,
+            $spoiler
         );
 
         $this->jsonResponse(['ok' => true]);

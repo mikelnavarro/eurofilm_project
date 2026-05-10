@@ -1,16 +1,20 @@
 <?php
 
 namespace Mikelnavarro\Eurofilm\models;
+
 use Mikelnavarro\Eurofilm\core\Db;
+
 class Usuario
 {
     protected $db;
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Db();
     }
 
 
-    public function registrar($nombre, $username, $email, $pass){
+    public function registrar($nombre, $username, $email, $pass)
+    {
         $passHash = password_hash($pass, PASSWORD_BCRYPT);
 
 
@@ -23,30 +27,34 @@ class Usuario
         return $this->db->execute();
     }
     // Funciones
-    public function obtenerUsuarioPorUserName($username){
+    public function obtenerUsuarioPorUserName($username)
+    {
         $sql = "SELECT * FROM users WHERE username = :username";
         $this->db->query($sql);
         $this->db->bind("username", $username);
 
         // registro() devuelve el objeto con las propiedades
-        return $this->db->registro();
+        return $this->db->registros();
     }
-    public function obtenerUsuarioPorEmail($email){
+    public function obtenerUsuarioPorEmail($email)
+    {
         $sql = "SELECT * FROM users WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind("email", $email);
 
         // registro() devuelve el objeto con las propiedades
-        return $this->db->registro();
+        return $this->db->registros();
     }
-    public function login($email, $clave){
+    public function login($email, $clave)
+    {
         $sql = "SELECT * FROM users WHERE email = :email AND password_hash = :clave";
         $this->db->query($sql);
         $this->db->bind(':email', $email);
         $this->db->bind(':clave', $clave);
         return $this->db->execute();
     }
-    public function comprobar($email, $clave){
+    public function comprobar($email, $clave)
+    {
         // 1. Buscamos al usuario solo por email
         $sql = "SELECT * FROM users WHERE email = :email";
         $this->db->query($sql);
@@ -67,7 +75,29 @@ class Usuario
             return false; // El email no existe
         }
     }
-    public function eliminarUsuario($email){
+    public function updateProfile($id, $username, $email, $country, $nombre, $bio)
+    {
+        $sql = "UPDATE users 
+            SET username = :username,
+                email = :email,
+                country = :country,
+                name = :name
+                bio = :bio
+            WHERE id = :id";
+
+        $this->db->query($sql);
+        $this->db->bind(':id', $id);
+        $this->db->bind(':username', $username);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':country', $country);
+        $this->db->bind(':name', $nombre);
+        $this->db->bind(':bio', $bio);
+
+
+        return $this->db->execute();
+    }
+    public function eliminarUsuario($email)
+    {
         $sql = "DELETE FROM users WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind(':email', $email);

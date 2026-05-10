@@ -123,6 +123,43 @@ class AuthController extends Controller
             'usuario' => $_SESSION['usuario']
         ]);
     }
+    // actualizar perfil de user
+    public function updateProfile()
+    {
+        $userId = $_SESSION['usuario']['id'];
+
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $country = $_POST['country'] ?? '';
+        $nombre = $_POST['nombre'];
+        $bio = $_POST['bio'] ?? '';
+
+
+        
+        // 1. comprobar username duplicado
+        $user = $this->usuarioModelo->obtenerUsuarioPorUserName($username);
+        if ($user && $user->id != $userId) {
+            $this->jsonResponse(['error' => 'Username ya existe']);
+            return;
+        }
+        // 2. comprobar email duplicado
+        $email = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
+        if ($email && $email->id != $userId) {
+            $this->jsonResponse(['error' => 'Email ya existe']);
+            return;
+        }
+
+        $ok = $this->usuarioModelo->updateProfile(
+            $userId,
+            $username,
+            $email,
+            $country,
+            $nombre,
+            $bio
+        );
+
+        $this->jsonResponse(['ok' => $ok]);
+    }
     // destruir la sesión
     public function logout()
     {

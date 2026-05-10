@@ -82,6 +82,19 @@ class Lista
 
         return $this->db->execute();
     }
+    // cambiar visibilidad de la lista
+    public function updateVisibility($listId, $visibility)
+    {
+        $sql = "UPDATE lists 
+            SET visibility = :visibility
+            WHERE id = :id";
+
+        $this->db->query($sql);
+        $this->db->bind(':visibility', $visibility);
+        $this->db->bind(':id', $listId);
+
+        return $this->db->execute();
+    }
     // favoritos - comprobar
     public function getMoviesByListId($listId)
     {

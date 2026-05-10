@@ -17,12 +17,20 @@ if (!$userId) {
     <meta charset="UTF-8">
     <title>Mis favoritos</title>
     <link rel="stylesheet" href="/Eurofilm/public/css/style.css">
+    <script defer src="../js/visibility.js" type="module"></script>
     <script defer src="../js/favorites.js" type="module"></script>
 </head>
 
 <body>
 
     <h1>Mis películas favoritas</h1>
+    <form id="formulario-visibility" method="POST">
+    <select id="visibility-fav">
+        <option value="Privada">Privada</option>
+        <option value="Publica">Publica</option>
+    </select>
+    <input type="submit" value="Cambiar Visibilidad de la Lista">
+    </form>
     <div id="favorites-container" data-user-id="<?= $userId ?>"></div>
 </body>
 
