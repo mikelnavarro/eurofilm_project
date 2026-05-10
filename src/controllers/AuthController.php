@@ -30,6 +30,10 @@ class AuthController extends Controller
         $username = $_POST['username'] ?? null;
         $email  = $_POST['email'] ?? null;
         $clave  = $_POST['password'] ?? null;
+
+
+        // ROLE
+        $rol = 'NORMAL';
         // datos incompletos
         if (!$nombre || !$username || !$email || !$clave) {
             $this->jsonResponse(['error' => 'Datos incompletos'], 400);
@@ -45,7 +49,7 @@ class AuthController extends Controller
             return;
         }
         // no se va a poder meter otro con el correo igual, hay que comprobar que son distintos
-        $this->usuarioModelo->registrar($nombre, $username, $email, $clave);
+        $this->usuarioModelo->registrar($nombre, $username, $email, $clave, $rol);
 
         $usuario = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
 
@@ -58,7 +62,8 @@ class AuthController extends Controller
                 'nombre' => $usuario->name,
                 'username' => $usuario->username,
                 'email' => $usuario->email,
-                'fecha_alta' => $usuario->fecha_alta
+                'fecha_alta' => $usuario->fecha_alta,
+                'role' => $usuario->role
             ];
             $this->jsonResponse(['ok' => true, 'usuario' => $_SESSION['usuario']]);
         } else {
@@ -133,6 +138,8 @@ class AuthController extends Controller
         $country = $_POST['country'] ?? '';
         $nombre = $_POST['nombre'];
         $bio = $_POST['bio'] ?? '';
+
+
 
 
         

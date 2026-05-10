@@ -29,7 +29,9 @@
             <input type="checkbox" name="spoiler" id="spoiler" value="1">
             <label for="spoiler">Contiene Spoiler</label>
         </div>
+        <input type="hidden" name="tmdbId" id="tmdbId" value="<?php echo $_GET['id']; ?>">
         <textarea name="comment" placeholder="Escribe"></textarea> 
+
         <button type="submit" id="btn-rate">Enviar reseña</button>
     </form>
 

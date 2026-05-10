@@ -120,42 +120,49 @@ class MovieController extends Controller
     // Rating - guardar votacion de pelicula
     public function addReview()
     {
+        var_dump($_POST);
         if (!isset($_SESSION['usuario'])) {
             $this->jsonResponse(['error' => 'No autenticado'], 401);
             return;
         }
 
 
-        $tmdbId = $_GET['id'];
+
+        $tmdbId = $_POST['tmdbId'] ?? null;
         $userId = $_SESSION['usuario']['id'];
-        $rating  = $_POST['rating'];
+        $rating = $_POST['rating'] ?? null;
         $titulo = $_POST['review-title'] ?? '';
         $comment = $_POST['comment'] ?? '';
-        $visibility = $_POST['visibility'] ?? "Privada";
+        $visibility = $_POST['visibility'] ?? 'Privada';
+        $spoiler = $_POST['spoiler'] ?? '0';
 
 
-        // spoiler
-        $spoiler = $_POST["spoiler"] ?? '0';
-        // 1. obtener datos de la peli desde TMDB o frontend
-
-        $movieId = $this->MovieModel->getByTmdbId($tmdbId);
-        if (!$movieId || !$rating) {
+        if (!$tmdbId || !$rating) {
             $this->jsonResponse(['error' => 'Datos incompletos'], 400);
             return;
         }
 
-        $movieData = $this->tmdb->getByTmdbId($tmdbId);
+        // Buscar película en BD
+        $movie = $this->MovieModel->getByTmdbId($tmdbId);
 
 
-        // 2. asegurar película en BD
-        $movieId = $this->MovieModel->create(
-            $tmdbId,
-            $movieData['title'],
-            $movieData['poster_path'],
-            $movieData['release_date']
-        );
+        // Si NO existe → crear
+        if (!$movie) {
+            $movieData = $this->tmdb->getMovie($tmdbId);
+
+            // 2. asegurar película en BD
+            $movieId = $this->MovieModel->create(
+                $tmdbId,
+                $movieData['title'],
+                $movieData['poster_path'],
+                $movieData['release_date']
+            );
+        } else {
+            // ya existe
+            $movieId = $movie->id;
+        }
         // insertamos en review
-
+        // guardar review
         // porque tenemos
         $this->reviewModel->saveReview(
             $userId,
@@ -166,7 +173,38 @@ class MovieController extends Controller
             $visibility,
             $spoiler
         );
-
         $this->jsonResponse(['ok' => true]);
     }
+
+
+    // obtener todas
+    public function getReviews()
+{
+    $tmdbId = $_GET['tmdb_id'] ?? null;
+
+    if (!$tmdbId) {
+        $this->jsonResponse([
+            'ok' => false,
+            'error' => 'TMDB ID requerido'
+        ]);
+        return;
+    }
+
+    // película interna
+    $movie = $this->MovieModel->getByTmdbId($tmdbId);
+
+    if (!$movie) {
+        $this->jsonResponse([
+            'ok' => true,
+            'reviews' => []
+        ]);
+        return;
+    }
+
+    $reviews = $this->reviewModel->getByMovieId($movie->id);
+    $this->jsonResponse([
+        'ok' => true,
+        'reviews' => $reviews
+    ]);
+}
 }

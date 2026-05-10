@@ -14,6 +14,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/tarjeta-peli.css">
     <link rel="stylesheet" href="../css/rating.css">
     <script defer src="../js/detalles.js" type="module"></script>
+    <script defer src="../js/reviews.js" type="module"></script>
     <script defer src="../js/rate.js" type="module"></script>
 </head>
 
@@ -69,6 +70,13 @@ require_once '../variables_config.php';
         ?>
         <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
 
+
+        <div id="reviews-container"></div>
+
+        <script>
+            const TMDB_ID = <?= json_encode($_GET['id']) ?>;
+            const CURRENT_USER_ID = <?= $_SESSION['usuario']['id'] ?? 'null' ?>;
+        </script>
     </main>
 </body>
 

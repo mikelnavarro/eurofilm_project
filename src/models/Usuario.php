@@ -13,17 +13,18 @@ class Usuario
     }
 
 
-    public function registrar($nombre, $username, $email, $pass)
+    public function registrar($nombre, $username, $email, $pass, $role)
     {
         $passHash = password_hash($pass, PASSWORD_BCRYPT);
 
 
-        $sql = "INSERT INTO users (name, username, email, passwordHash) VALUES (:name, :username, :email, :password)";
+        $sql = "INSERT INTO users (name, username, email, passwordHash, role) VALUES (:name, :username, :email, :password, :role)";
         $this->db->query($sql);
         $this->db->bind(':name', $nombre);
         $this->db->bind(':username', $username);
         $this->db->bind(':email', $email);
         $this->db->bind(':password',   $passHash);
+        $this->db->bind(':role',   $role);
         return $this->db->execute();
     }
     // Funciones

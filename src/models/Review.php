@@ -23,13 +23,13 @@ class Review
     {
         $this->db->query("
         INSERT INTO reviews
-        (user_id, movie_tmdb_id, rating, title, comment, visibility, spoiler)
+        (user_id, movie_id, rating, title, comment, visibility, spoiler)
         VALUES
-        (:user_id, :tmdb_id, :rating, :titulo, :comment, :visibility, :spoiler)
+        (:user_id, :movie_id, :rating, :title, :comment, :visibility, :spoiler)
     ");
 
         $this->db->bind(':user_id', $userId);
-        $this->db->bind(':tmdb_id', $movieId);
+        $this->db->bind(':movie_id', $movieId);
         $this->db->bind(':rating', $rating);
         $this->db->bind(':title', $titulo);
         $this->db->bind(':comment', $comment);
@@ -54,7 +54,7 @@ class Review
     return $this->db->registros();
 }
     // obtener reviews de una pelicula
-    public function getByMovie($movieId)
+    public function getByMovieId($movieId)
     {
         $sql = "SELECT r.*, u.name
             FROM reviews r
