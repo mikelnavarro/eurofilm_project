@@ -56,6 +56,9 @@ function renderMovieDetails(movie) {
   }
   // Countries
   renderCountries(movie);
+  // Votacion - Rating
+  const ratingtmdb = document.getElementById("movie-rating");
+  ratingtmdb.textContent = movie.vote_average;
   // Productoras - Companies
   renderCompanies(movie);
 

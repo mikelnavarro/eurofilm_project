@@ -1,5 +1,6 @@
-const formRating = document.getElementById("form-rating");
 
+
+const formRating = document.getElementById("form-rating");
 const msg = document.getElementById("rating-msg");
 
 formRating.addEventListener("submit", async (e) => {
@@ -14,6 +15,7 @@ formRating.addEventListener("submit", async (e) => {
   }
 
   const formData = new FormData(formRating);
+
 
   const res = await fetch("/Eurofilm/movie/addReview", {
     method: "POST",

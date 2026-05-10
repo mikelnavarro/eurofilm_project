@@ -1,0 +1,57 @@
+#film {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+/* Tarjeta de Película */
+.serie {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+}
+.serie {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.serie {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.serie img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Contenido de la Tarjeta */
+.serie h3 {
+    font-size: 0.9rem;
+    margin: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.serie p {
+    font-size: 0.8rem;
+    color: var(--gray-text);
+    margin: 0 10px 10px 10px;
+}
+.serie span {
+    display: none; 
+}
+
+/* Rating (Estilo burbuja) */
+.serie p:nth-of-type(1) {
+    color: #11a736; /* Verde para la nota */
+    font-weight: bold;
+}

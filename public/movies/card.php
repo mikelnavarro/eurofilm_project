@@ -57,6 +57,7 @@ require_once '../variables_config.php';
                     <p id="companies"></p>
                 </div>
                 <?php include_once "rating.php"; ?>
+                <div class="movie-rating"></div>
             </div>
         </div>
         </div>

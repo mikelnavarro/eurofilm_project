@@ -109,11 +109,18 @@ body {
 
 /* CAST */
 #movie-cast {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra */
     grid-column: 2;
     grid-row: 2;
     background: #fff;
     border-radius: 20px;
     padding: 20px;
+}
+#movie-cast h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
 }
 
 #cast {
@@ -121,7 +128,7 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 
 }
 /* Elemento Lista */
@@ -131,6 +138,7 @@ body {
     object-fit: cover;
     display: block;
     margin: 0;
+    border-radius: 70px;
 }
 #cast .Character {
     width: 2px;
@@ -143,18 +151,48 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 90px;
+    width: 100px;
     text-align: center;
     gap: 6px;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
     background: rgba(255,255,255,0.05);
+    background: #f8f9fa;
+    border: 1px solid transparent;
+
 }
 
+
+#cast li:hover {
+    background: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #eee;
+}
 #cast li:hover span {
     display: block;
 }
+/* Nombre del Actor */
+#cast .ActorName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
 
+/* Nombre del Personaje */
+#cast .Character {
+    width: 100%; /* Corregido de 2px a 100% */
+    color: #888;
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.1;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Si el nombre es muy largo, pone "..." */
+}
 /* Trailer container */
 #trailer-container {
     margin-top: 10px;

@@ -14,7 +14,7 @@ const pageDisplay = document.getElementById("current-page-display");
 
 async function fetchMovies(pagina) {
   try {
-    const res = await fetch(`${BASE_URL}/series?page=${pagina}`);
+    const res = await fetch(`/Eurofilm/api/series?page=${pagina}`);
 
     if (!res.ok) {
       throw new Error(`Error HTTP: ${res.status}`);
@@ -38,16 +38,16 @@ function renderList(series) {
   series.forEach((serie) => {
     // Creamos los elementos uno a uno
     const card = document.createElement("div");
-    card.className = "pelicula-card";
+    card.className = "serie";
     card.style.cursor = "pointer";
     // Si el usuario pulsa click, se abrirá la ventana de Card
     card.addEventListener("click", () => {
-      window.location.href = `card.php?id=${movie.id}`;
+      window.location.href = `card.php?id=${serie.id}`;
     });
     // Cargar elemento uno a uno
     const img = document.createElement("img");
     img.src = serie.poster_path
-      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      ? `https://image.tmdb.org/t/p/w200${serie.poster_path}`
       : "placeholder.png";
     img.alt = serie.alt;
     const title = document.createElement("h3");
@@ -66,19 +66,19 @@ function renderList(series) {
 prevBtn.addEventListener("click", async () => {
   if (paginaActual > 1) {
     paginaActual--;
-    await loadMovies();
+    await loadElements();
   }
 });
 nextBtn.addEventListener("click", async () => {
   paginaActual++;
-  await loadMovies();
+  await loadElements();
 });
 // Al cargar el documento, mostramos algo por defecto
-async function loadMovies() {
+async function loadElements() {
   console.log("Iniciando carga de películas...");
-  const movies = await fetchMovies(paginaActual);
-  renderList(movies);
+  const series = await fetchMovies(paginaActual);
+  renderList(series);
   updatePageUI(pageDisplay);
-  initFiltros(movies);
+  initFiltros(series);
 }
-loadMovies();
+loadElements();

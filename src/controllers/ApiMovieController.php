@@ -129,9 +129,10 @@ class ApiMovieController extends Controller
         $page = $_GET['page'] ?? 1;
 
 
-        $data = $this->tmdb->consultar('/tv', [
-            'with_original_language' => 'es',
-            'page' => $page
+        $data = $this->tmdb->consultar('/tv/on_the_air', [
+            'with_original_language' => 'es-ES',
+            'page' => $page,
+            "sort_by" => "popularity.desc",
         ]);
         header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
