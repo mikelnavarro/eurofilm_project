@@ -13,3 +13,4 @@ async function cargarPerfil() {
   document.getElementById("email").textContent = u.email;
   document.getElementById("country").value = u.country ?? "";
 }
+

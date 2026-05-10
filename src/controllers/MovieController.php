@@ -72,7 +72,21 @@ class MovieController extends Controller
             'created' => $ok
         ]);
     }
+    // borrar de Favoritos
 
+    public function removeFavorite()
+    {
+        $userId = $_SESSION['usuario']['id'];
+        $movieId = $_POST['movie_id'];
+
+        $listId = $this->ListModel->getOrCreateFavorites($userId);
+
+        $ok = $this->ListModel->removeMovie($listId, $movieId);
+
+        $this->jsonResponse([
+            'ok' => $ok
+        ]);
+    }
     // Favoritos
     public function getFavoritos()
     {
@@ -86,6 +100,8 @@ class MovieController extends Controller
             'movies' => $movies
         ]);
     }
+
+
     // Rating - guardar votacion de pelicula
     public function addReview()
     {

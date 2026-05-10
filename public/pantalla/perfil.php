@@ -31,11 +31,7 @@
                 <p><strong>Email:</strong> <?php echo $usuario['email'] ?? 'No definido'; ?></p>
 
             </div>
-
-            <hr>
             
-            <?php include 'favoritos.php'; ?>
-            <hr>
             <form id="form-profile">
                 <label>Username</label>
                 <input id="username" name="username" disabled><br><br>
@@ -50,6 +46,8 @@
                 <button type="submit">Guardar</button><br><br>
             </form>
         </div>
+        <?php include 'favoritos.php'; ?>
+
     </main>
     <?php include_once '../inc/footer.php' ?>
 

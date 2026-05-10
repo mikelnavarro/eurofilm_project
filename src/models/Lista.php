@@ -68,6 +68,20 @@ class Lista
         $this->db->bind(':movie_id', $movieId);
         return $this->db->registro() !== null;
     }
+    // favoritos - borrar
+    public function removeMovie($listId, $movieId)
+    {
+        $sql = "DELETE FROM list_movies 
+            WHERE list_id = :list_id 
+            AND movie_id = :movie_id
+            LIMIT 1";
+
+        $this->db->query($sql);
+        $this->db->bind(':list_id', $listId);
+        $this->db->bind(':movie_id', $movieId);
+
+        return $this->db->execute();
+    }
     // favoritos - comprobar
     public function getMoviesByListId($listId)
     {

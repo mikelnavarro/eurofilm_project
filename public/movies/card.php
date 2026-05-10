@@ -2,6 +2,7 @@
 
 require_once '../variables_config.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
