@@ -15,8 +15,9 @@ formRating.addEventListener("submit", async (e) => {
   const formData = new FormData();
   formData.append("movie_id", movieId);
   formData.append("rating", rating);
+  formData.append("comment", comment);
 
-  const res = await fetch("/Eurofilm/api/rateMovie", {
+  const res = await fetch("/Eurofilm/movies/rateMovie", {
     method: "POST",
     body: formData,
     credentials: "include"
@@ -25,11 +26,11 @@ formRating.addEventListener("submit", async (e) => {
   const data = await res.json();
 
   if (res.status === 401) {
-    msg.textContent = "Debes iniciar sesión";
+    msg.textContent = "Debes iniciar sesion";
     return;
   }
 
   msg.textContent = data.ok
-    ? "Valoración guardada ✔"
+    ? "Valoracion guardada"
     : data.error || "Error";
 });

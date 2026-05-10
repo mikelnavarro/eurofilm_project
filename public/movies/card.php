@@ -51,9 +51,6 @@ require_once '../variables_config.php';
                     <p id="companies"></p>
                 </div>
                 <?php include_once "rating.php"; ?>
-                <div id="trailer-container">
-                    <iframe id="movie-trailer" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
                 <button id="btn-favorito">Añadir a Favoritos</button>
             </div>
         </div>

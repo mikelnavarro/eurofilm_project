@@ -19,28 +19,27 @@ class Lista
     }
 
     // 1. obtener o crear lista Favoritos
-    public function getOrCreateFavoritesList($userId)
+    public function getOrCreateFavorites($userId)
     {
         $sql = "SELECT id FROM lists 
                 WHERE user_id = :user_id 
-                AND name = 'Favoritos'
+                AND title = 'Favoritos'
                 LIMIT 1";
 
-        $list = $this->db->query($sql, [
-            'user_id' => $userId
-        ]);
+        $this->db->query($sql);
+        $this->db->bind(':user_id', $userId);
+        $list = $this->db->registro();
+
 
         if ($list) {
-            return $list[0]->id;
+            return $list->id;
         }
 
-        $insert = "INSERT INTO lists (user_id, name)
+        $insert = "INSERT INTO lists (user_id, title)
                    VALUES (:user_id, 'Favoritos')";
-
-        $this->db->execute($insert, [
-            'user_id' => $userId
-        ]);
-
+        $this->db->query($insert);
+        $this->db->bind(':user_id', $userId);
+        $this->db->execute();
         return $this->db->lastInsertId();
     }
     // 2. añadir película a lista
@@ -49,10 +48,10 @@ class Lista
         $sql = "INSERT INTO list_movies (list_id, movie_id)
             VALUES (:list_id, :movie_id)";
 
-        return $this->db->execute($sql, [
-            'list_id' => $listId,
-            'movie_id' => $movieId
-        ]);
+        $this->db->query($sql);
+        $this->db->bind(':list_id', $listId);
+        $this->db->bind(':movie_id', $movieId);
+        return $this->db->execute();
     }
 
 
@@ -60,15 +59,26 @@ class Lista
     // si existe
     public function exists($listId, $movieId)
     {
-        $sql = "SELECT id FROM list_movies 
+        $sql = "SELECT 1 FROM list_movies 
             WHERE list_id = :list_id AND movie_id = :movie_id
             LIMIT 1";
 
-        $result = $this->db->query($sql, [
-            'list_id' => $listId,
-            'movie_id' => $movieId
-        ]);
+        $this->db->query($sql);
+        $this->db->bind(':list_id', $listId);
+        $this->db->bind(':movie_id', $movieId);
+        return $this->db->registro() !== null;
+    }
+    // favoritos - comprobar
+    public function getMoviesByListId($listId)
+    {
+        $sql = "SELECT m.*
+            FROM movies m
+            INNER JOIN list_movies lm ON lm.movie_id = m.id
+            WHERE lm.list_id = :list_id";
 
-        return !empty($result);
+        $this->db->query($sql);
+        $this->db->bind(':list_id', $listId);
+
+        return $this->db->registros();
     }
 }

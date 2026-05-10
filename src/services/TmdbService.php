@@ -55,7 +55,8 @@ class TmdbService
     }
     public function getMovie($id)
     {
-        return json_decode($this->consultar("/movie/$id"), true);
+        $datos = $this->consultar("/movie/$id");
+        return $datos;
     }
     public function getCredits($id)
     {

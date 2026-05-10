@@ -33,7 +33,9 @@
             </div>
 
             <hr>
-
+            
+            <?php include 'favoritos.php'; ?>
+            <hr>
             <form id="form-profile">
                 <label>Username</label>
                 <input id="username" name="username" disabled><br><br>

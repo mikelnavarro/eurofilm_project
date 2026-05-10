@@ -10,12 +10,14 @@ class MovieController extends Controller
     private $tmdb;
     private $ListModel;
     private $MovieModel;
+    private $reviewModel;
 
     // Constructor
     public function __construct()
     {
         $this->MovieModel = $this->modelo('Movie');
         $this->ListModel = $this->modelo('Lista');
+        $this->reviewModel = $this->modelo('Review');
         $this->tmdb = $this->service('TmdbService');
     }
     public function addFavorite()
@@ -44,15 +46,13 @@ class MovieController extends Controller
 
             $movieId = $this->MovieModel->create(
                 $tmdbId,
-                $tmdbData->title,
-                $tmdbData->poster_path,
-                $tmdbData->release_date
+                $tmdbData['title'],
+                $tmdbData['poster_path'],
+                $tmdbData['release_date'],
             );
         } else {
             $movieId = $movie->id;
         }
-
-
         // Obtener Lista favoritos
         $listId = $this->ListModel->getOrCreateFavorites($userId);
         if ($this->ListModel->exists($listId, $movieId)) {
@@ -62,14 +62,54 @@ class MovieController extends Controller
         $this->ListModel->addMovie($listId, $movieId);
 
         // Ok
-        $ok = $this->ListModel->addToFavorites(
+        $ok = $this->ListModel->addMovie(
             $userId,
-            $tmdbId
+            $movieId
         );
 
         $this->jsonResponse([
             'ok' => true,
             'created' => $ok
         ]);
+    }
+
+    // Favoritos
+    public function getFavoritos()
+    {
+        $userId = $_SESSION['usuario']['id'];
+
+        $listId = $this->ListModel->getOrCreateFavorites($userId);
+        $movies = $this->ListModel->getMoviesByListId($listId);
+
+        $this->jsonResponse([
+            'ok' => true,
+            'movies' => $movies
+        ]);
+    }
+    // Rating - guardar votacion de pelicula
+    public function addReview()
+    {
+        if (!isset($_SESSION['usuario'])) {
+            $this->jsonResponse(['error' => 'No autenticado'], 401);
+            return;
+        }
+
+        $tmdbId = $_POST['tmdb_id'] ?? null;
+        $rating = $_POST['rating'] ?? null;
+        $comment = $_POST['comment'] ?? null;
+
+        if (!$tmdbId || !$rating) {
+            $this->jsonResponse(['error' => 'Datos incompletos'], 400);
+            return;
+        }
+
+        $this->reviewModel->create(
+            $_SESSION['usuario']['id'],
+            $tmdbId,
+            $rating,
+            $comment
+        );
+
+        $this->jsonResponse(['ok' => true]);
     }
 }

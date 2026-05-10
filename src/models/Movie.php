@@ -20,9 +20,16 @@ class Movie
     public function getByTmdbId($tmdbId)
     {
         $sql = "SELECT * FROM movies WHERE tmdb_id = :tmdb_id LIMIT 1";
-        $result = $this->db->query($sql, ['tmdb_id' => $tmdbId]);
+        $this->db->query($sql);
+        $this->db->bind(':tmdb_id', $tmdbId);
 
-        return $result ? $result[0] : null;
+        return $this->db->registro();
+    }
+    public function getMoviesByListId($id){
+        $sql = "SELECT * FROM movies WHERE id = :id LIMIT 1";
+        $this->db->query($sql);
+        $this->db->bind(':id', $id);
+        return $this->db->registro();
     }
     // create
     public function create($tmdbId, $title, $poster, $releaseDate)
@@ -30,12 +37,14 @@ class Movie
         $sql = "INSERT INTO movies (tmdb_id, title, release_date, poster_path)
             VALUES (:tmdb_id, :title, :release_date, :poster)";
 
-        $this->db->execute($sql, [
-            'tmdb_id' => $tmdbId,
-            'title' => $title,
-            'release_date' => $releaseDate,
-            'poster' => $poster,
-        ]);
+        $this->db->query($sql);
+        $this->db->bind(':tmdb_id', $tmdbId);
+        $this->db->bind(':title', $title);
+        $this->db->bind(':release_date', $releaseDate);
+        $this->db->bind(':poster', $poster);
+
+        $this->db->execute();
+
 
         return $this->db->lastInsertId();
     }

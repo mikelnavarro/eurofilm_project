@@ -170,7 +170,7 @@ function renderCompanies(movie) {
 }
 // buscamos añadir a favoritos
 const movieData = document.getElementById("movie-data");
-const tmdbId = movieData?.dataset.tmdbId;
+const tmdbId = movieData.dataset.tmdb;
 const favBtn = document.getElementById("btn-favorito");
 
 
@@ -189,5 +189,24 @@ favBtn.addEventListener("click", async () => {
 
   if (data.ok) {
     favBtn.textContent = "En favoritos";
+    alert("Ya esta en favoritos");
   }
+});
+
+
+// Reseña
+btnReview.addEventListener("click", async () => {
+  const formData = new FormData();
+  formData.append("tmdb_id", tmdbId);
+  formData.append("rating", rating.value);
+  formData.append("comment", comment.value);
+
+  const res = await fetch("/Eurofilm/movie/add", {
+    method: "POST",
+    body: formData,
+    credentials: "include"
+  });
+
+  const data = await res.json();
+  console.log(data);
 });
