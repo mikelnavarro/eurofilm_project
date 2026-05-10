@@ -16,6 +16,7 @@ body {
 }
 /* PANEL IZQUIERDO */
 .left-panel {
+    box-shadow: 0 10px 15px -4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -252,4 +253,69 @@ body {
     #movie-trailer {
         height: 260px;
     }
+}
+/* PROVIDER */
+.provider-container {
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.streaming-link {
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
+    /* Degradado vibrante */
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    background-size: 200% auto;
+    color: white;
+    
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Sombra suave y transición */
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo al pasar el ratón */
+.streaming-link:hover {
+    background-position: right center;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
+}
+
+/* El icono con un pequeño pulso */
+.streaming-link .icon {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.streaming-link::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+    transition: all 0.6s;
+}
+
+.streaming-link:hover::after {
+    left: 120%;
 }

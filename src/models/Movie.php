@@ -48,4 +48,5 @@ class Movie
 
         return $this->db->lastInsertId();
     }
+    
 }

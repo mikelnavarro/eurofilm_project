@@ -14,7 +14,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/tarjeta-peli.css">
     <link rel="stylesheet" href="../css/rating.css">
     <script defer src="../js/detalles.js" type="module"></script>
-
+    <script defer src="../js/rate.js" type="module"></script>
 </head>
 
 <body>
@@ -40,19 +40,23 @@ require_once '../variables_config.php';
             <div class="right-panel">
                 <img id="movie-poster" src="" alt="Poster">
                 <p id="country-flag"></p>
+                <button id="btn-favorito">Añadir a Favoritos</button>
                 <p id="movie-language"></p>
                 <p id="movie-status"></p>
                 <div class="meta-block">
                     <span class="label">Paises: </span>
                     <p id="countries"></p>
                 </div>
-                <a id="link-provider">PROVIDER/S</a>
+                <div class="provider-container">
+                    <a href="#" id="link-provider" class="streaming-link">
+                        <span class="icon">▶</span> PROVIDER/S
+                    </a>
+                </div>
                 <div class="meta-block">
                     <span class="label">Productoras: </span>
                     <p id="companies"></p>
                 </div>
                 <?php include_once "rating.php"; ?>
-                <button id="btn-favorito">Añadir a Favoritos</button>
             </div>
         </div>
         </div>
@@ -63,6 +67,7 @@ require_once '../variables_config.php';
         }
         ?>
         <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
+
     </main>
 </body>
 

@@ -193,23 +193,3 @@ favBtn.addEventListener("click", async () => {
     alert("No esta en favoritos. Hubo algún problema.");
   }
 });
-
-// Reseña
-const formRate = document.getElementById("review-form");
-
-formRate.addEventListener("click", async () => {
-  e.preventDefault();
-  const formData = new FormData(formRate);
-
-  const res = await fetch("/Eurofilm/movie/add", {
-    method: "POST",
-    body: formData,
-    credentials: "include",
-  });
-  const data = await res.json();
-
-  if (data.ok) {
-    alert("Reseña guardada");
-  }
-  console.log(data);
-});

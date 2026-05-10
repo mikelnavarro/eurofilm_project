@@ -15,12 +15,10 @@ async function loadFavorites() {
   }
   data.movies.forEach((movie) => {
     container.innerHTML += `
-            <a href="/Eurofilm/public/pantalla/card.php?id=${movie.tmdb_id}" alt="card"><div class="movie-card">
+            <a href="/Eurofilm/public/movies/card.php?id=${movie.tmdb_id}" alt="card"><div class="movie-card">
                 <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}">
                 <h3>${movie.title}</h3>
                 <p>${movie.release_date}</p>
-                <button class="btn-remove-fav" data-id="MOVIE_ID">
-                Quitar</button>
             </div>
         `;
   });

@@ -128,7 +128,6 @@ class MovieController extends Controller
 
         $tmdbId = $_GET['id'];
         $userId = $_SESSION['usuario']['id'];
-        $movieId = $_POST['movie_id'];
         $rating  = $_POST['rating'];
         $titulo = $_POST['review-title'] ?? '';
         $comment = $_POST['comment'] ?? '';
@@ -137,13 +136,15 @@ class MovieController extends Controller
 
         // spoiler
         $spoiler = $_POST["spoiler"] ?? '0';
+        // 1. obtener datos de la peli desde TMDB o frontend
+
+        $movieId = $this->MovieModel->getByTmdbId($tmdbId);
         if (!$movieId || !$rating) {
             $this->jsonResponse(['error' => 'Datos incompletos'], 400);
             return;
         }
 
-        // 1. obtener datos de la peli desde TMDB o frontend
-        $movieData = $this->tmdb->getMovie($tmdbId);
+        $movieData = $this->tmdb->getByTmdbId($tmdbId);
 
 
         // 2. asegurar película en BD

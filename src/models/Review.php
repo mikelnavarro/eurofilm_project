@@ -39,6 +39,20 @@ class Review
 
         return $this->db->execute();
     }
+    
+    // obtener reviews
+    public function getByUser($userId)
+{
+    $sql = "SELECT r.*, m.title, m.poster_path
+            FROM reviews r
+            INNER JOIN movies m ON m.id = r.movie_id
+            WHERE r.user_id = :user_id
+            ORDER BY r.id DESC";
+
+    $this->db->query($sql);
+    $this->db->bind(':user_id', $userId);
+    return $this->db->registros();
+}
     // obtener reviews de una pelicula
     public function getByMovie($movieId)
     {
@@ -52,5 +66,20 @@ class Review
         $this->db->bind(':movie_id', $movieId);
 
         return $this->db->registros();
+    }
+    
+    // reseña
+    public function getAverageRating($movieId)
+    {
+        $sql = "SELECT 
+                AVG(rating) AS average_rating,
+                COUNT(*) AS total_reviews
+            FROM reviews
+            WHERE movie_id = :movie_id";
+
+        $this->db->query($sql);
+        $this->db->bind(':movie_id', $movieId);
+
+        return $this->db->registro();
     }
 }

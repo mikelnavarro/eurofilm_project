@@ -25,11 +25,11 @@ if (!$userId) {
 
     <h1>Mis películas favoritas</h1>
     <form id="formulario-visibility" method="POST">
-    <select id="visibility-fav">
-        <option value="Privada">Privada</option>
-        <option value="Publica">Publica</option>
-    </select>
-    <input type="submit" value="Cambiar Visibilidad de la Lista">
+        <select id="visibility-fav">
+            <option value="Privada">Privada</option>
+            <option value="Publica">Publica</option>
+        </select>
+        <input type="submit" value="Cambiar Visibilidad de la Lista">
     </form>
     <div id="favorites-container" data-user-id="<?= $userId ?>"></div>
 </body>
