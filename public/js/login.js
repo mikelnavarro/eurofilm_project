@@ -24,6 +24,7 @@ if (loginForm) {
         setTimeout(() => {
           window.location.href = "/Eurofilm/public/movies/movies.php";
         }, 800);
+        window.location.reload();
       } else {
         showMessage(data.error, true);
       }

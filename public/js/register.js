@@ -19,7 +19,8 @@ if (registerForm) {
         showMessage("Usuario registrado correctamente");
 
         setTimeout(() => {
-          window.location.href = "./movies.php";
+          window.location.reload();
+          window.location.href = "../movies/movies.php";
         }, 800);
       } else {
         showMessage(data.error, true);

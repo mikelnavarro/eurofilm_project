@@ -2,7 +2,7 @@
     <h3>Valoración media</h3>
 
     <div class="rating-box">
-        <span id="average-rating">--</span> / 5
+        <span id="average-rating">--</span> / 10
     </div>
 
     <small id="total-reviews"></small>

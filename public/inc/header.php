@@ -6,14 +6,14 @@ require_once '../variables_config.php';
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../image/favicon.ico" type="image/x-icon">
     <title><?= NOMBRESITIO ?? 'Eurofilm' ?></title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
-    <a href="<?php echo RUTA_URL; ?>/public/movies/movies.php"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
+    <a href="<?php echo RUTA_URL; ?>/public/movies/movies.php" class="logo-box"><img src="../image/favicon.ico" class="logo" alt="logo"></a>
     <h1>eurofilm</h1>
     <p><strong>Explorando el reino cinematográfico de TMDB</strong></p>
     <nav>

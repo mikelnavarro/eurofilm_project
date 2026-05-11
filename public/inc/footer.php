@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="../css/footer.css">
+
+
 <footer>
     <footer class="footer">
     <div class="footer-container">
@@ -34,10 +37,11 @@
             <div class="footer-social">
                 <a href="https://www.github.com/mikelnavarro">GitHub</a>
                 <a href="https://www.instagram.es/mikelnavarrol">Instagram</a>
+                <a href="https://www.facebook.com/mikel.navarrolopez.7">Facebook</a>
             </div>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Eurofilm · Proyecto Intermodular DAW</p>
+        <p>&copy; 2026 Eurofilm · Proyecto Inter modular</p>
     </div>
 </footer>
