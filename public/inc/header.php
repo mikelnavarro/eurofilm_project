@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php session_start();
 require_once '../variables_config.php';
 ?>
 <!DOCTYPE html>
@@ -9,6 +9,7 @@ require_once '../variables_config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../image/favicon.ico" type="image/x-icon">
     <title><?= NOMBRESITIO ?? 'Eurofilm' ?></title>
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
@@ -20,20 +21,20 @@ require_once '../variables_config.php';
             <li><a href="/Eurofilm/public/movies/movies.php">Inicio</a></li>
             <li><a href="#">Películas</a>
                 <ul class="submenu">
-                    <li><a href="/Eurofilm/public/movies/movies.php">Pelis de Acción</a></li>
                     <li><a href="/Eurofilm/public/movies/movies.php">Populares</a></li>
                 </ul>
             </li>
             <li><a href="/Eurofilm/public/movies/spanish.php">Spanish Movies</a></li>
             <li><a href="/Eurofilm/public/movies/series.php">Series en España</a></li>
-
             <?php if (isset($_SESSION['usuario'])) : ?>
                 <li>
                     <a href="/Eurofilm/public/pantalla/perfil.php">Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']['username']) ?? 'Usuario'; ?>
                         </strong>
                     </a>
+                    <ul class="submenu">
+                        <li><a href="/Eurofilm/public/pantalla/perfil.php">Ver Perfil</a></li>
+                    </ul>
                 </li>
-                <li><a href="/Eurofilm/public/pantalla/perfil.php">Ver Perfil</a></li>
                 <li>
                     <a href="/Eurofilm/auth/logout">Cerrar Sesión</a>
                 </li> <?php else : ?>

@@ -4,11 +4,22 @@
     --text-color: #000000;
     --accent-color: #e50914; /* Rojo Netflix */
     --gray-text: #252525;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --accent-glow: #6366f1;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --bg-main: #f8fafc;
 }
 * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     box-sizing: border-box;
 }
 body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%);
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,12 +28,31 @@ body {
     line-height: 1.5;
 
 }
+
 main {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
 }
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
 
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-glow), #ec4899);
+    border-radius: 2px;
+}
 /* Buttons */
 .btn-secondary {
     background-color: #bdc3c7;

@@ -71,7 +71,9 @@ require_once '../variables_config.php';
         <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
 
 
-        <div id="reviews-container"></div>
+        <div id="reviews-container">
+            <div class="review-card ${review.spoiler == 1 ? 'review-spoiler' : ''}">
+        </div>
         <script>
             const TMDB_ID = <?= json_encode($_GET['id']) ?>;
             const CURRENT_USER_ID = <?= $_SESSION['usuario']['id'] ?? 'null' ?>;

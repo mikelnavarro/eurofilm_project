@@ -23,15 +23,15 @@
             ?>
 
             <h2>Perfil</h2>
-            <?php var_dump($_SESSION['usuario']); ?>
-            <h1>Perfil de usuario</h1>
+            <?php //var_dump($_SESSION['usuario']); ?>
+            <!--<h1>Perfil de usuario</h1> -->
 
             <div class="perfil-container">
                 <p><strong>Nombre:</strong> <?php echo $usuario['nombre'] ?? 'No definido'; ?></p>
                 <p><strong>Username:</strong> <?php echo $usuario['username'] ?? 'No definido'; ?></p>
                 <p><strong>Email:</strong> <?php echo $usuario['email'] ?? 'No definido'; ?></p>
                 <p><strong>Estado:</strong> <?php echo $usuario['country'] ?? 'No definido'; ?></p>
-
+                <p><strong>ROL:</strong> <?php echo $usuario['role'] ?? 'No definido'; ?></p>
             </div>
 
             <form id="form-profile">

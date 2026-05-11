@@ -12,7 +12,7 @@
 
         header {
             z-index: 1000;
-            background-color: #3498db;
+            background-color: #5cb5f1;
             padding: 10px 15px;
             margin-bottom: 4px;
         }
@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: #3498db;
+            background: #5cb5f1;
         }
 
         .menu>li {
