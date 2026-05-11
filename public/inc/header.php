@@ -29,7 +29,7 @@ require_once '../variables_config.php';
 
             <?php if (isset($_SESSION['usuario'])) : ?>
                 <li>
-                    <a href="/Eurofilm/public/pantalla/perfil.php">Bienvenido, <strong><?php echo $_SESSION['usuario']['username'] ?? 'Usuario'; ?>
+                    <a href="/Eurofilm/public/pantalla/perfil.php">Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']['username']) ?? 'Usuario'; ?>
                         </strong>
                     </a>
                 </li>

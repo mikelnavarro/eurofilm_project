@@ -44,7 +44,7 @@ class Usuario
         $this->db->bind("email", $email);
 
         // registro() devuelve el objeto con las propiedades
-        return $this->db->registros();
+        return $this->db->registroObj();
     }
     public function login($email, $clave)
     {
@@ -108,32 +108,32 @@ class Usuario
 
     // Buscar usuario
     public function searchUsers($query = '', $country = '')
-{
-    $sql = "SELECT id, username, email, country
+    {
+        $sql = "SELECT id, username, email, country
             FROM users
             WHERE 1=1";
 
-    // búsqueda username
-    if (!empty($query)) {
-        $sql .= " AND username LIKE :query";
+        // búsqueda username
+        if (!empty($query)) {
+            $sql .= " AND username LIKE :query";
+        }
+
+        // filtro country
+        if (!empty($country)) {
+            $sql .= " AND country = :country";
+        }
+        $sql .= " ORDER BY username ASC";
+
+        $this->db->query($sql);
+
+        if (!empty($query)) {
+            $this->db->bind(':query', '%' . $query . '%');
+        }
+
+        if (!empty($country)) {
+            $this->db->bind(':country', $country);
+        }
+
+        return $this->db->registros();
     }
-
-    // filtro country
-    if (!empty($country)) {
-        $sql .= " AND country = :country";
-    }
-    $sql .= " ORDER BY username ASC";
-
-    $this->db->query($sql);
-
-    if (!empty($query)) {
-        $this->db->bind(':query', '%' . $query . '%');
-    }
-
-    if (!empty($country)) {
-        $this->db->bind(':country', $country);
-    }
-
-    return $this->db->registros();
-}
 }

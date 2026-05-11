@@ -87,7 +87,7 @@ class AuthController extends Controller
         // comprobamos
         $usuario = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
         // $usuario = $this->usuarioModelo->obtenerUsuarioPorUserName($username);
-        var_dump($usuario);
+        // var_dump($usuario);
         if (!$usuario || !password_verify($clave, $usuario->passwordHash)) {
             $this->jsonResponse(['error' => 'Credenciales incorrectas'], 401);
             return;
@@ -128,6 +128,9 @@ class AuthController extends Controller
             'usuario' => $_SESSION['usuario']
         ]);
     }
+
+
+
     // actualizar perfil de user
     public function updateProfile()
     {
@@ -142,7 +145,7 @@ class AuthController extends Controller
 
 
 
-        
+
         // 1. comprobar username duplicado
         $user = $this->usuarioModelo->obtenerUsuarioPorUserName($username);
         if ($user && $user->id != $userId) {
@@ -167,6 +170,7 @@ class AuthController extends Controller
 
         $this->jsonResponse(['ok' => $ok]);
     }
+
     // destruir la sesión
     public function logout()
     {
@@ -174,6 +178,8 @@ class AuthController extends Controller
         header("Location: /Eurofilm/public/movies/movies.php");
         exit;
     }
+
+
     // Para saber si esta logueado
     public function usuario()
     {
@@ -184,17 +190,19 @@ class AuthController extends Controller
         }
     }
 
+
+
     // Buscar usuario
     public function searchUsers()
-{
-    $query = $_GET['q'] ?? '';
-    $country = $_GET['country'] ?? '';
+    {
+        $query = $_GET['q'] ?? '';
+        $country = $_GET['country'] ?? '';
 
-    $users = $this->usuarioModelo->searchUsers($query, $country);
+        $users = $this->usuarioModelo->searchUsers($query, $country);
 
-    $this->jsonResponse([
-        'ok' => true,
-        'users' => $users
-    ]);
-}
+        $this->jsonResponse([
+            'ok' => true,
+            'users' => $users
+        ]);
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 // La sesión debe iniciarse antes de cargar las vistas
 session_start();
 // Cargar el autoloader
