@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/users.css">
+<?php include '../inc/header.php'; ?>
 <div class="users-search">
 
     <h2>Buscar usuarios</h2>
@@ -17,3 +19,4 @@
 
     <div id="users-container"></div>
 </div>
+<?php include '../inc/footer.php'; ?>
