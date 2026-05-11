@@ -12,7 +12,9 @@ async function loadReviews() {
   container.innerHTML = "";
 
   data.reviews.forEach(review => {
-
+const spoilerBadge = review.spoiler == 1
+    ? `<span class="spoiler-badge">Spoiler</span>`
+    : "";
     const canEdit =
       CURRENT_USER_ID &&
       review.user_id == CURRENT_USER_ID;
@@ -21,7 +23,7 @@ async function loadReviews() {
       <div class="review-card">
 
         <h3>${review.title ?? ''}</h3>
-
+        ${spoilerBadge}
         <p>${review.comment ?? ''}</p>
 
         <small>

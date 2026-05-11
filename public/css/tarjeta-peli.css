@@ -357,3 +357,20 @@ body {
 .streaming-link:hover::after {
     left: 120%;
 }
+
+
+
+
+.spoiler-badge {
+    display: inline-block;
+
+    background: #e74c3c;
+    color: white;
+
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}

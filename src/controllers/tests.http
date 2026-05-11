@@ -1,11 +1,11 @@
 @baseUrl = http://localhost/Eurofilm/api/movies
 
 ### Listado
-GET {{baseUrl}}/apiCar/cars
+GET {{baseUrl}}/api/movies
 Accept: application/json
 
 ###
 
 ### Detalle
-GET {{baseUrl}}/apiCar/car/1
+GET {{baseUrl}}/api/movies?id=220
 Accept: application/json
