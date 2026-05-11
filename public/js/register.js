@@ -11,6 +11,7 @@ if (registerForm) {
         body: formData,
         credentials: "include",
       });
+
       const data = await res.json();
       const text = await res.text();
 
@@ -21,9 +22,17 @@ if (registerForm) {
         setTimeout(() => {
           window.location.reload();
           window.location.href = "../movies/movies.php";
+          return;
         }, 800);
       } else {
         showMessage(data.error, true);
+      }
+      // register con response ok
+      if (res.ok) {
+        console.log("¡Éxito! Recargando...");
+        window.location.reload();
+      } else {
+        alert("Algo salió mal: " + data.message);
       }
     } catch (error) {
       console.error(error);
@@ -32,7 +41,6 @@ if (registerForm) {
   });
 }
 // metodos
-
 
 // funcion mostrar mensaje
 function showMessage(text, isError = false) {

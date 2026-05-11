@@ -63,9 +63,10 @@ form.addEventListener("submit", async (e) => {
 // Habilitar botón si hay cambios
 function checkChanges() {
   const changed =
-    username.value !== original.username ||
-    email.value !== original.email ||
-    country.value !== original.country;
+    username.value !== originalData.username ||
+    email.value !== originalData.email ||
+    country.value !== originalData.country;
+    bio.value !== originalData.bio;
 
   saveBtn.disabled = !changed;
 }

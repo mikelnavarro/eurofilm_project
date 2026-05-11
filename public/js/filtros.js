@@ -18,7 +18,7 @@ function aplicarFiltros() {
 
   if (pais) {
     filtradas = allMovies.filter(movie =>
-      movie.origin_country?.includes(pais) ||
+      movie-production_countries?.includes(pais) ||
       movie.production_countries?.some(c => c.iso_3166_1 === pais)
     );
   }
