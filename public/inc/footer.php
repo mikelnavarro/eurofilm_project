@@ -1,6 +1,43 @@
 <footer>
-    <p>&copy; 2026 Eurofilm</p>
-    <div id="autor">
-        <p>Mikel Navarro</p>
+    <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2>Eurofilm</h2>
+            <p>
+                Catálogo cinematográfico desarrollado como proyecto web.
+                Explora películas, guarda favoritos y comparte reseñas.
+            </p>
+        </div>
+
+        <!-- Enlaces -->
+        <div class="footer-links">
+            <h3>Enlaces</h3>
+            <a href="/Eurofilm/public/movies/movies.php">Inicio</a>
+            <a href="/Eurofilm/public/movies/movies.php">Películas</a>
+            <a href="/Eurofilm/public/about.php">Quiénes somos</a>
+        </div>
+        <!-- Usuario -->
+        <div class="footer-links">
+            <h3>Cuenta</h3>
+            <a href="/Eurofilm/public/pantalla/perfil.php">Mi perfil</a>
+            <a href="/Eurofilm/public/pantalla/login.php">Login</a>
+            <a href="/Eurofilm/public/pantalla/register.php">Regístrate!</a>
+        </div>
+
+        <!-- Contacto -->
+        <div class="footer-contact">
+            <h3>Contacto</h3>
+            <p>&phone;669 092 418</p>
+            <p>mikelnaval2006@gmail.com</p>
+            <p>España</p>
+
+            <div class="footer-social">
+                <a href="https://www.github.com/mikelnavarro">GitHub</a>
+                <a href="https://www.instagram.es/mikelnavarrol">Instagram</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Eurofilm · Proyecto Intermodular DAW</p>
     </div>
 </footer>
