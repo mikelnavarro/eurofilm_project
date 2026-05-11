@@ -49,6 +49,7 @@ document.addEventListener("click", async (e) => {
     if (data.ok) {
       //eliminar Card
       btn.closest(".movie-card").remove();
+      window.location.reload();
     } else {
       alert("Error al eliminar favorito");
     }

@@ -30,11 +30,13 @@ formRating.addEventListener("submit", async (e) => {
     msg.textContent = data.error || "Error";
     return;
   }
-
-  if (data.updated) {
-    msg.textContent = "Reseña actualizada";
-  } else {
-    msg.textContent = "Reseña creada";
+  if (data.ok) {
+    if (data.updated) {
+      msg.textContent = "Reseña actualizada";
+    } else {
+      msg.textContent = "Reseña creada";
+    }
+    window.location.reload();
   }
 
   if (data.hasReviewed) {
@@ -46,8 +48,6 @@ formRating.addEventListener("submit", async (e) => {
     form.comment.value = data.review.comment;
   }
 
-  
   console.log(data);
   msg.style.color = "green";
 });
-

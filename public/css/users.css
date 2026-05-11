@@ -1,0 +1,19 @@
+.users-search {
+    max-width: 800px;
+    margin: auto;
+}
+
+.user-card {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+#search-user,
+#filter-country {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}

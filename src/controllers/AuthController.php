@@ -183,4 +183,18 @@ class AuthController extends Controller
             $this->jsonResponse(['error' => 'No autenticado'], 401);
         }
     }
+
+    // Buscar usuario
+    public function searchUsers()
+{
+    $query = $_GET['q'] ?? '';
+    $country = $_GET['country'] ?? '';
+
+    $users = $this->usuarioModelo->searchUsers($query, $country);
+
+    $this->jsonResponse([
+        'ok' => true,
+        'users' => $users
+    ]);
+}
 }
