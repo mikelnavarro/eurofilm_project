@@ -1,0 +1,392 @@
+/* General */
+body {
+    margin: 0;
+    padding: 40px;
+    background-color: #141414;
+    font-family: Arial, sans-serif;
+}
+/* PANEL DERECHO */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: rgba(255,255,255,0.03);
+    padding: 20px;
+    border-radius: 18px;
+}
+/* PANEL IZQUIERDO */
+.left-panel {
+    box-shadow: 0 10px 15px -4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#details {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+    max-width: 1300px;
+    margin: auto;
+    align-items: start;
+}
+
+/* Title */
+#title {
+    grid-column: 1 / span 2;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 30px;
+    color: #000000;
+}
+/* INFO */
+#info {
+    grid-column: 2;
+    grid-row: 1;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+/* BLOQUES DE TEXTO */
+#genres,
+#release-date,
+#overview,
+#companies,
+#countries,
+#language,
+#status {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000000;
+}
+#release-date {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+}
+
+/* Poster */
+#poster {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+#poster {
+    width: 100%;
+    border-radius: 16px;
+    display: block;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+#poster img {
+    width: 100%;
+    height: auto;
+}
+
+#overview {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    text-align: left;
+    min-height: 150px;
+}
+
+
+/* Rating */
+#rating {
+    grid-column: 3 / span 2;
+    grid-row: 4;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+/* CAST */
+#cast {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra */
+    grid-column: 2;
+    grid-row: 2;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+#cast h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+#cast {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+}
+/* Elemento Lista */
+#cast img {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    border-radius: 70px;
+}
+#cast .Character {
+    width: 2px;
+    color: #d8d8d8;
+    font-style: italic;
+    text-align: justify;
+}
+#cast li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    text-align: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.05);
+    background: #f8f9fa;
+    border: 1px solid transparent;
+
+}
+
+
+#cast li:hover {
+    background: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #eee;
+}
+#cast li:hover span {
+    display: block;
+}
+/* Nombre del Actor */
+#cast .ActorName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+/* Nombre del Personaje */
+#cast .Character {
+    width: 100%; /* Corregido de 2px a 100% */
+    color: #888;
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.1;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Si el nombre es muy largo, pone "..." */
+}
+/* Trailer container */
+#trailer-container {
+    margin-top: 10px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    border-radius: 4px;
+
+}
+#trailer {
+    width: 100%;
+    height: 420px;
+    border: none;
+    border-radius: 4px;
+}
+/* Banderas */
+#countries {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#countries img {
+    width: 28px;
+    height: 20px;
+    border-radius: 3px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+/* Compañias */
+#companies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.company {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+.company img {
+    height: 25px;
+    object-fit: contain;
+}
+#director {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+}
+/* Elemento Lista */
+#director img {
+    width: 119px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    border-radius: 70px;
+}
+/* Títulos de los Bloques de Card */
+
+.meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+
+    /* Opcion cajita */
+    background: rgba(255,255,255,0.04);
+    padding: 10px;
+    border-radius: 10px;
+}
+.label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 0.5px;
+}
+.meta-block div {
+    font-size: 14px;
+    color: #000000;
+}
+/* Botón de favoritos (Estilo TFG) */
+#btn-favorito {
+    background: #e50914;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+}
+
+#btn-favorito:hover {
+    background-color: #ef4a4a;
+    transform: scale(1.02);
+}
+/* Responsive */
+@media (max-width: 900px) {
+    #details {
+        grid-template-columns: 1fr;
+    }
+
+    #trailer {
+        height: 260px;
+    }
+}
+/* PROVIDER */
+.provider-container {
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.streaming-link {
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
+    /* Degradado vibrante */
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    background-size: 200% auto;
+    color: white;
+    
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Sombra suave y transición */
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo al pasar el ratón */
+.streaming-link:hover {
+    background-position: right center;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
+}
+
+/* El icono con un pequeño pulso */
+.streaming-link .icon {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.streaming-link::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+    transition: all 0.6s;
+}
+
+.streaming-link:hover::after {
+    left: 120%;
+}
+
+
+
+
+.spoiler-badge {
+    display: inline-block;
+
+    background: #e74c3c;
+    color: white;
+
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}

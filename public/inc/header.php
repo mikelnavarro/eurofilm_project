@@ -25,7 +25,7 @@ require_once '../variables_config.php';
                 </ul>
             </li>
             <li><a href="/Eurofilm/public/movies/spanish.php">Spanish Movies</a></li>
-            <li><a href="/Eurofilm/public/movies/series.php">Series en España</a></li>
+            <li><a href="/Eurofilm/public/series/series.php">Series en España</a></li>
             <?php if (isset($_SESSION['usuario'])) : ?>
                 <li>
                     <a href="/Eurofilm/public/pantalla/perfil.php">Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['usuario']['username']) ?? 'Usuario'; ?>

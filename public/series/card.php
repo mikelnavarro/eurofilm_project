@@ -11,49 +11,50 @@ require_once '../variables_config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/tarjeta-peli.css">
+    <link rel="stylesheet" href="../css/card.css">
     <link rel="stylesheet" href="../css/rating.css">
-    <script defer src="../js/detalles.js" type="module"></script>
-    <script defer src="../js/reviews.js" type="module"></script>
-    <script defer src="../js/rate.js" type="module"></script>
+    <script defer src="../js/detalles_series.js" type="module"></script>
+    <!-- <script defer src="../js/reviews.js" type="module"></script>-->
+    <!-- <script defer src="../js/rate.js" type="module"></script>-->
 </head>
 
 <body>
     <?php include '../inc/header.php'; ?>
     <main>
-        <div id="movie-details">
+        <div id="details">
 
             <!-- IZQUIERDA: INFO -->
             <div class="left-panel">
-                <div id="movie-info">
-                    <p id="movie-genres"></p>
-                    <h1 id="movie-title"></h1>
+                <div id="info">
+                    <p id="genres"></p>
+                    <p id="country-flag"></p>
+                    <h1 id="title"></h1>
                     <div id="director">
                         <img id="directing_path" src="" alt="Poster">
                         <p id="created-by"></p>
                     </div>
-                    <p id="movie-release-date"></p>
-                    <p id="movie-overview"></p>
+                    <p id="release-date"></p>
+                    <p id="overview"></p>
                 </div>
                 <!-- ACTRICES -->
-                <div id="movie-cast">
+                <div id="cast">
                     <h3>Elenco</h3>
                     <ul id="cast"></ul>
                 </div>
             </div>
             <!-- DERECHA: POSTER -->
             <div class="right-panel">
-                <img id="movie-poster" src="" alt="Poster">
+                <img id="poster" src="" alt="Poster">
                 <p id="country-flag"></p>
                 <button id="btn-favorito">Añadir a Favoritos</button>
-                <p id="movie-language"></p>
-                <p id="movie-status"></p>
+                <p id="language"></p>
+                <p id="status"></p>
                 <div class="meta-block">
                     <span class="label">Paises: </span>
                     <p id="countries"></p>
                 </div>
                 <div class="provider-container">
-                    <a href="#" id="homepage" class="streaming-link">
+                    <a href="#" id="link-provider" class="streaming-link">
                         <span class="icon">▶</span> PROVIDER/S
                     </a>
                 </div>
@@ -62,8 +63,8 @@ require_once '../variables_config.php';
                     <span class="label">Productoras: </span>
                     <p id="companies"></p>
                 </div>
-                <?php include_once "rating.php"; ?>
-                <div class="movie-rating-tmdb"></div>
+                <?php include_once "../movies/rating.php"; ?>
+                <div class="rating-tmdb"></div>
             </div>
         </div>
         </div>
@@ -73,7 +74,7 @@ require_once '../variables_config.php';
             die("ID de película no válido");
         }
         ?>
-        <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
+        <div id="data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
 
         <h3>Reseñas de los Usuarios</h3>
         <div id="reviews-container">

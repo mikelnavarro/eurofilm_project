@@ -1,4 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
+
+
+import { renderDirector, renderWatchProviders } from "./funciones-carga.js";
 // Referencias
 const detailsView = document.getElementById("movie-details");
 
@@ -54,11 +57,16 @@ function renderMovieDetails(movie) {
     // Si no hay (o es una búsqueda general que no trae los nombres)
     genresElement.textContent = "Géneros: No disponibles";
   }
+  // proveedor
+  renderWatchProviders(movie);
   // Countries
   renderCountries(movie);
+  // flag
+  renderFlag(movie);
   // Productoras - Companies
   renderCompanies(movie);
-
+  // Directing
+  renderDirector(movie);
   // Trailer
   if (movie.trailer) {
     const iframe = document.createElement("iframe");
@@ -69,7 +77,7 @@ function renderMovieDetails(movie) {
   // Casting
   renderCast(movie);
   // Link
-  document.getElementById("link-provider").href = movie.homepage;
+  document.getElementById("homepage").href = movie.homepage;
 }
 showDetails();
 async function showDetails() {
@@ -131,12 +139,28 @@ function renderCountries(movie) {
   });
 }
 function renderFlag(movie) {
-  const flag = document.getElementById("country-flag");
-  flag.innerHTML = "";
-  const img = document.createElement("img");
-  img.src = `https://flagcdn.com/w40/${movie.origin_country.toLowerCase()}.png`;
-  img.alt = movie.origin_country;
-  flag.appendChild(img);
+  const flagContainer = document.getElementById("country-flag");
+  if (!flagContainer) return;
+  flagContainer.innerHTML = "";
+  // codigo c
+  let countryCode = "";
+
+  if (movie.origin_country && movie.origin_country.length > 0) {
+    // Caso para Series
+    countryCode = movie.origin_country[0];
+  } else if (
+    movie.production_countries &&
+    movie.production_countries.length > 0
+  ) {
+    // Caso para Películas
+    countryCode = movie.production_countries[0].iso_3166_1;
+  }
+  if (countryCode) {
+    const img = document.createElement("img");
+    img.src = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
+    img.alt = movie.origin_country;
+    flagContainer.appendChild(img);
+  }
 }
 /* Cargar imágenes de Productoras */
 function renderCompanies(movie) {

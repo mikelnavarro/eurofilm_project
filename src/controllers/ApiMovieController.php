@@ -20,10 +20,10 @@ class ApiMovieController extends Controller
 
     public function index()
     {
-        header('Content-Type: text/json; charset=utf-8');
+        //header('Content-Type: text/json; charset=utf-8');
         echo "<h1>Bienvenido a Eurofilm</h1>";
         echo "El sistema de rutas está funcionando correctamente.";
-        exit();
+        //exit();
     }
 
 
@@ -44,8 +44,6 @@ class ApiMovieController extends Controller
 
         $this->jsonResponse($data, 200);
     }
-
-
     public function movie($param = null)
     {
 
@@ -66,7 +64,6 @@ class ApiMovieController extends Controller
         // CRÉDITOS
         $credits = $this->tmdb->consultar("/movie/$id/credits");
         $data['cast'] = array_slice($credits['cast'], 0, 5);
-
         // TRAILER
         $videos = $this->tmdb->consultar("/movie/$id/videos");
 
@@ -79,10 +76,10 @@ class ApiMovieController extends Controller
                 }
             }
         }
-
         $data["trailer"] = $trailer;
-
-
+        // PROVEEDORES
+        $watch_providers = $this->tmdb->consultar("/movie/$id/watch/providers");
+        $data['watch_providers'] = $watch_providers;
 
         header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
@@ -114,18 +111,43 @@ class ApiMovieController extends Controller
         $page = $_GET['page'] ?? 1;
 
         $data = $this->tmdb->consultar('/discover/movie', [
+            'with_origin_country' => 'ES',
             'with_original_language' => 'es',
             "sort_by" => "popularity.desc",
             'page' => $page
         ]);
 
-        
-        
+
+
         header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }
-    public function series() {
+    public function searchSeries()
+    {
+        $country = $_GET['with_origin_country'] ?? null; // Recibimos el país si existe
+        $query = $_GET['query'] ?? null;
+        $page = $_GET['page'] ?? 1;
+
+        if (!$query) {
+            $this->jsonResponse(['error' => 'Query requerida'], 400);
+        }
+
+        $data = $this->tmdb->consultar('/search/tv', [
+            'query' => $query,
+            'page' => $page
+        ]);
+        if ($country) {
+            $data['results'] = array_values(array_filter($data['results'], function ($movie) use ($country) {
+                return isset($movie['origin_country']) && in_array($country, $movie['origin_country']);
+            }));
+        }
+        header('Content-Type: application/json');
+        $this->jsonResponse($data, 200);
+        exit;
+    }
+    public function series()
+    {
         $page = $_GET['page'] ?? 1;
 
 
@@ -139,24 +161,48 @@ class ApiMovieController extends Controller
         exit;
     }
 
-    // Para añadir a favoritos (listas)
-    public function addFavorito(): void
+    // serie
+    public function serie($param = null)
     {
-
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->jsonResponse(['error' => 'Method Not Allowed'], 405);
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->jsonResponse(['error' => 'Método no permitido'], 405);
         }
-
-        $data = $this->getJSON();
-
-        $movieId = $data['movie_id'] ?? null;
-
-        if (!$movieId) {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Content-Type: application/json');
             $this->jsonResponse(['error' => 'ID requerido'], 400);
+            exit;
         }
 
-        $this->modelo = $this->modelo('List');
-        $resultado = $this->modelo->addFavorito($movieId);
-        $this->jsonResponse(['success' => $resultado]);
+        // DETALLES PRINCIPALES
+        $data = $this->tmdb->consultar("/tv/$id");
+        // CRÉDITOS
+        $credits = $this->tmdb->consultar("/tv/$id/credits");
+        $data['cast'] = array_slice($credits['cast'], 0, 5);
+
+
+
+        // TRAILER
+        $videos = $this->tmdb->consultar("/tv/$id/videos");
+        $trailer = null;
+        if (!empty($videos['results'])) {
+            foreach ($videos['results'] as $video) {
+                if ($video['site'] === 'YouTube' && $video['type'] === 'Trailer') {
+                    $trailer = $video['key'];
+                    break;
+                }
+            }
+        }
+
+        $data["trailer"] = $trailer;
+        // PROVEEDORES
+        $watch_providers = $this->tmdb->consultar("/tv/$id/watch/providers");
+        $data['watch_providers'] = $watch_providers;
+
+
+
+        header('Content-Type: application/json');
+        $this->jsonResponse($data, 200);
+        exit;
     }
 }

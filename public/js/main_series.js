@@ -4,7 +4,7 @@ import { initFiltros } from "./filtros.js";
 import { updatePageUI } from "./helper.js";
 // Referencias
 let paginaActual = 1;
-const movieContainer = document.getElementById("film");
+const container = document.getElementById("film");
 
 
 // Para las paginas botones
@@ -29,9 +29,10 @@ async function fetchMovies(pagina) {
   }
 }
 
+
 // función de carga de detalles de Movies
 function renderList(series) {
-  if (!movieContainer) {
+  if (!container) {
     console.error("La referencia del contenedor de 'peliculas' no encontrado.");
     return;
   }
@@ -51,15 +52,18 @@ function renderList(series) {
       : "placeholder.png";
     img.alt = serie.alt;
     const title = document.createElement("h3");
-    title.textContent = serie.title;
+    title.textContent = serie.name;
+    // ID
     const id = document.createElement("span");
     id.textContent = serie.id;
+
+
     const releaseYear = document.createElement("p");
-    releaseYear.textContent = serie.release_date?.slice(0, 4) ?? "—";
+    releaseYear.textContent = serie.first_air_date?.slice(0, 4) ?? "—";
 
     card.append(img, title, releaseYear);
     // añadir la tarjeta al contenedor principal
-    movieContainer.append(card);
+    container.append(card);
   });
 }
 // eventos (Controladores de usuario)
