@@ -27,6 +27,7 @@ require_once '../variables_config.php';
             <div class="left-panel">
                 <div id="movie-info">
                     <p id="movie-genres"></p>
+                    <p id="country-flag"></p>
                     <h1 id="movie-title"></h1>
                     <div id="director">
                         <img id="directing_path" src="" alt="Poster">
@@ -44,7 +45,6 @@ require_once '../variables_config.php';
             <!-- DERECHA: POSTER -->
             <div class="right-panel">
                 <img id="movie-poster" src="" alt="Poster">
-                <p id="country-flag"></p>
                 <button id="btn-favorito">Añadir a Favoritos</button>
                 <p id="movie-language"></p>
                 <p id="movie-status"></p>

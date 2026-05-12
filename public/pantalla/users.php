@@ -20,3 +20,4 @@
     <div id="users-container"></div>
 </div>
 <?php include '../inc/footer.php'; ?>
+<script defer src="../js/users.js" type="module"></script>

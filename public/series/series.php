@@ -7,7 +7,7 @@ require_once '../variables_config.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>Eurofilm - Películas Españolas</title>
+    <title>Eurofilm</title>
     <link rel="stylesheet" href="../css/style-series.css">
     <link rel="stylesheet" href="../css/global.css">
     <script defer src="../js/busqueda-serie.js" type="module"></script>

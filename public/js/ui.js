@@ -1,4 +1,5 @@
-export function render(container, movies) {
+const container = document.getElementById("peliculas");
+export function render(movies) {
   container.innerHTML = "";
 
   if (!Array.isArray(movies)) return;

@@ -29,21 +29,14 @@ async function loadUserReviews() {
 
   data.reviews.forEach((r) => {
     container.innerHTML += `
-      <div class="review-card">
-
+    <div class="review-card">
         <div class="movie-mini">
           <img src="https://image.tmdb.org/t/p/w200${r.poster_path}" />
-          <h4>${r.title}</h4>
-        </div>
-
+          <h4>${r.title}</h4></div>
         <p><b>${r.rating}/5</b></p>
         <p>${r.comment ?? "Sin comentarios..."}</p>
-
         <small>${r.visibility}</small>
-            <button class="btn btn-delete-review" data-id="${r.id}">
-  Borrar
-</button>
-      </div>
+          <button class="btn btn-delete-review" data-id="${r.id}">Borrar</button></div>
 
     `;
   });
@@ -51,9 +44,7 @@ async function loadUserReviews() {
 
 loadUserReviews();
 document.addEventListener("click", async (e) => {
-
   if (e.target.classList.contains("btn-delete-review")) {
-
     const reviewId = e.target.dataset.id;
 
     if (!confirm("¿Eliminar reseña?")) return;
@@ -64,7 +55,7 @@ document.addEventListener("click", async (e) => {
     const res = await fetch("/Eurofilm/movie/deleteReview", {
       method: "POST",
       body: formData,
-      credentials: "include"
+      credentials: "include",
     });
 
     const data = await res.json();

@@ -41,7 +41,7 @@ export function renderWatchProviders(detalles) {
   const providers = detalles.watch_providers.results.ES;
 
   if (!providers) {
-    container.textContent = "No disponible en tu región.";
+    container.textContent = "No disponible todavía.";
     return;
   }
   // icono

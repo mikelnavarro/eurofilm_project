@@ -12,6 +12,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/global.css">
     <script defer src="../js/busqueda.js" type="module"></script>
     <script defer src="../js/main.js" type="module"></script>
+    <script defer src="../js/filtros.js" type="module"></script>
 </head>
 
 <body>

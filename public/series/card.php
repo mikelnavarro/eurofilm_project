@@ -37,7 +37,7 @@ require_once '../variables_config.php';
                     <p id="overview"></p>
                 </div>
                 <!-- ACTRICES -->
-                <div id="cast">
+                <div id="movie-cast">
                     <h3>Elenco</h3>
                     <ul id="cast"></ul>
                 </div>
