@@ -12,17 +12,13 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/global.css">
     <script defer src="../js/busqueda.js" type="module"></script>
     <script defer src="../js/main.js" type="module"></script>
+    <script defer src="../js/filtros.js" type="module"></script>
 </head>
 
 <body>
     <?php include '../inc/header.php'; ?>
     <?php include '../busqueda.php'; ?>
     <?php include 'filtros.php'; ?>
-    <select id="select-pais">
-        <option value="">Cualquier país</option>
-        <option value="ES">España</option>
-        <option value="US">EE.UU.</option>
-    </select>
     <main>
         <!-- Películas Populares -->
         <h3>Películas populares</h3>

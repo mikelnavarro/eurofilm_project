@@ -6,6 +6,7 @@ export function renderList(movies,movieContainer) {
     return;
   }
   if (!Array.isArray(movies)) return;
+  movieContainer.innerHTML = "";
   movies.forEach((movie) => {
     // Creamos los elementos uno a uno
     const card = document.createElement("div");

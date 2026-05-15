@@ -18,6 +18,7 @@ require_once '../variables_config.php';
 
     <?php include '../inc/header.php'; ?>
     <?php include '../busqueda.php'; ?>
+    <?php include 'filtros.php'; ?>
     <main>
 
         <h2>Películas Españolas</h2>

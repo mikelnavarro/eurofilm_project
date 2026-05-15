@@ -83,6 +83,6 @@ async function loadElements() {
   const series = await fetchMovies(paginaActual);
   renderList(series);
   updatePageUI(pageDisplay);
-  //initFiltros(series);
+  initFiltros(series);
 }
 loadElements();

@@ -7,14 +7,14 @@ const selectSort = document.getElementById("select-sort");
 // Variable de todas las pelis
 let allMovies = [];
 
-export function initFiltros(movies, movieContainer) {
+export function initFiltros(movies) {
   allMovies = movies;
   selectSort.addEventListener("change", aplicarFiltros);
   selectGenero.addEventListener("change", aplicarFiltros);
   selectPais.addEventListener("change", aplicarFiltros);
 }
 // Módulo Genérico
-export function applyFilters(items, filters) {
+function applyFilters(items, filters) {
   return items.filter((item) => {
     const matchCountry = !filters.country || item.country === filters.country;
 
@@ -23,12 +23,13 @@ export function applyFilters(items, filters) {
     return matchCountry && matchGenre;
   });
 }
-export function aplicarFiltros() {
+function aplicarFiltros() {
   const pais = selectPais.value;
+  const sort = selectSort.value;
   const genero = selectGenero.value;
 
   // pelis
-  let filtradas = allMovies;
+  let filtradas = [...allMovies];
   if (pais) {
     filtradas = allMovies.filter((movie) => {
       const porOrigen = movie.origin_country?.includes(pais);
@@ -47,7 +48,6 @@ export function aplicarFiltros() {
   if (sort) {
     filtradas = [...filtradas].sort((a, b) => {
       switch (sort) {
-
         case "year_desc":
           return (b.release_date ?? "").localeCompare(a.release_date ?? "");
 

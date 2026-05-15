@@ -1,6 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
 import { apiGet } from "./api.js";
 import { updatePageUI } from "./helper.js";
+import { initFiltros } from "./filtros.js";
 
 
 // Referencias
@@ -79,5 +80,5 @@ async function loadSpanishMovies() {
   const movies = await fetchSpanishMovies(paginaActual);
   renderList(movies);
   updatePageUI(pageDisplay);
+  //initFiltros(movies);
 }
-
