@@ -12,7 +12,7 @@ const prevBtn = document.getElementById("prev-page");
 const nextBtn = document.getElementById("next-page");
 const pageDisplay = document.getElementById("current-page-display");
 
-async function fetchMovies(pagina) {
+export async function fetchMovies(pagina) {
   try {
     const res = await fetch(`${BASE_URL}/movies?page=${pagina}`);
 

@@ -1,4 +1,4 @@
-import { fetchMovies } from "./main.js";
+import { fetchMovies } from './main.js';
 import { render } from "./ui.js";
 // Referencias
 const selectPais = document.getElementById("select-pais");
