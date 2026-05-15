@@ -1,6 +1,5 @@
 import { BASE_URL } from "./configuracion.js";
 import { apiGet } from "./api.js";
-import { render } from "./ui.js";
 import { updatePageUI } from "./helper.js";
 
 

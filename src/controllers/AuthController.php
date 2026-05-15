@@ -134,6 +134,11 @@ class AuthController extends Controller
     // actualizar perfil de user
     public function updateProfile()
     {
+        if (!isset($_SESSION['usuario'])) {
+            $this->jsonResponse(['error' => 'No autenticado'], 401);
+            return;
+        }
+
         $userId = $_SESSION['usuario']['id'];
 
         $username = $_POST['username'];
@@ -154,6 +159,8 @@ class AuthController extends Controller
         }
         // 2. comprobar email duplicado
         $email = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
+        var_dump($this->usuarioModelo->obtenerUsuarioPorEmail($email));
+        die();
         if ($email && $email->id != $userId) {
             $this->jsonResponse(['error' => 'Email ya existe']);
             return;

@@ -30,10 +30,14 @@ require_once '../variables_config.php';
                     <p id="country-flag"></p>
                     <h1 id="movie-title"></h1>
                     <div id="director">
-                        <img id="directing_path" src="" alt="Poster">
                         <p id="created-by"></p>
+                        <img id="directing_path" src="" alt="Poster">
                     </div>
                     <p id="movie-release-date"></p>
+                    <div id="write">
+                        <img id="directing_path" src="" alt="Poster">
+                        <p id="writers"></p>
+                    </div>
                     <p id="movie-overview"></p>
                 </div>
                 <!-- ACTRICES -->
@@ -74,15 +78,14 @@ require_once '../variables_config.php';
         }
         ?>
         <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
-
         <h3>Reseñas de los Usuarios</h3>
         <div id="reviews-container">
-            <div class="review-card ${review.spoiler == 1 ? 'review-spoiler' : ''}">
-            </div>
-            <script>
-                const TMDB_ID = <?= json_encode($_GET['id']) ?>;
-                const CURRENT_USER_ID = <?= $_SESSION['usuario']['id'] ?? 'null' ?>;
-            </script>
+            <div class="review-card ${review.spoiler == 1 ? 'review-spoiler' : ''}"></div>
+        </div>
+        <script>
+            const TMDB_ID = <?= json_encode($_GET['id']) ?>;
+            const CURRENT_USER_ID = <?= $_SESSION['usuario']['id'] ?? 'null' ?>;
+        </script>
     </main>
 </body>
 

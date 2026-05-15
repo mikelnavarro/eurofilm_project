@@ -34,6 +34,10 @@ require_once '../variables_config.php';
                         <p id="created-by"></p>
                     </div>
                     <p id="release-date"></p>
+                    <div id="write">
+                        <img id="directing_path" src="" alt="Poster">
+                        <p id="writers"></p>
+                    </div>
                     <p id="overview"></p>
                 </div>
                 <!-- ACTRICES -->

@@ -30,6 +30,7 @@ form.addEventListener("submit", async (e) => {
     const email = formData.get("email");
     const country = formData.get("country");
     const bio = formData.get("bio");
+
     // si no cambió nada, no envía
     if (
       username === originalData.username &&
@@ -65,7 +66,7 @@ function checkChanges() {
   const changed =
     username.value !== originalData.username ||
     email.value !== originalData.email ||
-    country.value !== originalData.country;
+    country.value !== originalData.country ||
     bio.value !== originalData.bio;
 
   saveBtn.disabled = !changed;
@@ -75,3 +76,4 @@ function checkChanges() {
 username.addEventListener("input", checkChanges);
 email.addEventListener("input", checkChanges);
 country.addEventListener("input", checkChanges);
+bio.addEventListener("input", checkChanges);

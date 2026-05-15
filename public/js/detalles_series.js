@@ -71,6 +71,8 @@ renderWatchProviders(detalles);
       `Creado por: ${detalles.created_by.map((c) => c.name).join(", ")}`;
   }
   renderDirector(detalles);
+  // Guion
+  renderWritersMovie(detalles);
   // companies
   renderCompanies(detalles);
 

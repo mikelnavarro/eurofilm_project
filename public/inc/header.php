@@ -9,8 +9,8 @@ require_once '../variables_config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../image/favicon.ico" type="image/x-icon">
     <title><?= NOMBRESITIO ?? 'Eurofilm' ?></title>
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/global.css">
 </head>
 <header>
     <a href="<?php echo RUTA_URL; ?>public/movies/movies.php" class="logo-box"><img src="../image/favicon.ico" class="logo" alt="logo"></a>

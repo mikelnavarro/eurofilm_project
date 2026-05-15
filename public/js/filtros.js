@@ -1,6 +1,6 @@
-import { fetchMovies } from './main.js';
-import { render } from "./ui.js";
+import { renderList } from "./ui.js";
 // Referencias
+const movieContainer = document.getElementById("peliculas");
 const selectPais = document.getElementById("select-pais");
 // Variable de todas las pelis
 let allMovies = [];
@@ -22,7 +22,7 @@ function aplicarFiltros() {
     );
   }
 
-  render(filtradas);
+  renderList(filtradas,movieContainer);
 }
 
 function filtros() {
@@ -43,5 +43,6 @@ function filtros() {
     });
   }
 
-  render(filtradas);
+  
+  renderList(filtradas,movieContainer);
 }

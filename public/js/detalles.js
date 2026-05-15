@@ -1,7 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
 
 
-import { renderDirector, renderWatchProviders } from "./funciones-carga.js";
+import { renderDirectorMovie, renderWatchProviders, renderWritersMovie } from "./funciones-carga.js";
 // Referencias
 const detailsView = document.getElementById("movie-details");
 
@@ -66,7 +66,9 @@ function renderMovieDetails(movie) {
   // Productoras - Companies
   renderCompanies(movie);
   // Directing
-  renderDirector(movie);
+  renderDirectorMovie(movie);
+  // Guion
+  renderWritersMovie(movie);
   // Trailer
   if (movie.trailer) {
     const iframe = document.createElement("iframe");

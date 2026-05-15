@@ -10,5 +10,5 @@ export async function apiGet(endpoint, params = {}) {
   const res = await fetch(url);
   const data = await res.json();
 
-  return data.results;
+  return data.results ?? data;
 }

@@ -31,7 +31,7 @@ async function fetchMovies(pagina) {
 
 
 // función de carga de detalles de Movies
-function renderList(series) {
+export function renderList(series,seriesContainer) {
   if (!container) {
     console.error("La referencia del contenedor de 'peliculas' no encontrado.");
     return;
@@ -83,6 +83,6 @@ async function loadElements() {
   const series = await fetchMovies(paginaActual);
   renderList(series);
   updatePageUI(pageDisplay);
-  initFiltros(series);
+  //initFiltros(series);
 }
 loadElements();

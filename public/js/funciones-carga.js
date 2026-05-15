@@ -4,9 +4,13 @@ export function renderDirector(movie) {
   const imgElement = document.getElementById("directing_path");
   const nameElement = document.getElementById("created-by");
 
+  if (!movie.credits || !movie.credits.crew) {
+    return;
+  }
+
   // verificamos si existe la propiedad y si tiene al menos un creador
-  if (movie.credits && movie.credits.crew > 0) {
-    const director = detalles.credits.crew.find(
+  if (movie.credits && movie.credits.crew.length > 0) {
+    const director = movie.credits.crew.find(
       (persona) => persona.job === "Director",
     );
     if (director) {
@@ -62,7 +66,6 @@ export function renderWatchProviders(detalles) {
   };
   const categorias = ["flatrate", "rent", "buy"];
 
-
   categorias.forEach((cat) => {
     if (providers[cat] && providers[cat].length > 0) {
       const titulo = document.createElement("h4");
@@ -84,5 +87,40 @@ export function renderWatchProviders(detalles) {
     link.textContent = " Ver más opciones";
     link.target = "_blank";
     container.appendChild(link);
+  }
+}
+export function renderDirectorMovie(movie) {
+  // Extrae el array 'crew' sin importar cómo venga estructurado desde la API
+  const crew = movie.credits?.crew || movie.crew || [];
+
+  // Encuentra al director
+  const director = crew.find((p) => p.job === "Director");
+
+  if (director) {
+    // Renderiza el texto y la imagen directamente en el DOM
+    document.getElementById("created-by").textContent =
+      `Director: ${director.name}`;
+    document.getElementById("directing_path").src = director.profile_path
+      ? `https://image.tmdb.org/t/p/w200${director.profile_path}`
+      : "placeholder.png";
+  }
+}
+// función guion
+export function renderWritersMovie(movie) {
+  const crew = movie.credits?.crew || movie.crew || [];
+  
+  // Filtra todos los guionistas (puede haber más de uno)
+  const writers = crew.filter(p => p.job === "Writer" || p.job === "Screenplay");
+
+  if (writers.length > 0) {
+    // Une los nombres con comas si hay varios guionistas
+    const writersNames = writers.map(w => w.name).join(", ");
+    
+    document.getElementById("writers").textContent = `Guión: ${writersNames}`;
+    
+    // Muestra la foto del primer guionista del array
+    document.getElementById("directing_path").src = writers[0].profile_path
+      ? `https://image.tmdb.org/t/p/w200${writers[0].profile_path}`
+      : "placeholder.png";
   }
 }

@@ -63,6 +63,7 @@ class ApiMovieController extends Controller
         $data = $this->tmdb->consultar("/movie/$id");
         // CRÉDITOS
         $credits = $this->tmdb->consultar("/movie/$id/credits");
+        $data['crew'] = $credits['crew'];
         $data['cast'] = array_slice($credits['cast'], 0, 5);
         // TRAILER
         $videos = $this->tmdb->consultar("/movie/$id/videos");

@@ -1,5 +1,5 @@
 import { apiGet } from "./api.js";
-import { render } from "./ui.js";
+import { renderList } from "./main_series.js";
 // Referencias
 const btnBuscar = document.getElementById("btn-buscar");
 const inputBusqueda = document.getElementById("busqueda-titulo");
@@ -17,7 +17,7 @@ btnBuscar.addEventListener("input", async () => {
 
 
   
-  render(seriesContainer, movies);
+  renderList(movies,seriesContainer);
 });
 
 
@@ -26,6 +26,9 @@ inputBusqueda.addEventListener("input", async () => {
   const query = inputBusqueda.value.trim();
   console.log("QUERY:", query);
 
+
+
+  seriesContainer.innerHTML = '';
   // Si el input está vacío, limpiamos el contenedor y salimos
   if (query === "") {
     seriesContainer.innerHTML = ""; 
@@ -37,7 +40,8 @@ inputBusqueda.addEventListener("input", async () => {
     const elements = await apiGet("/searchSeries", { query: query });
     console.log("TV API:", elements);
 
-    render(seriesContainer, elements);
+  renderList(elements,seriesContainer);
+
   } catch (error) {
     console.error("Error en la búsqueda:", error);
   }
