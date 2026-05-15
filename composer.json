@@ -7,5 +7,7 @@
             "Mikelnavarro\\Eurofilm\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
 }
