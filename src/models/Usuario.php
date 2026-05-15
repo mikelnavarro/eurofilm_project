@@ -109,7 +109,7 @@ class Usuario
     // Buscar usuario
     public function searchUsers($query = '', $country = '')
     {
-        $sql = "SELECT id, username, email, country, createdAt
+        $sql = "SELECT id, username, email, bio, country, createdAt
             FROM users
             WHERE 1=1";
 
@@ -122,7 +122,7 @@ class Usuario
         if (!empty($country)) {
             $sql .= " AND country = :country";
         }
-        $sql .= " ORDER BY username ASC";
+        $sql .= " ORDER BY username DESC";
 
         $this->db->query($sql);
 
