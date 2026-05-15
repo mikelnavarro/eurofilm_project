@@ -80,7 +80,7 @@ require_once '../variables_config.php';
         <div id="movie-data" data-tmdb="<?= htmlspecialchars($tmdb_id) ?>"></div>
         <h3>Reseñas de los Usuarios</h3>
         <div id="reviews-container">
-            <div class="review-card ${review.spoiler == 1 ? 'review-spoiler' : ''}"></div>
+            <div data-resena="<?= $_SESSION['usuario']['id'] ?>" class="review-card ${review.spoiler == 1 ? 'review-spoiler' : ''}"></div>
         </div>
         <script>
             const TMDB_ID = <?= json_encode($_GET['id']) ?>;

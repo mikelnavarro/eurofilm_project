@@ -20,7 +20,7 @@ require_once '../variables_config.php';
     <?php include '../busqueda.php'; ?>
     <main>
 
-        <h2>Series en España</h2>
+        <h2>Catálogo - Series</h2>
         <div id="film"></div>
     </main>
 

@@ -33,10 +33,12 @@ formRating.addEventListener("submit", async (e) => {
   if (data.ok) {
     if (data.updated) {
       msg.textContent = "Reseña actualizada";
+      window.location.reload();
     } else {
       msg.textContent = "Reseña creada";
+      window.location.reload();
     }
-    window.location.reload();
+    
   }
 
   if (data.hasReviewed) {

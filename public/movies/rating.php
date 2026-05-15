@@ -16,7 +16,7 @@
         <div class="form-group">
             <select name="visibility" class="visibility" id="visibility">
                 <option id="private" value="Privada">PRIVADA</option>
-                <option id="public" value="Publica">PÚBLICA</option>
+                <option id="public" value="Publica" selected>PÚBLICA</option>
             </select>
         </div>
         <div class="form-group">
