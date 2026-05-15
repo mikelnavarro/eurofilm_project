@@ -46,6 +46,6 @@ async function loadMovies() {
   const movies = await fetchMovies(paginaActual);
   renderList(movies,movieContainer);
   updatePageUI(pageDisplay);
-  //initFiltros(movies);
+  initFiltros(movies,movieContainer);
 }
 loadMovies();
