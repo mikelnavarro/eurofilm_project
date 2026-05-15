@@ -52,7 +52,7 @@ document.addEventListener("click", async (e) => {
       window.location.reload();
     } else {
       alert("Error al eliminar favorito");
+      return;
     }
-    location.reload();
   }
 });

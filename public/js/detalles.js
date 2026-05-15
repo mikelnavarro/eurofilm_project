@@ -1,6 +1,4 @@
 import { BASE_URL } from "./configuracion.js";
-
-
 import { renderDirectorMovie, renderWatchProviders, renderWritersMovie } from "./funciones-carga.js";
 // Referencias
 const detailsView = document.getElementById("movie-details");
@@ -195,6 +193,7 @@ function renderCompanies(movie) {
   });
 }
 // buscamos añadir a favoritos
+
 const movieData = document.getElementById("movie-data");
 const tmdbId = movieData.dataset.tmdb;
 const favBtn = document.getElementById("btn-favorito");
@@ -214,8 +213,18 @@ favBtn.addEventListener("click", async () => {
 
   if (data.ok) {
     favBtn.textContent = "En favoritos";
+    showMessage("Ya esta en favoritos");
     alert("Ya esta en favoritos");
+    window.location.reload();
   } else {
+    showMessage("No esta en favoritos. Hubo algún problema.", true);
     alert("No esta en favoritos. Hubo algún problema.");
   }
 });
+// funcion mostrar mensaje
+export function showMessage(text, isError = false) {
+  const mensaje = document.getElementById("mensaje");
+
+  mensaje.textContent = text;
+  mensaje.style.color = isError ? "red" : "green";
+}

@@ -3,6 +3,8 @@ import { initFiltros } from "./filtros.js";
 import { updatePageUI } from "./helper.js";
 import { renderList } from "./ui.js";
 
+
+
 // Referencias
 export let paginaActual = 1;
 const movieContainer = document.getElementById("peliculas");
@@ -44,8 +46,8 @@ nextBtn.addEventListener("click", async () => {
 async function loadMovies() {
   console.log("Iniciando carga de películas...");
   const movies = await fetchMovies(paginaActual);
-  renderList(movies,movieContainer);
+  renderList(movies, movieContainer);
   updatePageUI(pageDisplay);
-  initFiltros(movies,movieContainer);
+  initFiltros(movies);
 }
 loadMovies();

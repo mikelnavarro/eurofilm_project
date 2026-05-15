@@ -21,6 +21,7 @@ require_once '../variables_config.php';
 <body>
     <?php include '../inc/header.php'; ?>
     <main>
+        <span id="mensaje"></span>
         <div id="movie-details">
 
             <!-- IZQUIERDA: INFO -->
