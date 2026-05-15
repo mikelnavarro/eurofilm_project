@@ -45,6 +45,7 @@ require_once '../variables_config.php';
                 <ul class="submenu">
                     <li><a href="/Eurofilm/public/referencia/quienes-somos">Quiénes somos</a></li>
                     <li><a href="#">Email</a></li>
+                    <li><a href="/Eurofilm/public/pantalla/users.php">Conecta con usuarios</a></li>
                 </ul>
             </li>
         </ul>

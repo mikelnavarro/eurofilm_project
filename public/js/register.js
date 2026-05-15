@@ -21,8 +21,7 @@ if (registerForm) {
 
         setTimeout(() => {
           window.location.reload();
-          window.location.href = "../movies/movies.php";
-          return;
+          //window.location.href = "../movies/movies.php";
         }, 800);
       } else {
         showMessage(data.error, true);

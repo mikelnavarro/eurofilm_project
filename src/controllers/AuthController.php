@@ -62,8 +62,7 @@ class AuthController extends Controller
                 'nombre' => $usuario->name,
                 'username' => $usuario->username,
                 'email' => $usuario->email,
-                'fecha_alta' => $usuario->fecha_alta,
-                'role' => $usuario->role
+                'fecha_alta' => $usuario->createdAt,
             ];
             $this->jsonResponse(['ok' => true, 'usuario' => $_SESSION['usuario']]);
         } else {
@@ -100,7 +99,7 @@ class AuthController extends Controller
             'nombre' => $usuario->name,
             'username' => $usuario->username,
             'email' => $usuario->email,
-            'fecha_alta' => $usuario->fecha_alta
+            'fecha_alta' => $usuario->createdAt
         ];
         $this->jsonResponse(['ok' => true]);
     }
@@ -125,7 +124,7 @@ class AuthController extends Controller
         }
         $this->jsonResponse([
             'ok' => true,
-            'usuario' => $_SESSION['usuario']
+            'usuario' => $usuario
         ]);
     }
 
@@ -158,10 +157,8 @@ class AuthController extends Controller
             return;
         }
         // 2. comprobar email duplicado
-        $email = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
-        var_dump($this->usuarioModelo->obtenerUsuarioPorEmail($email));
-        die();
-        if ($email && $email->id != $userId) {
+        $emailComprueba = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
+        if ($email && $emailComprueba->id != $userId) {
             $this->jsonResponse(['error' => 'Email ya existe']);
             return;
         }
@@ -174,8 +171,17 @@ class AuthController extends Controller
             $nombre,
             $bio
         );
-
+        if ($user) {
+            // sesión
+            $_SESSION['usuario'] = [
+                'id' => $user->id,
+                'nombre' => $user->name,
+                'username' => $user->username,
+                'email' => $user->email,
+                'fecha_alta' => $user->createdAt
+            ];
         $this->jsonResponse(['ok' => $ok]);
+        }
     }
 
     // destruir la sesión

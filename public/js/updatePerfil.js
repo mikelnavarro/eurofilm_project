@@ -56,6 +56,7 @@ form.addEventListener("submit", async (e) => {
 
     if (data.ok) {
       alert("Perfil actualizado");
+      window.location.reload();
     }
   });
 

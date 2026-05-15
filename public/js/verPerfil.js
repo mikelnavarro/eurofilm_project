@@ -5,14 +5,26 @@ async function cargarPerfil() {
   });
 
   const data = await res.json();
+  if (!data.ok) {
+    data.error;
+    return;
+  }
 
-  if (!data.ok) return;
-
-  const u = data.usuario;
-  document.getElementById("username").value = u.username ?? "";
-  document.getElementById("email").textContent = u.email;
-  document.getElementById("country").value = u.country ?? "";
+  if (data.ok) {
+    renderizar(data.usuario);
+    console.log("USER:", data);
+  }
 }
+
+// Ver usuario
+
+function renderizar(user) {
+  document.getElementById("username").value = user.username;
+  document.getElementById("email").value = user.email;
+  document.getElementById("country").value = user.country;
+  document.getElementById("bio").value = user.bio;
+}
+cargarPerfil();
 // Ver reseñas
 // contenedor
 const container = document.getElementById("user-reviews-container");

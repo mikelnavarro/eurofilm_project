@@ -19,12 +19,10 @@ if (loginForm) {
       const data = await res.json();
       if (data.ok) {
         showMessage("Usuario registrado correctamente");
-                  window.location.href = "/Eurofilm/public/movies/movies.php";
-
+            window.location.href = "/Eurofilm/public/movies/movies.php";
         setTimeout(() => {
           window.location.href = "/Eurofilm/public/movies/movies.php";
         }, 800);
-        window.location.reload();
       } else {
         showMessage(data.error, true);
       }

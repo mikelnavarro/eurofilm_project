@@ -35,7 +35,7 @@ class Usuario
         $this->db->bind("username", $username);
 
         // registro() devuelve el objeto con las propiedades
-        return $this->db->registros();
+        return $this->db->registroObj();
     }
     public function obtenerUsuarioPorEmail($email)
     {
@@ -82,7 +82,7 @@ class Usuario
             SET username = :username,
                 email = :email,
                 country = :country,
-                name = :name
+                name = :name,
                 bio = :bio
             WHERE id = :id";
 
@@ -109,7 +109,7 @@ class Usuario
     // Buscar usuario
     public function searchUsers($query = '', $country = '')
     {
-        $sql = "SELECT id, username, email, country
+        $sql = "SELECT id, username, email, country, createdAt
             FROM users
             WHERE 1=1";
 
