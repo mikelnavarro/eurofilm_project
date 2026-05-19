@@ -15,6 +15,7 @@ require_once '../variables_config.php';
     <link rel="stylesheet" href="../css/rating.css">
     <script defer src="../js/detalles.js" type="module"></script>
     <script defer src="../js/reviews.js" type="module"></script>
+    <!-- Servicios Externalizados Chats -->
     <script defer src="../js/rate.js" type="module"></script>
 </head>
 
@@ -89,5 +90,4 @@ require_once '../variables_config.php';
         </script>
     </main>
 </body>
-
 </html>

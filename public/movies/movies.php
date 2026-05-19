@@ -13,6 +13,9 @@ require_once '../variables_config.php';
     <script defer src="../js/busqueda.js" type="module"></script>
     <script defer src="../js/main.js" type="module"></script>
     <script defer src="../js/filtros.js" type="module"></script>
+
+    <!-- Servicios Externalizados Chats -->
+    <script type="text/javascript" src="https://popupsmart.com/freechat.js"></script>
 </head>
 
 <body>
@@ -30,7 +33,35 @@ require_once '../variables_config.php';
         <button id="next-page">Siguiente</button>
     </div>
     <?php include '../inc/footer.php'; ?>
-
 </body>
-
+    <script>
+        window.start.init({
+            title: "Hi there ✌️",
+            message: "How may we help you? Just send us a message now to get assistance.",
+            color: "#FA764F",
+            position: "right",
+            placeholder: "Enter your message",
+            withText: "Write with",
+            viaWhatsapp: "Or write us directly via Whatsapp",
+            gty: "Go to your",
+            awu: "and write us",
+            connect: "Connect now",
+            button: "Write us",
+            device: "everywhere",
+            logo: "https://d2r80wdbkwti6l.cloudfront.net/1FJbm6ECI9NXCXX1WPTZnyedW51585zz.jpg",
+            services: [{
+                "name": "mail",
+                "content": "mikelnaval06@gmail.com"
+            }, {
+                "name": "whatsapp",
+                "content": "669092418"
+            }, {
+                "name": "telegram",
+                "content": "mikelnaval06"
+            }, {
+                "name": "phone",
+                "content": "669092418"
+            }]
+        })
+    </script>
 </html>

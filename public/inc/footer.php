@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="../css/footer.css">
 
 
-<footer>
-    <footer class="footer">
+<footer class="footer">
     <div class="footer-container">
         <div class="footer-brand">
             <h2>Eurofilm</h2>
