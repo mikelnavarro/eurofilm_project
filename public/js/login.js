@@ -24,7 +24,7 @@ if (loginForm) {
           window.location.href = "/Eurofilm/public/movies/movies.php";
         }, 800);
       } else {
-        showMessage(data.error, true);
+        showMessage("E-mail o clave incorrectos. Inténtelo otra vez", true);
       }
     } catch (error) {
       console.error(error);

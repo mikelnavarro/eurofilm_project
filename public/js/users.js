@@ -40,7 +40,7 @@ function renderizar(container, users) {
     bio.textContent = user.bio ?? "Sin biografía";
 
     const email = document.createElement("small");
-    email.textContent = user.email;
+    email.textContent = user.username;
 
     const date = document.createElement("small");
     const formattedDate = user.createdAt

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2026 a las 15:07:29
+-- Tiempo de generación: 15-05-2026 a las 22:36:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -56,7 +56,9 @@ INSERT INTO `lists` (`id`, `title`, `visibility`, `createdAt`, `user_id`) VALUES
 (1, 'Favoritos', NULL, '2026-05-10 11:49:39', 2),
 (2, 'Favoritos', NULL, '2026-05-11 09:56:02', NULL),
 (3, 'Favoritos', NULL, '2026-05-11 10:09:46', 3),
-(4, 'Favoritos', NULL, '2026-05-11 11:37:16', 4);
+(4, 'Favoritos', NULL, '2026-05-11 11:37:16', 4),
+(5, 'Favoritos', NULL, '2026-05-11 19:28:54', 5),
+(6, 'Favoritos', NULL, '2026-05-11 19:43:58', 6);
 
 -- --------------------------------------------------------
 
@@ -77,11 +79,16 @@ INSERT INTO `list_movies` (`movie_id`, `list_id`) VALUES
 (6, 1),
 (7, 1),
 (3, 2),
+(10, 2),
+(12, 2),
+(14, 2),
+(16, 2),
+(17, 2),
+(19, 2),
 (1, 3),
 (3, 3),
 (12, 3),
-(13, 3),
-(6, 4);
+(13, 3);
 
 -- --------------------------------------------------------
 
@@ -115,7 +122,13 @@ INSERT INTO `movies` (`id`, `tmdb_id`, `title`, `release_date`, `poster_path`, `
 (11, 1630423, 'Sangre asesina', '2026-05-06', '/16TvbhCP8CfiGEbxcbtQLYWO6WG.jpg', NULL),
 (12, 931285, 'Mortal Kombat II', '2026-05-06', '/ivVKHht5jutNGnObn1y5sSDrAXn.jpg', NULL),
 (13, 1239198, 'Mi querida señorita', '2026-04-17', '/3Od2J0JICLLMQfQAUbpCJg82HYg.jpg', NULL),
-(14, 1318447, 'Depredador dominante', '2026-04-24', '/mV7uFS1U8iP0p4CcXZp4znBVpch.jpg', NULL);
+(14, 1318447, 'Depredador dominante', '2026-04-24', '/mV7uFS1U8iP0p4CcXZp4znBVpch.jpg', NULL),
+(15, 1933, 'Los otros', '2001-08-02', '/u03kblxsv3zar3Uqt6sRfICU9L6.jpg', NULL),
+(16, 1283, 'Torrente, el brazo tonto de la ley', '1998-03-13', '/bYAqKRiDVL0f38AoUKpDI32oY5r.jpg', NULL),
+(17, 1038918, '美女奉行 おんな牢秘抄II', '1995-09-21', '/i3Ouy0rMUHyKeHZV3PYl106OSwe.jpg', NULL),
+(18, 687163, 'Proyecto Salvación', '2026-03-15', '/7lwOTxajURKEWO6gI370NTrVdBO.jpg', NULL),
+(19, 1439930, 'Marvel Television presenta The Punisher: One Last Kill', '2026-05-12', '/qkyqQqQN8HAkLezR6xWTYzz6Icv.jpg', NULL),
+(20, 185417, 'Mi querida señorita', '1972-02-17', '/4LkvQraMTioGvjJxHoyaI3KVVrk.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -171,7 +184,9 @@ INSERT INTO `reviews` (`id`, `user_id`, `movie_id`, `rating`, `title`, `comment`
 (13, NULL, 3, 5.0, 'Bonita peli para entusiasmados del videojuego', '', 'Publica', 0, '2026-05-11 09:55:39'),
 (14, 3, 3, 5.0, 'Bonita peli', 'Bonita peli para entusiasmados del videojuego', 'Publica', 0, '2026-05-11 10:10:12'),
 (15, 3, 12, 10.0, 'Buena película de acción', 'La mejor peli de acción con el gran actor Karl Urban y la espléndida actriz Adeline Rudolph.', 'Publica', 0, '2026-05-11 10:17:49'),
-(18, 4, 6, 10.0, 'Muy bonita', 'Muy bonita la peli. Recomendada para las niños y los niños. ¡¡Preciosa!!', 'Publica', 1, '2026-05-11 12:37:14');
+(18, 4, 6, 10.0, 'Muy bonita', 'Muy bonita la peli. Recomendada para las niños y los niños. ¡¡Preciosa!!', 'Publica', 1, '2026-05-11 12:37:14'),
+(21, 2, 18, 10.0, 'Muy Bonita', 'Esta película es emocionante e impresionante. La he visto y sus efectos especiales me parecen de diez. Está muy bien. Al final casi tiene problemas con la llegada al planeta Tierra pero logra encapsular a la criatura y llegar a América (el mundo).', 'Publica', 1, '2026-05-15 19:24:51'),
+(22, 2, 20, 10.0, 'Película emotiva y reflexiva', 'Me encanta cómo es Adela y José Luis López Vázquez actúa muy bien.', 'Publica', 1, '2026-05-15 20:03:33');
 
 -- --------------------------------------------------------
 
@@ -198,9 +213,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `passwordHash`, `country`, `role`, `state`, `createdAt`, `bio`) VALUES
 (1, 'Elena Makarovic', 'elenamakarovic', 'elenamakarovic@gmail.com', '$2y$10$NfJ.xdVfVPicdyMlPBFKtecGVeJdkjJ6E/JS7QKCtKfN2okyTk1ZG', NULL, NULL, NULL, '2026-05-08 16:03:33', NULL),
-(2, 'Sandra Cornágo', 'sandra_cornago_1997', 'sandracornagonav@gmail.com', '$2y$10$uP/j3Tyjz0JRpqeovhP.6uvct3ZNKGlTPwISw4ANYnoXgz0HCtt4m', NULL, NULL, NULL, '2026-05-08 16:37:25', NULL),
+(2, 'Sandra Cornágo', 'sandra_cornago_1997', 'sandracornagonav@gmail.com', '$2y$10$uP/j3Tyjz0JRpqeovhP.6uvct3ZNKGlTPwISw4ANYnoXgz0HCtt4m', 'Alemania', NULL, NULL, '2026-05-08 16:37:25', 'Hola soy Sandrita, ¿qué tal estáis todos?'),
 (3, 'mikel', 'mikelnava', 'mikelnaval2006@gmail.com', '$2y$10$xojHZ7T3QGgdG7NJtyFxEuwdwraEdryOppmethOHENUi86Wdwc90e', NULL, 'NORMAL', NULL, '2026-05-11 09:45:30', NULL),
-(4, 'Mikel', 'mikel', 'mikelnavarro2006@gmail.com', '$2y$10$8yATJ1hNEbuFz5z3ivuUu.BjS4/Pgf143mKRfB1nGiVRWl.kaHryu', NULL, 'NORMAL', NULL, '2026-05-11 11:18:43', NULL);
+(4, 'Mikel', 'mikel', 'mikelnavarro2006@gmail.com', '$2y$10$8yATJ1hNEbuFz5z3ivuUu.BjS4/Pgf143mKRfB1nGiVRWl.kaHryu', NULL, 'NORMAL', NULL, '2026-05-11 11:18:43', NULL),
+(5, 'Elena ', 'elenaparabolica_', 'elenaparabolica@gmail.com', '$2y$10$ICRbFYgnkx2pS34m1VL2a.M1MCWOq4TT43DSX2ZfrgFoi7Naaege2', NULL, 'NORMAL', NULL, '2026-05-11 19:28:45', NULL),
+(6, 'lope_de_vega', 'lope_de_vega', 'lope@gmail.com', '$2y$10$W6T.AKkr9gy.RrpNGsRdleerBLiHG0UABRFnasDcsW0nZUxqQfCWu', NULL, 'NORMAL', NULL, '2026-05-11 19:43:55', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -279,13 +296,13 @@ ALTER TABLE `directors`
 -- AUTO_INCREMENT de la tabla `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `providers`
@@ -297,13 +314,13 @@ ALTER TABLE `providers`
 -- AUTO_INCREMENT de la tabla `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

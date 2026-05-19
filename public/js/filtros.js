@@ -11,17 +11,7 @@ export function initFiltros(movies) {
   allMovies = movies;
   selectSort.addEventListener("change", aplicarFiltros);
   selectGenero.addEventListener("change", aplicarFiltros);
-  selectPais.addEventListener("change", aplicarFiltros);
-}
-// Módulo Genérico
-function applyFilters(items, filters) {
-  return items.filter((item) => {
-    const matchCountry = !filters.country || item.country === filters.country;
-
-    const matchGenre = !filters.genre || item.genre?.includes(filters.genre);
-
-    return matchCountry && matchGenre;
-  });
+  selectPais.addEventListener("change", filtros);
 }
 function aplicarFiltros() {
   const pais = selectPais.value;
@@ -71,13 +61,11 @@ function aplicarFiltros() {
 function filtros() {
   const pais = selectPais.value; // Ej: "ES"
   let filtradas = allMovies;
-
   if (pais) {
     filtradas = allMovies.filter((movie) => {
-      // 1. Intentar con origin_country (común en resultados de búsqueda/listados)
+      // Con origin_country pais 
       const porOrigen = movie.origin_country?.includes(pais);
-
-      // 2. Intentar con production_countries (por si acaso tu API lo incluye)
+      // Con production_countries
       const porProduccion = movie.production_countries?.some((c) =>
         typeof c === "string" ? c === pais : c.iso_3166_1 === pais,
       );
@@ -87,4 +75,16 @@ function filtros() {
   }
 
   renderList(filtradas, movieContainer);
+}
+
+
+// Módulo Genérico
+function applyFilters(items, filters) {
+  return items.filter((item) => {
+    const matchCountry = !filters.country || item.country === filters.country;
+
+    const matchGenre = !filters.genre || item.genre?.includes(filters.genre);
+
+    return matchCountry && matchGenre;
+  });
 }
