@@ -37,7 +37,7 @@ inputBusqueda.addEventListener("input", async () => {
   }
   
   try {
-    const elements = await apiGet("/searchSeries", { query: query });
+    const elements = await apiGet("/searchSeries/tv", { query: query });
     console.log("TV API:", elements);
 
   renderList(elements,seriesContainer);

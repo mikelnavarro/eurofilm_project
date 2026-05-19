@@ -1,5 +1,5 @@
 import { BASE_URL } from "./configuracion.js";
-import { renderWatchProviders } from "./funciones-carga.js";
+import { renderWritersMovie, renderWatchProviders } from "./funciones-carga.js";
 // Referencias
 const detailsView = document.getElementById("details");
 

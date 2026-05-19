@@ -20,7 +20,7 @@ require_once '../variables_config.php';
     <?php include '../busqueda.php'; ?>
     <?php include 'filtros.php'; ?>
     <main>
-
+        <option id="Country" value="ES" type="hidden"></option>
         <h2>Películas Españolas</h2>
         <div id="peliculas"></div>
     </main>

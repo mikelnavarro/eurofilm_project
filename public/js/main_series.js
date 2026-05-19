@@ -1,6 +1,4 @@
 import { BASE_URL } from "./configuracion.js";
-
-import { initFiltros } from "./filtros.js";
 import { updatePageUI } from "./helper.js";
 // Referencias
 let paginaActual = 1;
@@ -79,10 +77,9 @@ nextBtn.addEventListener("click", async () => {
 });
 // Al cargar el documento, mostramos algo por defecto
 async function loadElements() {
-  console.log("Iniciando carga de películas...");
+  console.log("Iniciando carga de catalogo de Series...");
   const series = await fetchMovies(paginaActual);
   renderList(series);
-  updatePageUI(pageDisplay);
-  initFiltros(series);
+  updatePageUI(paginaActual,pageDisplay);
 }
 loadElements();

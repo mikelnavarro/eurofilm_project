@@ -98,6 +98,7 @@ class ApiMovieController extends Controller
             $this->jsonResponse(['error' => 'Query requerida'], 400);
         }
 
+
         $data = $this->tmdb->consultar('/search/movie', [
             'query' => $query,
             'page' => $page

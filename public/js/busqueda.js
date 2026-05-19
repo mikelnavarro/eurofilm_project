@@ -8,6 +8,7 @@ const inputBusqueda = document.getElementById("busqueda-titulo");
 const container = document.getElementById("peliculas");
 
 
+
 // Input busqueda (evento Input)
 inputBusqueda.addEventListener("input", async () => {
   container.innerHTML = "";
@@ -21,7 +22,6 @@ inputBusqueda.addEventListener("input", async () => {
     window.location.reload();
     return;
   }
-  
   try {
     const movies = await apiGet("/search/movie", { query: query });
     renderList(movies,container);

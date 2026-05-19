@@ -47,7 +47,7 @@ async function loadMovies() {
   console.log("Iniciando carga de películas...");
   const movies = await fetchMovies(paginaActual);
   renderList(movies, movieContainer);
-  updatePageUI(pageDisplay);
+  updatePageUI(paginaActual,pageDisplay);
   initFiltros(movies);
 }
 loadMovies();

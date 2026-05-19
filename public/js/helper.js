@@ -1,5 +1,4 @@
 // Función para cambiar de página
-import { paginaActual } from "./main.js";
-export function updatePageUI(pageDisplay) {
+export function updatePageUI(paginaActual,pageDisplay) {
   pageDisplay.textContent = `Página ${paginaActual}`;
 }

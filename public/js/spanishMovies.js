@@ -79,6 +79,7 @@ nextBtn.addEventListener("click", async () => {
 async function loadSpanishMovies() {
   const movies = await fetchSpanishMovies(paginaActual);
   renderList(movies);
-  updatePageUI(pageDisplay);
-  //initFiltros(movies);
+  updatePageUI(paginaActual,pageDisplay);
+  initFiltros(movies);
 }
+loadSpanishMovies();
