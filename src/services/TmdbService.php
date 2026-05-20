@@ -38,17 +38,13 @@ class TmdbService
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
 
+
         // CONFIGURACIÓN PARA EL BEARER TOKEN
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $this->token,
             'Content-Type: application/json'
         ]);
-
         $resultado = curl_exec($ch);
-        // Si sigue fallando, esto te dirá por qué exactamente
-        if (curl_errno($ch)) {
-            echo 'Error de cURL: ' . curl_error($ch);
-        }
         curl_close($ch);
         // Decodificamos a array asociativo (NO volveemos a encodificar)
         return json_decode($resultado, true);

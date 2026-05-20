@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
     <script defer src="../js/login.js" type="module"></script>
+
+    <!-- Otros Servicios -->
 </head>
 
 <body>

@@ -10,14 +10,14 @@ return [
     ],
     // Configuración de TMDB
     'tmdb' => [
-        'api_key' => '4d3faecd2785dc35f1635f8d03d69e8e',
-        'token' => 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDNmYWVjZDI3ODVkYzM1ZjE2MzVmOGQwM2Q2OWU4ZSIsIm5iZiI6MTc3NjI4MDQyMC43NTIsInN1YiI6IjY5ZGZlMzY0MTY4N2RiZGU1NmY5NDA5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8V7izLrCtRLetzuCAPWnWLW3aUEuvl-LSkdg8KHqhIE',
+        'api_key' => 'af29f8a0d4727927172c7825408f2cda',
+        'token' => 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZjI5ZjhhMGQ0NzI3OTI3MTcyYzc4MjU0MDhmMmNkYSIsIm5iZiI6MTc3NjI4MDQyMC43NTIsInN1YiI6IjY5ZGZlMzY0MTY4N2RiZGU1NmY5NDA5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KMJVXb5n0eWifW6HiJn67amyw2H9xN15dcv6g3LIxus',
         'base_url' => 'https://api.themoviedb.org/3',
         'img_url'  => 'https://image.tmdb.org/t/p/w500'
     ],
     'rutas' =>  [],
     'site' => [
         'name' => 'Eurofilm',
-        'url'  => 'http://localhost/pelis/public'
+        'url'  => 'http://localhost/Eurofilm/public'
     ]
 ];
