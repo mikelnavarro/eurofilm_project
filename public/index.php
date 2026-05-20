@@ -8,5 +8,5 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 // 3. Arrancar el Core
 // Como usas namespaces, instancia el Core desde su ubicación
-$app = new \Mikelnavarro\Eurofilm\Core\Core();
+$app = new \Mikelnavarro\Eurofilm\core\Core();
 
