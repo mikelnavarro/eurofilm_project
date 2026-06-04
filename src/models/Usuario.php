@@ -32,7 +32,7 @@ class Usuario
     {
         $sql = "SELECT * FROM users WHERE username = :username";
         $this->db->query($sql);
-        $this->db->bind("username", $username);
+        $this->db->bind(':username', $username);
 
         // registro() devuelve el objeto con las propiedades
         return $this->db->registroObj();
@@ -41,7 +41,7 @@ class Usuario
     {
         $sql = "SELECT * FROM users WHERE email = :email";
         $this->db->query($sql);
-        $this->db->bind("email", $email);
+        $this->db->bind(':email', $email);
 
         // registro() devuelve el objeto con las propiedades
         return $this->db->registroObj();
@@ -51,8 +51,11 @@ class Usuario
         $sql = "SELECT * FROM users WHERE email = :email AND password_hash = :clave";
         $this->db->query($sql);
         $this->db->bind(':email', $email);
-        $this->db->bind(':clave', $clave);
-        return $this->db->execute();
+        $usuario = $this->db->registroObj();
+        if ($usuario && isset($usuario->passwordHash) && password_verify($clave, $usuario->passwordHash)) {
+            return $usuario;
+        }
+        return false;
     }
     public function comprobar($email, $clave)
     {
@@ -65,7 +68,7 @@ class Usuario
         $fila = $this->db->registro();
         if ($fila) {
             // 2. Extraemos el hash de la base de datos (asegúrate que el nombre de la columna sea correcto)
-            $hashed_password = $fila->password;
+            $hashed_password = $fila->passwordHash;
             // 3. Verificamos si la clave coincide con el hash
             if (password_verify($clave, $hashed_password)) {
                 return $fila; // Retornamos el objeto usuario si es correcto

@@ -15,7 +15,6 @@ class AuthController extends Controller
     }
     // Registrase
 
-
     // Otro método 
     public function registrarse()
     {
