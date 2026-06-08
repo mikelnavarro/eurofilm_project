@@ -1,5 +1,5 @@
 <?php
-namespace Mikelnavarro\Eurofilm\core;
+namespace Mikelnavarro\Eurofilm\Core;
 
 use PDO;
 use PDOException;

@@ -2,7 +2,7 @@
 
 namespace Mikelnavarro\Eurofilm\models;
 
-use Mikelnavarro\Eurofilm\core\Db;
+use Mikelnavarro\Eurofilm\Core\Db;
 use PDO;
 use PDOException;
 

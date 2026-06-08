@@ -14,7 +14,7 @@
     <?php include '../inc/header.php'; ?>
     <main class="auth-container">
 
-        <form id="form-register">
+        <form id="form-register" class="auth">
 
             <h1>Crear cuenta</h1>
 

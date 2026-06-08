@@ -11,7 +11,7 @@ body {
     align-items: center;
 }
 
-form {
+.auth {
     width: 100%;
     max-width: 420px;
     background: rgba(255, 255, 255, 0.04);
@@ -20,26 +20,20 @@ form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 360px;
-}
+
 /* Titulos del FORMULARIO */
 
-form h1 {
+.auth h1 {
     text-align: center;
     margin-bottom: 1.5rem;
     color: #333;
     margin: 0 0 10px 0;
 }
 /* LOGIN → franja azul arriba */
-form {
+.auth {
     border-top: 4px solid #4a90e2;
 }
 
@@ -78,7 +72,7 @@ input:focus {
     transition: background-color 0.2s;
 }
 
-form.button:hover {
+.auth.button:hover {
     background-color: #357abd;
 }
 

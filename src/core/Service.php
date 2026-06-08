@@ -1,6 +1,6 @@
 <?php
 
-namespace Mikelnavarro\Eurofilm\core;
+namespace Mikelnavarro\Eurofilm\Core;
 
 class Service
 {

@@ -15,7 +15,7 @@
 
     <?php include '../inc/header.php'; ?>
     <main class="auth-container">
-        <form id="loginForm">
+        <form id="loginForm" class="auth">
             <h1>Iniciar Sesión</h1>
             <div class="form-group">
                 <label for="username">Nombre de usuario</label>

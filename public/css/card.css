@@ -20,6 +20,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+      grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
 }
 #details {
     display: grid;

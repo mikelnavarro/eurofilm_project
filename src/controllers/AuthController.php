@@ -2,7 +2,7 @@
 
 namespace Mikelnavarro\Eurofilm\controllers;
 
-use Mikelnavarro\Eurofilm\core\Controller;
+use Mikelnavarro\Eurofilm\Core\Controller;
 
 class AuthController extends Controller
 {
