@@ -1,8 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
-import { initFiltros } from "./filtros.js";
 import { updatePageUI } from "./helper.js";
 import { renderList } from "./ui.js";
-
+import { initFiltros } from "./filtros.js";
 
 
 // Referencias
@@ -48,6 +47,6 @@ async function loadMovies() {
   const movies = await fetchMovies(paginaActual);
   renderList(movies, movieContainer);
   updatePageUI(paginaActual,pageDisplay);
-  initFiltros(movies);
+  //initFiltros(movies);
 }
 loadMovies();

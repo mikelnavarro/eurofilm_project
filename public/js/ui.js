@@ -1,6 +1,5 @@
-
 // función de carga de detalles de Movies
-export function renderList(movies,movieContainer) {
+export function renderList(movies, movieContainer) {
   if (!movieContainer) {
     console.error("La referencia del contenedor de 'peliculas' no encontrado.");
     return;
