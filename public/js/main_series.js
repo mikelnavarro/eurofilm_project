@@ -12,7 +12,7 @@ const pageDisplay = document.getElementById("current-page-display");
 
 async function fetchMovies(pagina) {
   try {
-    const res = await fetch(`/Eurofilm/api/series?page=${pagina}`);
+    const res = await fetch(`${BASE_URL}/api/series?page=${pagina}`);
 
     if (!res.ok) {
       throw new Error(`Error HTTP: ${res.status}`);

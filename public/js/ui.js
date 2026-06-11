@@ -14,7 +14,7 @@ export function renderList(movies,movieContainer) {
     card.style.cursor = "pointer";
     // Si el usuario pulsa click, se abrirá la ventana de Card
     card.addEventListener("click", () => {
-      window.location.href = `card.php?id=${movie.id}`;
+      window.location.href = `card.html?id=${movie.id}`;
     });
     // Cargar elemento uno a uno
     const img = document.createElement("img");

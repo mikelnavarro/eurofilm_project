@@ -16,7 +16,7 @@ const pageDisplay = document.getElementById("current-page-display");
 
 async function fetchMovies(pagina) {
   try {
-    const res = await fetch(`${BASE_URL}/movies?page=${pagina}`);
+    const res = await fetch(`${BASE_URL}/api/movies?page=${pagina}`);
 
     if (!res.ok) {
       throw new Error(`Error HTTP: ${res.status}`);

@@ -1,15 +1,3 @@
-<?php
-// suponemos sesión activa
-$userId = $_SESSION['usuario']['id'];
-
-if (!$userId) {
-    die("No autorizado");
-}
-
-// controlador ya te pasa esto idealmente
-// $movies = [...];
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,6 +12,7 @@ if (!$userId) {
 
 <body>
 
+    
     <h2>Mis películas favoritas</h2>
     <form id="formulario-visibility" method="POST">
         <select id="visibility-fav">

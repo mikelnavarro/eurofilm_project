@@ -107,6 +107,7 @@ class AuthController extends Controller
 
         if (!isset($_SESSION['usuario'])) {
             $this->jsonResponse([
+                'logged' => false,
                 'ok' => false,
                 'error' => 'No autenticado'
             ], 401);
@@ -115,13 +116,15 @@ class AuthController extends Controller
 
 
         $email = $_SESSION['usuario']['email'];
-
         $usuario = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
+
+
         if (!$usuario) {
             $this->jsonResponse(['error' => 'Usuario no encontrado'], 404);
             return;
         }
         $this->jsonResponse([
+            'logged' => true,
             'ok' => true,
             'usuario' => $usuario
         ]);
@@ -179,7 +182,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'fecha_alta' => $user->createdAt
             ];
-        $this->jsonResponse(['ok' => $ok]);
+            $this->jsonResponse(['ok' => $ok]);
         }
     }
 
