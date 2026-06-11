@@ -1,24 +1,24 @@
-<?php
-require_once '../variables_config.php';
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <title>Eurofilm</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/global.css">
+
+    <!-- Estilos Unicos -->
+    <link rel="stylesheet" href="../css/style.css">
+
+
+    <script defer src="../js/header/header.js" type="module"></script>
+
     <script defer src="../js/busqueda.js" type="module"></script>
     <script defer src="../js/spanishMovies.js" type="module"></script>
 </head>
 
 <body>
-
-    <?php include '../inc/header.php'; ?>
-    <?php include '../busqueda.php'; ?>
-    <?php include 'filtros.php'; ?>
+    <header id="cabecera"></header>
+    <section id="search-box"></section>
     <main>
         <option id="Country" value="ES" type="hidden"></option>
         <h2>Películas Españolas</h2>
@@ -30,8 +30,7 @@ require_once '../variables_config.php';
         <span id="current-page-display">Página 1</span>
         <button id="next-page">Siguiente</button>
     </div>
-    <?php include '../inc/footer.php'; ?>
-
+    <footer id="footer"></footer>
 </body>
 
 </html>
