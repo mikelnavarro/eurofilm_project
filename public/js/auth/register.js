@@ -1,4 +1,4 @@
-import { BASE_URL } from "./configuracion.js";
+import { BASE_URL } from "../configuracion.js";
 // Referencias
 const registerForm = document.getElementById("form-register");
 if (registerForm) {

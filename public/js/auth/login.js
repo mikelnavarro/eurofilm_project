@@ -1,4 +1,4 @@
-import { BASE_URL } from "./configuracion.js";
+import { BASE_URL } from "../configuracion.js";
 
 // Función importada
 // Referencias

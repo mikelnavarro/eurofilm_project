@@ -1,5 +1,5 @@
 import { BASE_URL } from "./configuracion.js";
-import { updatePageUI } from "./helper.js";
+import { updatePageUI } from "./helpers/helper.js";
 // Referencias
 let paginaActual = 1;
 const container = document.getElementById("film");

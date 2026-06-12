@@ -4,7 +4,7 @@ namespace Mikelnavarro\Eurofilm\controllers;
 
 use Mikelnavarro\Eurofilm\Core\Controller;
 
-class ApiMovieController extends Controller
+class ApiController extends Controller
 {
     // Atributos
     private $tmdb;
@@ -44,6 +44,7 @@ class ApiMovieController extends Controller
 
         $this->jsonResponse($data, 200);
     }
+    // GET /api/movie
     public function movie($param = null)
     {
 
@@ -63,6 +64,7 @@ class ApiMovieController extends Controller
         $data = $this->tmdb->consultar("/movie/$id");
         // CRÉDITOS
         $credits = $this->tmdb->consultar("/movie/$id/credits");
+        $data['crew'] = $credits['crew'];
         $data['cast'] = array_slice($credits['cast'], 0, 5);
         // TRAILER
         $videos = $this->tmdb->consultar("/movie/$id/videos");

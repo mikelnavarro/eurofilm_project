@@ -1,5 +1,5 @@
 import { BASE_URL } from "./configuracion.js";
-import { updatePageUI } from "./helper.js";
+import { updatePageUI } from "./helpers/helper.js";
 import { renderList } from "./ui.js";
 import { initFiltros } from "./filtros.js";
 

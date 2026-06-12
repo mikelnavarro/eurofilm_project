@@ -37,3 +37,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+
+// Footer
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById('footer');
+  if (container) {
+    try {
+      const contenidoHtml = await cargarComponente(`${PUBLIC_URL}/inc/footer.html`);
+      container.innerHTML = contenidoHtml;
+    } catch (error) {
+      console.error("Fallo al inyectar la cabecera:", error);
+    }
+  }
+});

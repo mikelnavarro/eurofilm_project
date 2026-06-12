@@ -1,4 +1,4 @@
-import { BASE_URL } from "./configuracion.js";
+import { BASE_URL } from "../configuracion.js";
 async function cargarPerfil() {
   const res = await fetch("/Eurofilm/auth/perfil", {
     credentials: "include",
