@@ -1,9 +1,15 @@
+import { getMovieIdFromUrl } from "./helpers/helper.js";
+
 const container = document.getElementById("reviews-container");
+const tmdbId = getMovieIdFromUrl();
 // cargar reviews
 async function loadReviews() {
+  if (!container || !tmdbId) {
+    return;
+  }
 
   const res = await fetch(
-    `/Eurofilm/movie/getReviews?tmdb_id=${TMDB_ID}`
+    `/Eurofilm/movie/getReviews?tmdb_id=${tmdbId}`
   );
   const data = await res.json();
 
@@ -36,9 +42,12 @@ const spoilerBadge = review.spoiler == 1
 
 loadReviews();
 async function loadAverage() {
+  if (!tmdbId) {
+    return;
+  }
 
   const res = await fetch(
-    `/Eurofilm/movie/getMediaByMovie?tmdb_id=${TMDB_ID}`
+    `/Eurofilm/movie/getMediaByMovie?tmdb_id=${tmdbId}`
   );
 
   const data = await res.json();

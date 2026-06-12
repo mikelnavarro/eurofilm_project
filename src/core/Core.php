@@ -3,7 +3,7 @@
 namespace Mikelnavarro\Eurofilm\Core;
 class Core
 {
-    protected $controladorActual = 'ApiMovie';
+    protected $controladorActual = 'Api';
     protected $metodoActual = 'index';
     protected array $parametros = [];
 

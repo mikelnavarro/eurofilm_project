@@ -20,10 +20,10 @@ class ApiController extends Controller
 
     public function index()
     {
-        //header('Content-Type: text/json; charset=utf-8');
-        echo "<h1>Bienvenido a Eurofilm</h1>";
-        echo "El sistema de rutas está funcionando correctamente.";
-        //exit();
+        $data = "Bienvenido a Eurofilm";
+        $data = "El sistema de rutas está funcionando correctamente.";
+        $this->jsonResponse($data, 201);
+        exit();
     }
 
 
@@ -41,11 +41,11 @@ class ApiController extends Controller
             "sort_by" => "popularity.desc",
             'page' => $page
         ]);
-
         $this->jsonResponse($data, 200);
+        exit();
     }
     // GET /api/movie
-    public function movie($param = null)
+    public function movie($param = null): void
     {
 
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -82,15 +82,13 @@ class ApiController extends Controller
         // PROVEEDORES
         $watch_providers = $this->tmdb->consultar("/movie/$id/watch/providers");
         $data['watch_providers'] = $watch_providers;
-
-        header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }
 
 
     // Buscar películas
-    public function search()
+    public function search(): void
     {
         $query = $_GET['query'] ?? null;
         $page = $_GET['page'] ?? 1;
@@ -104,12 +102,11 @@ class ApiController extends Controller
             'query' => $query,
             'page' => $page
         ]);
-        header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }
     // Películas Españolas
-    public function spanishMovies()
+    public function spanishMovies(): void
     {
         $page = $_GET['page'] ?? 1;
 
@@ -122,11 +119,10 @@ class ApiController extends Controller
 
 
 
-        header('Content-Type: application/json');
         $this->jsonResponse($data, 200);
         exit;
     }
-    public function searchSeries()
+    public function searchSeries(): void
     {
         $country = $_GET['with_origin_country'] ?? null; // Recibimos el país si existe
         $query = $_GET['query'] ?? null;

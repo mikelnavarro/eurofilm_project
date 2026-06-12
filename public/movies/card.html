@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/rating.css">
 
     <script defer src="../js/components/load.js" type="module"></script>
-
+cfd
     <script defer src="../js/detalles.js" type="module"></script>
     <script defer src="../js/reviews.js" type="module"></script>
     <!-- Servicios Externalizados Chats -->
@@ -68,7 +68,53 @@
                     <span class="label">Productoras: </span>
                     <p id="companies"></p>
                 </div>
-                <?php include_once "rating.php"; ?>
+                <div id="rating-summary">
+                    <h3>Valoración media</h3>
+
+                    <div class="rating-box">
+                        <span id="average-rating">--</span> / 10
+                    </div>
+
+                    <small id="total-reviews"></small>
+                </div>
+                <div id="rating-box">
+                    <span class="label">Tu valoración</span>
+                    <form id="form-rating" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="review-title" id="review-title" placeholder="Escribe titulo de la reseña">
+                        </div>
+                        <div class="form-group">
+                            <select name="visibility" class="visibility" id="visibility">
+                                <option id="private" value="Privada">PRIVADA</option>
+                                <option id="public" value="Publica" selected>PÚBLICA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="rating" class="puntos">
+                                <option id="1" value="1">Muy Poco</option>
+                                <option id="2" value="2">Algo - 2</option>
+                                <option id="3" value="3">Insuficiente - 3</option>
+                                <option id="4" value="4">Insuficiente - 4</option>
+                                <option id="5" value="5">Suficiente - 5</option>
+                                <option id="6" value="6">Buena - 6</option>
+                                <option id="7" value="7">Notable - 7</option>
+                                <option id="8" value="8">Notable - 8</option>
+                                <option id="9" value="9">Me encanto - 9</option>
+                                <option id="10" value="10">Excelente - 10</option>
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" name="spoiler" id="spoiler" value="1">
+                            <label for="spoiler">Contiene Spoiler</label>
+                        </div>
+                        <input type="hidden" name="tmdbId" id="tmdbId" value="">
+                        <textarea name="comment" placeholder="Escribe"></textarea>
+
+                        <button type="submit" id="btn-rate">Enviar reseña</button>
+                    </form>
+
+                    <p id="rating-msg"></p>
+                </div>
                 <div class="movie-rating-tmdb"></div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { BASE_URL } from "./configuracion.js";
 import { renderList } from "./ui.js";
 import { updatePageUI } from "./helpers/helper.js";
-// import { initFiltros } from "./filtros.js";
+import { initFiltros } from "./filtros.js";
 
 
 // Referencias

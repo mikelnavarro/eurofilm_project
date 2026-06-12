@@ -1,13 +1,12 @@
 import { BASE_URL } from "./configuracion.js";
-import { renderDirectorMovie, renderWatchProviders, renderWritersMovie } from "./funciones-carga.js";
+import { getMovieIdFromUrl } from "./helpers/helper.js";
+import {
+  renderDirectorMovie,
+  renderWatchProviders,
+  renderWritersMovie,
+} from "./funciones-carga.js";
 // Referencias
 const detailsView = document.getElementById("movie-details");
-
-// Obtener el ID de la API
-function getMovieId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("id");
-}
 // Pide detalles de Peli a la API DE TMDB
 async function fetchMovie(id) {
   try {
@@ -81,7 +80,13 @@ function renderMovieDetails(movie) {
 }
 showDetails();
 async function showDetails() {
-  const id = getMovieId();
+  const id = getMovieIdFromUrl();
+
+  if (!id) {
+    console.error("No se encontró el ID en la URL");
+    return;
+  }
+
   const detalles = await fetchMovie(id);
   if (detalles) {
     renderMovieDetails(detalles);
@@ -195,7 +200,7 @@ function renderCompanies(movie) {
 // buscamos añadir a favoritos
 
 const movieData = document.getElementById("movie-data");
-const tmdbId = movieData.dataset.tmdb;
+const tmdbId = getMovieIdFromUrl();
 const favBtn = document.getElementById("btn-favorito");
 
 favBtn.addEventListener("click", async () => {
@@ -211,16 +216,16 @@ favBtn.addEventListener("click", async () => {
   const data = await res.json();
   console.log(data);
 
-  if (data.ok) {
-    favBtn.textContent = "En favoritos";
-    showMessage("Ya esta en favoritos");
-    alert("Ya esta en favoritos");
-    window.location.reload();
-  } else {
-    showMessage("No esta en favoritos. Hubo algún problema.", true);
-    alert("No esta en favoritos. Hubo algún problema.");
-  }
-});
+    if (data.ok) {
+      favBtn.textContent = "En favoritos";
+      showMessage("Ya esta en favoritos");
+      alert("Ya esta en favoritos");
+      window.location.reload();
+    } else {
+      showMessage("No esta en favoritos. Hubo algún problema.", true);
+      alert("No esta en favoritos. Hubo algún problema.");
+    }
+  });
 // funcion mostrar mensaje
 export function showMessage(text, isError = false) {
   const mensaje = document.getElementById("mensaje");

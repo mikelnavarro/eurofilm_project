@@ -1,5 +1,12 @@
+import { getMovieIdFromUrl } from "./helpers/helper.js";
+
 const formRating = document.getElementById("form-rating");
 const msg = document.getElementById("rating-msg");
+const tmdbIdInput = document.getElementById("tmdbId");
+
+if (tmdbIdInput) {
+  tmdbIdInput.value = getMovieIdFromUrl() || "";
+}
 
 formRating.addEventListener("submit", async (e) => {
   e.preventDefault();
