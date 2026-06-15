@@ -60,28 +60,39 @@ class ApiController extends Controller
             exit;
         }
 
-        // DETALLES PRINCIPALES
-        $data = $this->tmdb->consultar("/movie/$id");
-        // CRÉDITOS
-        $credits = $this->tmdb->consultar("/movie/$id/credits");
-        $data['crew'] = $credits['crew'];
-        $data['cast'] = array_slice($credits['cast'], 0, 5);
-        // TRAILER
-        $videos = $this->tmdb->consultar("/movie/$id/videos");
+        // Ruta completa append
+        $rutaCompleta = "/movie/$id?append_to_response=credits,videos,watch/providers";
+        $data = $this->tmdb->consultar($rutaCompleta);
 
+        // procesar los créditos si existen en la respuesta unificada
+        if (!empty($data['credits'])) {
+            $data['crew'] = $data['credits']['crew'] ?? [];
+            $data['cast'] = array_slice($data['credits']['cast'] ?? [], 0, 5);
+            unset($data['credits']);
+        } else {
+            $data['crew'] = [];
+            $data['cast'] = [];
+        }
         $trailer = null;
-        if (!empty($videos['results'])) {
-            foreach ($videos['results'] as $video) {
+        if (!empty($data['videos']['results'])) {
+            foreach ($data['videos']['results'] as $video) {
                 if ($video['site'] === 'YouTube' && $video['type'] === 'Trailer') {
                     $trailer = $video['key'];
                     break;
                 }
             }
+            unset($data['videos']); // Limpieza opcional
         }
         $data["trailer"] = $trailer;
-        // PROVEEDORES
-        $watch_providers = $this->tmdb->consultar("/movie/$id/watch/providers");
-        $data['watch_providers'] = $watch_providers;
+
+        // procesar los proveedores desde el bloque
+        if (!empty($data['watch/providers'])) {
+            $data['watch_providers'] = $data['watch/providers'];
+            unset($data['watch/providers']); // Limpieza opcional
+        } else {
+            $data['watch_providers'] = null;
+        }
+
         $this->jsonResponse($data, 200);
         exit;
     }
@@ -172,31 +183,38 @@ class ApiController extends Controller
             $this->jsonResponse(['error' => 'ID requerido'], 400);
             exit;
         }
+        // Una unica peticion
+        $rutaCompleta = "/tv/$id?append_to_response=credits,videos,watch/providers";
+        $data = $this->tmdb->consultar($rutaCompleta);
 
-        // DETALLES PRINCIPALES
-        $data = $this->tmdb->consultar("/tv/$id");
-        // CRÉDITOS
-        $credits = $this->tmdb->consultar("/tv/$id/credits");
-        $data['cast'] = array_slice($credits['cast'], 0, 5);
+        
+        // procesar los creditos
+        if (!empty($data['credits'])) {
+            $data['cast'] = array_slice($data['credits']['cast'] ?? [], 0, 5);
+            unset($data['credits']);
+        } else {
+            $data['cast'] = [];
+        }
 
-
-
-        // TRAILER
-        $videos = $this->tmdb->consultar("/tv/$id/videos");
+        // procesamos el trailer
         $trailer = null;
-        if (!empty($videos['results'])) {
-            foreach ($videos['results'] as $video) {
+        if (!empty($data['videos']['results'])) {
+            foreach ($data['videos']['results'] as $video) {
                 if ($video['site'] === 'YouTube' && $video['type'] === 'Trailer') {
                     $trailer = $video['key'];
                     break;
                 }
             }
+            unset($data['videos']); // Limpieza
         }
-
         $data["trailer"] = $trailer;
-        // PROVEEDORES
-        $watch_providers = $this->tmdb->consultar("/tv/$id/watch/providers");
-        $data['watch_providers'] = $watch_providers;
+        // los proveedores de la tele
+        if (!empty($data['watch/providers'])) {
+            $data['watch_providers'] = $data['watch/providers'];
+            unset($data['watch/providers']);
+        } else {
+            $data['watch_providers'] = null;
+        }
 
 
 

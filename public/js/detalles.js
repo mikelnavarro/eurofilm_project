@@ -5,18 +5,22 @@ import {
   renderWatchProviders,
   renderWritersMovie,
 } from "./funciones-carga.js";
+
+
 // Referencias
 const detailsView = document.getElementById("movie-details");
+
 // Pide detalles de Peli a la API DE TMDB
 async function fetchMovie(id) {
   try {
-    const response = await fetch(`${BASE_URL}/api/movie?id=${id}`);
+    const res = await fetch(`${BASE_URL}/api/movie?id=${id}`);
 
-    if (!response.ok) {
+    if (!res.ok) {
       throw new Error("Error en API");
     }
-
-    return await response.json();
+    const data = await res.json();
+    console.log("Datos recibidos:", data);
+    return data;
   } catch (error) {
     console.error("Error al cargar detalles:", error);
   }
@@ -216,16 +220,16 @@ favBtn.addEventListener("click", async () => {
   const data = await res.json();
   console.log(data);
 
-    if (data.ok) {
-      favBtn.textContent = "En favoritos";
-      showMessage("Ya esta en favoritos");
-      alert("Ya esta en favoritos");
-      window.location.reload();
-    } else {
-      showMessage("No esta en favoritos. Hubo algún problema.", true);
-      alert("No esta en favoritos. Hubo algún problema.");
-    }
-  });
+  if (data.ok) {
+    favBtn.textContent = "En favoritos";
+    showMessage("Ya esta en favoritos");
+    alert("Ya esta en favoritos");
+    window.location.reload();
+  } else {
+    showMessage("No esta en favoritos. Hubo algún problema.", true);
+    alert("No esta en favoritos. Hubo algún problema.");
+  }
+});
 // funcion mostrar mensaje
 export function showMessage(text, isError = false) {
   const mensaje = document.getElementById("mensaje");

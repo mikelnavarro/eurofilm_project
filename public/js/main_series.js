@@ -41,7 +41,7 @@ export function renderList(series,seriesContainer) {
     card.style.cursor = "pointer";
     // Si el usuario pulsa click, se abrirá la ventana de Card
     card.addEventListener("click", () => {
-      window.location.href = `card.php?id=${serie.id}`;
+      window.location.href = `card.html?id=${serie.id}`;
     });
     // Cargar elemento uno a uno
     const img = document.createElement("img");
@@ -65,21 +65,25 @@ export function renderList(series,seriesContainer) {
   });
 }
 // eventos (Controladores de usuario)
-prevBtn.addEventListener("click", async () => {
-  if (paginaActual > 1) {
-    paginaActual--;
-    await loadElements();
-  }
-});
-nextBtn.addEventListener("click", async () => {
-  paginaActual++;
-  await loadElements();
-});
 // Al cargar el documento, mostramos algo por defecto
 async function loadElements() {
   console.log("Iniciando carga de catalogo de Series...");
   const series = await fetchMovies(paginaActual);
-  renderList(series);
-  updatePageUI(paginaActual,pageDisplay);
+  renderList(series, container);
+  updatePageUI(paginaActual, pageDisplay);
 }
-loadElements();
+
+if (container && prevBtn && nextBtn && pageDisplay) {
+  prevBtn.addEventListener("click", async () => {
+    if (paginaActual > 1) {
+      paginaActual--;
+      await loadElements();
+    }
+  });
+  nextBtn.addEventListener("click", async () => {
+    paginaActual++;
+    await loadElements();
+  });
+
+  loadElements();
+}

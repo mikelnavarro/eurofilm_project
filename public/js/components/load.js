@@ -34,6 +34,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const contenidoHtml = await cargarComponente(`${PUBLIC_URL}/movies/busqueda.html`);
       container.innerHTML = contenidoHtml;
+
+      if (window.location.pathname.includes('/series/')) {
+        await import("../buscar/busqueda-serie.js");
+      } else {
+        await import("../buscar/busqueda.js");
+      }
     } catch (error) {
       console.error("Fallo al inyectar la barra para Buscar:", error);
     }

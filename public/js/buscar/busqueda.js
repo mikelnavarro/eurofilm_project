@@ -1,6 +1,6 @@
-import { apiGet } from "./api.js";
-import { BASE_URL } from "./configuracion.js";
-import { renderList } from "./ui.js";
+import { apiGet } from "../api.js";
+import { BASE_URL } from "../configuracion.js";
+import { renderList } from "../ui.js";
 
 // Referencias
 const btnBuscar = document.getElementById("btn-buscar");

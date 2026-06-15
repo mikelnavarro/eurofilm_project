@@ -12,8 +12,7 @@ function getSerieId() {
 // Pide detalles de Peli a la API DE TMDB
 async function fetchSerie(id) {
   try {
-    const response = await fetch(`${BASE_URL}/serie?id=${id}`);
-
+    const response = await fetch(`${BASE_URL}/api/serie?id=${id}`);
     if (!response.ok) {
       throw new Error("Error en API");
     }
