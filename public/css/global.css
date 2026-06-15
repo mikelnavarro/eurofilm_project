@@ -1,5 +1,5 @@
 :root {
-
+    /* Colores B */
     --ef-bg: #f6f7fb;
     --ef-surface: #ffffff;
     --ef-surface-soft: #f1f5f9;
@@ -15,9 +15,17 @@
     --ef-radius-lg: 12px;
     --ef-radius-pill: 999px;
 
+
+    /* Botones Colores */
+    --ef-primary: #ebbb15;
+    --ef-primary-dark: #d6a90f;
+    --ef-secondary: #64748b;
+    --ef-secondary-dark: #475569;
+
+    /* Shadow */
     --ef-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
     --ef-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
-
+    /* Espacios Definidos */
     --ef-space-1: 4px;
     --ef-space-2: 8px;
     --ef-space-3: 12px;
@@ -39,52 +47,53 @@
 
 }
 
-* {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+/* Reset basico */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg-color);
     background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
         radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 20%);
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--ef-text);
+    background-color: var(--ef-bg);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0;
     line-height: 1.5;
+    min-height: 100vh;
 
 }
 
+
+/* layout global */
 main {
-    max-width: 1200px;
-    margin: 20px auto;
+    max-width: var(--ef-container);
+
+    margin:
+        var(--ef-space-5) auto;
     padding: 20px;
 }
 
-h1 {
-    font-size: 1.9rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
+.hidden {
+    display: none;
 }
 
-h1::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-glow), #ec4899);
-    border-radius: 2px;
+.text-center {
+    text-align: center;
 }
-
 /* Buttons */
+button,
+.btn-primary,
+.btn-secondary {
+    border: none;
+    border-radius: var(--ef-radius-md);
+    padding: var(--ef-space-3) var(--ef-space-4);
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
 .btn-secondary {
     background-color: #bdc3c7;
     color: #2c3e50;
@@ -95,7 +104,7 @@ h1::after {
 }
 
 .btn-primary {
-    background-color: #3498db;
+    background-color: var(--ef-primary);
     color: white;
 }
 
