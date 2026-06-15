@@ -31,18 +31,15 @@ inputBusqueda.addEventListener("input", async () => {
 btnBuscar.addEventListener("click", async () => {
   const query = inputBusqueda.value.trim();
   console.log("QUERY:", query);
-
-  if (query === "") return;
-  try {
-    const url = `${BASE_URL}/api/search/movie?query=${encodeURIComponent(query)}`;
-    const res = await fetch(url);
-    // validacion de respuesta del servidor
-    if (!res.ok) {
-      throw new Error(`Error HTTP: ${res.status}`);
-    }
-    const data = await res.json();
-    renderList(data, container);
+  if (query === "") {
+    container.innerHTML = "";
+    window.location.reload();
+    return;
+  }  try {
+    const movies = await apiGet("/search/movie", { query: query });
+    console.log("MOVIES:", movies);
+    renderList(movies, container);
   } catch (error) {
-    console.error(error);
+    console.error("Error en la búsqueda:", error);
   }
 });

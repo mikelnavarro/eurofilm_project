@@ -15,6 +15,7 @@ async function cargarComponente(ruta) {
   return await respuesta.text();
 }
 
+// CABECERA
 document.addEventListener("DOMContentLoaded", async () => {
   const contenedorHeader = document.getElementById('cabecera');
   if (contenedorHeader) {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+// BARRA BÚSQUEDA
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById('search-box');
   if (container) {
@@ -38,7 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// Footer
+
+// FOOTER
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById('footer');
   if (container) {
