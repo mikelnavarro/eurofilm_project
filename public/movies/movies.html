@@ -10,7 +10,7 @@
     <!-- Estilos Unicos -->
     <link rel="stylesheet" href="../css/filmografia/style-backup.css">
 
-    
+
     <script defer src="../js/components/load.js" type="module"></script>
     <script defer src="../js/main.js" type="module"></script>
     <script defer src="../js/buscar/busqueda.js" type="module"></script>
@@ -22,7 +22,11 @@
 
 <body>
     <header id="cabecera"></header>
-    <div id="search-box"></div>
+    <section class="search-box">
+        <input type="text" id="busqueda-titulo" placeholder="Busca tu película...">
+        <button id="btn-buscar">
+            <i class="fas fa-search"></i>Buscar</button>
+    </section>
     <main>
         <!-- Películas Populares -->
         <h1>Películas populares</h1>

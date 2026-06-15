@@ -15,7 +15,7 @@ async function buscarSeries() {
   }
   
   try {
-    const elements = await apiGet("/searchSeries/tv", { query });
+    const elements = await apiGet("/api/searchSeries", { query });
     renderList(elements, seriesContainer);
   } catch (error) {
     console.error("Error en la búsqueda:", error);

@@ -187,7 +187,8 @@ class ApiController extends Controller
         $rutaCompleta = "/tv/$id?append_to_response=credits,videos,watch/providers";
         $data = $this->tmdb->consultar($rutaCompleta);
 
-        
+
+
         // procesar los creditos
         if (!empty($data['credits'])) {
             $data['cast'] = array_slice($data['credits']['cast'] ?? [], 0, 5);
@@ -196,7 +197,7 @@ class ApiController extends Controller
             $data['cast'] = [];
         }
 
-        // procesamos el trailer
+        // trailer
         $trailer = null;
         if (!empty($data['videos']['results'])) {
             foreach ($data['videos']['results'] as $video) {

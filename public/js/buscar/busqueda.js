@@ -20,7 +20,7 @@ inputBusqueda.addEventListener("input", async () => {
     return;
   }
   try {
-    const movies = await apiGet("/search/movie", { query: query });
+    const movies = await apiGet("/api/search/movie/", { query: query });
     renderList(movies, container);
     console.log("IS ARRAY:", Array.isArray(movies));
     console.log("MOVIES:", movies);
