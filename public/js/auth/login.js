@@ -11,7 +11,7 @@ if (loginForm) {
 
     const formData = new FormData(loginForm);
     try {
-      const res = await fetch(`/Eurofilm/auth/login`, {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         body: formData,
         credentials: "include",

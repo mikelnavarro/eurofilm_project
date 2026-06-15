@@ -6,7 +6,7 @@ if (registerForm) {
     e.preventDefault();
     const formData = new FormData(registerForm);
     try {
-      const res = await fetch(`/Eurofilm/auth/registrarse`, {
+      const res = await fetch(`${BASE_URL}/auth/registrarse`, {
         method: "POST",
         body: formData,
         credentials: "include",
@@ -21,7 +21,7 @@ if (registerForm) {
 
         setTimeout(() => {
           window.location.reload();
-          //window.location.href = "../movies/movies.php";
+          window.location.replace("../movies/movies.html")
         }, 800);
       } else {
         showMessage(data.error, true);
