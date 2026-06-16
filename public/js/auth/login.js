@@ -1,4 +1,4 @@
-import { BASE_URL } from "../configuracion.js";
+import { PUBLIC_URL, BASE_URL } from "../configuracion.js";
 
 // Función importada
 // Referencias
@@ -19,9 +19,9 @@ if (loginForm) {
       const data = await res.json();
       if (data.ok) {
         showMessage("Usuario registrado correctamente");
-            window.location.href = "/Eurofilm/public/movies/movies.php";
+        window.location.replace(`${PUBLIC_URL}/movies/movies.html`);
         setTimeout(() => {
-          window.location.href = "/Eurofilm/public/movies/movies.php";
+          window.location.replace(`${PUBLIC_URL}/movies/movies.html`);
         }, 800);
       } else {
         showMessage("E-mail o clave incorrectos. Inténtelo otra vez", true);

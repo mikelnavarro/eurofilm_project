@@ -2,6 +2,8 @@
 
 namespace Mikelnavarro\Eurofilm\controllers;
 
+
+use Mikelnavarro\Eurofilm\tools\Mailer;
 use Mikelnavarro\Eurofilm\Core\Controller;
 
 class AuthController extends Controller
@@ -63,6 +65,12 @@ class AuthController extends Controller
                 'email' => $usuario->email,
                 'fecha_alta' => $usuario->createdAt,
             ];
+            $this->mailer->send(
+                $email,
+                'Bienvenida a Eurofilm',
+                $this->emailTemplate('bienvenida', ['username' => $username]),
+                ['from_name' => 'Eurofilm']
+            );
             $this->jsonResponse(['ok' => true, 'usuario' => $_SESSION['usuario']]);
         } else {
             $this->jsonResponse(['error' => 'No se ha podido registrar'], 500);
@@ -81,7 +89,6 @@ class AuthController extends Controller
         $username = $_POST['username'];
         $email = $_POST['email'];
         $clave = $_POST['password'];
-
         // comprobamos
         $usuario = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
         // $usuario = $this->usuarioModelo->obtenerUsuarioPorUserName($username);
@@ -205,8 +212,6 @@ class AuthController extends Controller
         }
     }
 
-
-
     // Buscar usuario
     public function searchUsers()
     {
@@ -219,5 +224,81 @@ class AuthController extends Controller
             'ok' => true,
             'users' => $users
         ]);
+    }
+    // RESET DE LA CONTRASEÑA
+    public function requestPasswordReset()
+    {
+        $email = $_POST['email'];
+        if (!$email) {
+            $this->jsonResponse(['ok' => false, 'error' => 'Email requerido'], 400);
+            return;
+        }
+        $usuario = $this->usuarioModelo->obtenerUsuarioPorEmail($email);
+        if (!$usuario) {
+            $this->jsonResponse(['ok' => false, 'error' => 'Usuario no encontrado'], 404);
+            return;
+        }
+        // Generar token (válido 1 hora)
+        $token = bin2hex(random_bytes(32));
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+        // Guardar
+        $this->usuarioModelo->saveResetToken($usuario->id, $token, $expiresAt);
+
+        // $this->mailer->send(
+        //   $email,
+        // 'Recuperar contraseña',
+        //  $this->emailTemplate('reset', ['resetLink' => $resetLink]),
+        //     ['from_name' => 'Eurofilm']
+        //);
+
+        // enviar json
+        $this->jsonResponse(['ok' => true, 'message' => 'Email de recuperación enviado']);
+    }
+
+    public function deleteAccount()
+    {
+        if (!isset($_SESSION['usuario'])) {
+            $this->jsonResponse(['ok' => false, 'error' => 'No autenticado'], 401);
+            return;
+        }
+
+        $userId = $_SESSION['usuario']['id'];
+        $email = $_SESSION['usuario']['email'];
+
+        // Eliminar usuario
+        $this->usuarioModelo->delete($userId);
+
+        // Notificar
+        $this->mailer->send(
+            $email,
+            'Tu cuenta ha sido eliminada',
+            $this->emailTemplate('cuenta-eliminada'),
+            ['from_name' => 'Eurofilm']
+        );
+
+        session_destroy();
+        $this->jsonResponse(['ok' => true, 'message' => 'Cuenta eliminada']);
+    }
+    // Plantillas HTML de emails
+    private function emailTemplate(string $type, array $data = []): string
+    {
+        switch ($type) {
+            case 'bienvenida':
+                return "<h1>Bienvenida, {$data['username']}</h1>
+                        <p>Tu cuenta ha sido creada correctamente.</p>";
+
+            case 'reset':
+                return "<h1>Recuperar contraseña</h1>
+                        <p><a href='{$data['resetLink']}'>Haz clic aquí para cambiar tu contraseña</a></p>
+                        <p>Este enlace expira en 1 hora.</p>";
+
+            case 'cuenta-eliminada':
+                return "<h1>Cuenta eliminada</h1>
+                        <p>Tu cuenta en Eurofilm ha sido eliminada correctamente.</p>";
+
+            default:
+                return '';
+        }
     }
 }

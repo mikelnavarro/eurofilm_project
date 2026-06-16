@@ -15,9 +15,19 @@ return [
         'base_url' => $_ENV["BASE_URL"],
         'img_url'  => $_ENV["IMG_URL"]
     ],
+    // Mailer
+        'mail' => [
+        'host'      => $_ENV['MAIL_HOST'] ?? '',
+        'port'      => $_ENV['MAIL_PORT'] ?? 587,
+        'username'  => $_ENV['MAIL_USERNAME'] ?? '',
+        'password'  => $_ENV['MAIL_PASSWORD'] ?? '',
+        'from_name' => $_ENV['MAIL_FROM_NAME'] ?? 'Sistema',
+        'charset'   => $_ENV['MAIL_CHARSET'] ?? 'UTF-8',
+    ],
     'rutas' =>  [],
     // Sitio web
     'site' => [
+        'token_expiry'     => $_ENV['TOKEN_RESET_EXPIRY'] ?? 3600,
         'name' => $_ENV["SITE"],
         'url'  => $_ENV["URL"] ?? 'http://localhost/Eurofilm/'
     ]

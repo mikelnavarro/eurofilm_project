@@ -61,7 +61,7 @@ class ApiController extends Controller
         }
 
         // Ruta completa append
-        $rutaCompleta = "/movie/$id?append_to_response=credits,videos,watch/providers";
+        $rutaCompleta = "/movie/$id?append_to_response=credits,videos,watch/providers&language=es-ES";
         $data = $this->tmdb->consultar($rutaCompleta);
 
         // procesar los créditos si existen en la respuesta unificada

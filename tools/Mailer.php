@@ -10,10 +10,11 @@ class Mailer
     private $config;
     private $mail;
 
-    public function __construct(array $config)
+    public function __construct()
     {
+        $config = require __DIR__ . '/../config/config.php';
         $mail = new PHPMailer(true);
-        $this->config = $config;
+        $this->config = $config['mail'];
 
 
         $this->mail->isSMTP();

@@ -21,7 +21,7 @@ if (registerForm) {
 
         setTimeout(() => {
           window.location.reload();
-          window.location.replace("../movies/movies.html")
+          window.location.replace(`${PUBLIC_URL}/movies/movies.html`);
         }, 800);
       } else {
         showMessage(data.error, true);

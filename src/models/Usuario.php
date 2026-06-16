@@ -139,4 +139,14 @@ class Usuario
 
         return $this->db->registros();
     }
+
+
+    // Generar y guardar token reset
+    public function saveResetToken(int $userId, string $token): bool
+    {
+        $expiresAt = date('Y-m-d H:i:s', time() + $this->config['app']['token_expiry']);
+
+        $query = "UPDATE usuarios SET reset_token = ?, reset_token_expires = ? WHERE id = ?";
+        return $this->db->query($query, [$token, $expiresAt, $userId]);
+    }
 }

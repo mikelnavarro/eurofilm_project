@@ -1,3 +1,4 @@
+
 import { getMovieIdFromUrl } from "./helpers/helper.js";
 
 const container = document.getElementById("reviews-container");
