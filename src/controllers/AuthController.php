@@ -270,7 +270,8 @@ class AuthController extends Controller
         $this->usuarioModelo->delete($userId);
 
         // Notificar
-        $this->mailer->send(
+        $mailer = new Mailer();
+        $mailer->send(
             $email,
             'Tu cuenta ha sido eliminada',
             $this->emailTemplate('cuenta-eliminada'),

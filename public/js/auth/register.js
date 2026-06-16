@@ -28,7 +28,6 @@ if (registerForm) {
       }
       // register con response ok
       if (res.ok) {
-        console.log("¡Éxito! Recargando...");
         window.location.reload();
       } else {
         alert("Algo salió mal: " + data.message);

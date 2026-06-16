@@ -211,15 +211,14 @@ favBtn.addEventListener("click", async () => {
   const formData = new FormData();
   formData.append("tmdb_id", tmdbId);
 
-  const res = await fetch("/Eurofilm/movie/addFavorite", {
+
+  // carga la response
+  const res = await fetch(`${BASE_URL}/movie/addFavorite`, {
     method: "POST",
     body: formData,
     credentials: "include",
   });
-
   const data = await res.json();
-  console.log(data);
-
   if (data.ok) {
     favBtn.textContent = "En favoritos";
     showMessage("Ya esta en favoritos");

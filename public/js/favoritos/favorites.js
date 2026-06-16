@@ -1,5 +1,9 @@
+import { BASE_URL } from '../configuracion.js';
+
+
+// cargar lista de favoritos al usuario por ID
 async function loadFavorites() {
-  const res = await fetch("/Eurofilm/movie/getFavoritos", {
+  const res = await fetch(`${BASE_URL}/movie/`, {
     credentials: "include",
   });
 

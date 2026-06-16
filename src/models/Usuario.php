@@ -139,14 +139,40 @@ class Usuario
 
         return $this->db->registros();
     }
-
-
-    // Generar y guardar token reset
-    public function saveResetToken(int $userId, string $token): bool
+    // Guardar token de reset
+    public function saveResetToken($email, $token, $expiresAt)
     {
-        $expiresAt = date('Y-m-d H:i:s', time() + $this->config['app']['token_expiry']);
-
-        $query = "UPDATE usuarios SET reset_token = ?, reset_token_expires = ? WHERE id = ?";
-        return $this->db->query($query, [$token, $expiresAt, $userId]);
+        $sql = "UPDATE users SET reset_token = :token, reset_token_expires = :expires WHERE email = :email";
+        $this->db->query($sql);
+        $this->db->bind(':token', $token);
+        $this->db->bind(':expires', $expiresAt);
+        $this->db->bind(':email', $email);
+        return $this->db->execute();
+    }
+    // Verificar si el token es válido y no ha expirado
+    public function verifyResetToken($token)
+    {
+        $sql = "SELECT id, email FROM users WHERE reset_token = :token AND reset_token_expires > NOW()";
+        $this->db->query($sql);
+        $this->db->bind(':token', $token);
+        return $this->db->registroObj();
+    }
+    // Cambiar contraseña
+    public function changePassword($userId, $newPassword)
+    {
+        $passwordHash = password_hash($newPassword, PASSWORD_BCRYPT);
+        $sql = "UPDATE users SET passwordHash = :password WHERE id = :id";
+        $this->db->query($sql);
+        $this->db->bind(':password', $passwordHash);
+        $this->db->bind(':id', $userId);
+        return $this->db->execute();
+    }
+    // Limpiar token después de cambiar contraseña
+    public function clearResetToken($userId)
+    {
+        $sql = "UPDATE users SET reset_token = NULL, reset_token_expires = NULL WHERE id = :id";
+        $this->db->query($sql);
+        $this->db->bind(':id', $userId);
+        return $this->db->execute();
     }
 }
